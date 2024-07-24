@@ -76,7 +76,7 @@ const authServiceObject = new AuthService();
 export default authServiceObject;
 
 
-function setProject(APPWRITE_PROJECT_ID: string | undefined) {
-    throw new Error('Function not implemented.');
-}
+// function setProject(APPWRITE_PROJECT_ID: string | undefined) {
+//     throw new Error('Function not implemented.');
+// }
 
