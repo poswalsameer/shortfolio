@@ -2,6 +2,7 @@ import React from 'react'
 import { checkLogin, checkLogout } from "../features/auth.slice";
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '../../components/ui/button';
+import Link from 'next/link';
 
 function Homepage() {
 
@@ -18,9 +19,13 @@ function Homepage() {
           <h1 className='text-2xl text-gray-500 '>Show the world who you are</h1>
         </div>
 
-        <div className='flex flex-col justify-center items-center gap-y-3'>
-          <Button variant="secondary">Create your shortfolio</Button>
-          <Button variant="destructive" className='h-9 '>Login</Button>
+        <div className='flex flex-col justify-center items-center gap-y-6'>
+          <Link href="/signup">
+            <Button variant="secondary" >Create your shortfolio</Button>
+          </Link>
+          <Link href="/login">
+            <Button variant="destructive" className='h-9 '>Login</Button>
+          </Link>
         </div>
       </div>
 

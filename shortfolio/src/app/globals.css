@@ -31,4 +31,10 @@
     filter: blur(2px);
     /* background-size: cover; */
 }
-  
+ 
+#loginImage{
+    background: url('../../public/people.png');
+    background-repeat: repeat-x;
+    filter: blur(2px);
+    /* background-size: cover; */
+}
