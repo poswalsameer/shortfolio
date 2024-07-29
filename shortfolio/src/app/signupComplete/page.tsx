@@ -17,7 +17,7 @@ function page() {
     <div className='flex flex-col justify-center items-center gap-y-6'>
         <img src="smiley.png" alt="" className='h-24 w-24' />
         <h1 className='text-xl text-gray-500 '> You are now the official member of the Shortfolio Community. Cheers on this feat! </h1>
-        <Link href='/home'>
+        <Link href='/enterDetails'>
           <Button variant="secondary" className='h-9 '>Let's go</Button>
         </Link>
     </div>
