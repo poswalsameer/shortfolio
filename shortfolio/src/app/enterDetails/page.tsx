@@ -137,7 +137,7 @@ function page() {
     
         </div>
 
-        <Link href="/signupComplete">
+        <Link href='/poswalsameer'>
             <Button variant="secondary" className='w-52 font-bold'>Roll into your profile</Button>
           </Link>
         
