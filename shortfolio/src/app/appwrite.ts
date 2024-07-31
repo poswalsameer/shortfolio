@@ -13,11 +13,21 @@ export class AuthService{
         this.account = new Account(this.client);
     }
 
+    isValidEmail = (email:any) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
     // FUNCTION TO REGISTER USER
-    async registerUser({name, email, password}: {name: string, email: string, password: string}){
+    async registerUser({ email, password, fullName ,username}: { email: string, password: string, fullName:string ,username: string}){
+
+        if (!this.isValidEmail(email)) {
+            console.log("Invalid email address format.");
+            return;
+        }
 
         try {
-            const createdUser = await this.account.create( ID.unique() ,name, email, password);
+            const createdUser = await this.account.create( ID.unique(), email, password, fullName ,username);
 
             if( createdUser ){
                 // redirect to login page and login the user

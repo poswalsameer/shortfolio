@@ -62,6 +62,9 @@ function page() {
                 <Input type="email" placeholder="Email" 
                 {...register("email", {
                     required: true,
+                    validate: {
+                        matchPattern: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || "Email address must be a valid address",
+                    }
                 })} 
                 />
 
