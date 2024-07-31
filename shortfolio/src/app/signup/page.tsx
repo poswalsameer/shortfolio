@@ -1,9 +1,20 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import Link from "next/Link";
 
 function page() {
+
+  console.log(process.env.NEXT_PUBLIC_APPWRITE_URL!);
+  
+
+  const [fullName, setFullName] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   return (
     <div className=' h-screen w-screen flex flex-col justify-center items-center bg-[#FFF6F2] text-black'>
 
@@ -15,10 +26,10 @@ function page() {
         </div>
 
         <div className='flex flex-col justify-center items-center gap-y-6'>
-            <Input type="text" placeholder="Full Name" />
-            <Input type="text" placeholder="Username" />
-            <Input type="email" placeholder="Email" />
-            <Input type="password" placeholder="Password" />
+            <Input type="text" placeholder="Full Name" value={fullName} onChange={ (e) => setFullName(e.target.value) } />
+            <Input type="text" placeholder="Username" value={username} onChange={ (e) => setUsername(e.target.value) } />
+            <Input type="email" placeholder="Email" value={email} onChange={ (e) => setEmail(e.target.value) } />
+            <Input type="password" placeholder="Password" value={password} onChange={ (e) => setPassword(e.target.value) } />
 
             <Link href="/signupComplete">
               <Button variant="destructive">Create account</Button>

@@ -8,8 +8,8 @@ export class AuthService{
 
     constructor(){
         this.client
-            .setEndpoint(process.env.APPWRITE_URL!)
-            .setProject(process.env.APPWRITE_PROJECT_ID!);
+            .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_URL!)
+            .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!);
         this.account = new Account(this.client);
     }
 

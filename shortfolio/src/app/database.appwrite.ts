@@ -9,8 +9,8 @@ export class DatabaseService{
     constructor(){
 
         this.client
-            .setEndpoint(process.env.APPWRITE_URL!)
-            .setProject(process.env.APPWRITE_PROJECT_ID!);
+            .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_URL!)
+            .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!);
         
         this.databases = new Databases(this.client);
         this.storage = new Storage(this.client);
@@ -23,8 +23,8 @@ export class DatabaseService{
         try {
             
             const createdDetails = await this.databases.createDocument(
-                process.env.APPWRITE_DATABASE_ID,
-                process.env.APPWRITE_COLLECTION_ID,
+                process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID,
+                process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID,
                 ID.unique(),
                 {
                     'username' : usernameFrontend,
@@ -57,8 +57,8 @@ export class DatabaseService{
         try {
             
             const updatedDetails = await this.databases.updateDocument(
-                process.env.APPWRITE_DATABASE_ID,
-                process.env.APPWRITE_COLLECTION_ID,
+                process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID,
+                process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID,
                 ID.unique(),
                 {
                     'username' : usernameFrontend,
@@ -93,7 +93,7 @@ export class DatabaseService{
         try {
             
             const uploadedFile = await this.storage.createFile(
-                process.env.APPWRITE_BUCKET_ID,
+                process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID,
                 ID.unique(),
                 file
             )
@@ -115,7 +115,7 @@ export class DatabaseService{
         try {
             
             const deletedFile = await this.storage.deleteFile(
-                process.env.APPWRITE_BUCKET_ID,
+                process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID,
                 fileId
             )
 
@@ -133,7 +133,7 @@ export class DatabaseService{
         try {
             
             const updatedFile = await this.storage.updateFile(
-                process.env.APPWRITE_BUCKET_ID,
+                process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID,
                 fileId
             )
 
