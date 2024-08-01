@@ -3,9 +3,34 @@ import { checkLogin, checkLogout } from "../features/auth.slice";
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '../../components/ui/button';
 import Link from 'next/link';
+import authServiceObject from '../appwrite';
+import { useRouter } from 'next/navigation';
 
 function Homepage() {
 
+  const router = useRouter();
+
+  const loginButtonClicked = async () => {
+
+    // GETTING ANY ACTIVE SESSION IF ANY
+    const currentSession = await authServiceObject.getCurrentSession();
+
+    if( currentSession ){
+        // IF CURRENT SESSION EXISTS, THEN FIND THE USER DETAILS
+        const currentUser = await authServiceObject.getLoggedInUser();
+
+        if( currentUser ){
+          // IF USER EXISTS, THEN DIRECTLY REDIRECT TO THE USER PROFILE
+          const user = currentUser.name.split(" ").join('');
+          router.push(`/${user}`)
+        }
+    }
+    else{
+      // IF SESSION NOT FOUND, THEN REDIRECT TO LOGIN PAGE
+      router.push('/login');
+    }
+
+  }
     
 
   return (
@@ -23,9 +48,9 @@ function Homepage() {
           <Link href="/signup">
             <Button variant="secondary" >Create your shortfolio</Button>
           </Link>
-          <Link href="/login">
-            <Button variant="destructive" className='h-9 '>Login</Button>
-          </Link>
+          {/* <Link href="/login"> */}
+            <Button variant="destructive" className='h-9 ' onClick={loginButtonClicked}>Login</Button>
+          {/* </Link> */}
         </div>
       </div>
 

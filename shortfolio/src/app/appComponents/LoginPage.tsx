@@ -34,16 +34,17 @@ function page() {
         setUser('');
 
         const userData = await authServiceObject.getLoggedInUser();
-        // console.log(userData.name);
+        console.log(userData);
         setUser(userData.name);
+        // const user = userData.name;
+        const user = userData.name.split(" ").join('');
+        
          
         if( userData ){
           dispatch(checkLogin(userData));
         }
       
         // NAVIGATING TO THE USER ROUTE AFTER SUCCESSFULL LOGIN
-
-        //TODO: setup this route to navigate to the specific person's profile only
         router.push(`/${user}`);
         
       }

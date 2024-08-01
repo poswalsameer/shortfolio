@@ -68,6 +68,26 @@ export class AuthService{
         return null; // in case try catch fails by any how
     }
 
+    // FUNCTION TO GET ANY CURRENT SESSION IF ANY
+    async getCurrentSession(){
+        try {
+            
+            const sessionDetails = await this.account.getSession('current');
+            
+            if( sessionDetails ){
+                return sessionDetails;
+            }
+            else{
+                console.log(" Could not find any sessions ");
+                
+            }
+
+        } catch (error) {
+            console.log("Error while getting the current session: ", error);
+            
+        }
+    }
+
     // FUNCTION TO LOGOUT THE USER
     async logoutUser(){
         try {
