@@ -7,6 +7,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { checkLogin } from '../features/auth.slice';
 import { Provider, useDispatch } from 'react-redux';
 import authServiceObject from '../appwrite';
+import { useRouter } from 'next/navigation';
 
 
 function page() {
@@ -14,7 +15,10 @@ function page() {
   const { register, handleSubmit } = useForm();
 
   const [error, setError] = useState('');
+  const [user, setUser] = useState('');
+
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const loginUserFunction = async(data:any) => {
 
@@ -27,14 +31,21 @@ function page() {
       const loginSesson = await authServiceObject.loginUser(data);
 
       if( loginSesson ){
+        setUser('');
+
         const userData = await authServiceObject.getLoggedInUser();
+        // console.log(userData.name);
+        setUser(userData.name);
          
         if( userData ){
           dispatch(checkLogin(userData));
         }
-        
-        // TODO:  Navigate to homepage after login
+      
+        // NAVIGATING TO THE USER ROUTE AFTER SUCCESSFULL LOGIN
 
+        //TODO: setup this route to navigate to the specific person's profile only
+        router.push(`/${user}`);
+        
       }
       
     } catch (error:any) {

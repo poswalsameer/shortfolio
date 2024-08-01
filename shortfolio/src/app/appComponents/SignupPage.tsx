@@ -8,6 +8,8 @@ import { useForm } from 'react-hook-form'
 import authServiceObject from '../appwrite';
 import { useDispatch } from 'react-redux';
 import { checkLogin } from '../features/auth.slice';
+import { useRouter } from 'next/navigation';
+// import Router from 'next/router';
 
 function page() {
 
@@ -15,6 +17,7 @@ function page() {
   const[error, setError] = useState('');
 
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const signupUserFunction = async(data:any) => {
 
@@ -32,6 +35,10 @@ function page() {
         if( userData ){
           dispatch(checkLogin(userData));
         }
+
+        //NAVIGATING THE PAGE TO LOGIN PAGE AFTER SUCCESSFULL SIGNUP
+        router.push('/user');
+
       }
 
     } catch (error:any) {
