@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState } from 'react'
 import { Provider } from 'react-redux'
-import UserProfile from '../appComponents/UserProfile';
-import { store } from '../reduxStore/store';
-import authServiceObject from '../appwrite';
+import UserProfile from '../../appComponents/UserProfile';
+import { store } from '../../reduxStore/store';
+import authServiceObject from '../../appwrite';
 
 function page() {
 
@@ -15,13 +15,15 @@ function page() {
         setUserName('');
 
         const currentUser = await authServiceObject.getLoggedInUser();
+        console.log("Details of the current user: ", currentUser);
+        
 
         if( currentUser ){
             console.log(currentUser.name);
             setUserName(currentUser.name);
         }
         else{
-            console.log("user not logging");
+            console.log("Current user not found");
             
         }
     }

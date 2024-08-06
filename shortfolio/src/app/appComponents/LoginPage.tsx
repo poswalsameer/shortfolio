@@ -35,17 +35,20 @@ function page() {
 
         const userData = await authServiceObject.getLoggedInUser();
         console.log(userData);
-        setUser(userData.name);
+        setUser(userData);
         // const user = userData.name;
-        const user = userData.name.split(" ").join('');
-        
+
+        //CREATING USERNAME WITHOUT SPACES FOR URL
+        const username = userData.name.split(" ").join('');
          
         if( userData ){
           dispatch(checkLogin(userData));
         }
       
         // NAVIGATING TO THE USER ROUTE AFTER SUCCESSFULL LOGIN
-        router.push(`/${user}`);
+        router.push(`/user/${username}`);
+        console.log("Redirected to the profile route");
+        
         
       }
       
@@ -87,7 +90,7 @@ function page() {
                     minLength: 8,
                 })}
                 />
-                <Button type='submit' variant="secondary" className='h-9' onClick={loginUserFunction}>Login</Button>
+                <Button type='submit' variant="secondary" className='h-9'>Login</Button>
             </div>
         </form>
         

@@ -21,8 +21,10 @@ function Homepage() {
 
         if( currentUser ){
           // IF USER EXISTS, THEN DIRECTLY REDIRECT TO THE USER PROFILE
-          const user = currentUser.name.split(" ").join('');
-          router.push(`/${user}`)
+          console.log(currentUser);
+          
+          const username = currentUser.name.split(" ").join('');
+          router.push(`/user/${username}`)
         }
     }
     else{

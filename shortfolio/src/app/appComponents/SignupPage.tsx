@@ -32,12 +32,14 @@ function page() {
       if( signUpDetails ){
         const userData = await authServiceObject.getLoggedInUser();
 
+        const username = userData.name.split(" ").join('');
+
         if( userData ){
           dispatch(checkLogin(userData));
         }
 
         //NAVIGATING THE PAGE TO LOGIN PAGE AFTER SUCCESSFULL SIGNUP
-        router.push('/user');
+        router.push(`/user/${username}`);
 
       }
 
@@ -92,7 +94,7 @@ function page() {
               })}
               />
 
-              <Button variant="destructive" onClick={signupUserFunction}>Create account</Button>
+              <Button variant="destructive">Create account</Button>
             
           </div>
         </form>
