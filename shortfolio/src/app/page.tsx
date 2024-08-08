@@ -6,7 +6,6 @@ import { Provider } from "react-redux";
 import Homepage from "./appComponents/Homepage";
 import { useState, useEffect } from "react"; 
 import authServiceObject from "./appwrite";
-import AuthLayout from "./appComponents/AuthLayout";
 
 export default function Home() {
 

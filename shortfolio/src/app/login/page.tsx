@@ -5,7 +5,6 @@ import LoginPage from '../appComponents/LoginPage';
 import { Provider } from 'react-redux'
 import { store } from '../reduxStore/store';
 import authServiceObject from '../appwrite';
-import AuthLayout from '../appComponents/AuthLayout';
 
 function page() {
 
@@ -36,9 +35,9 @@ function page() {
 
   return (
     <Provider store={store}>
-      {/* <AuthLayout userProfile={user}> */}
+    
           < LoginPage />
-      {/* </AuthLayout> */}
+      
     </Provider>
   )
 }

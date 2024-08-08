@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import UserProfile from '../../appComponents/UserProfile';
 import { store } from '../../reduxStore/store';
 import authServiceObject from '../../appwrite';
-import AuthLayout from '@/app/appComponents/AuthLayout';
+
 
 function page() {
 
@@ -36,9 +36,8 @@ function page() {
 
   return (
     <Provider store={store}>
-        {/* <AuthLayout userProfile={userName}> */}
+
             <UserProfile params={userName}/>
-        {/* </AuthLayout> */}
 
     </Provider>
   )

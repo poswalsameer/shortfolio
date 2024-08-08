@@ -4,7 +4,6 @@ import React from 'react'
 import SignupPage from '../appComponents/SignupPage';
 import { Provider } from 'react-redux';
 import { store } from '../reduxStore/store';
-import AuthLayout from '../appComponents/AuthLayout';
 import { useEffect, useState } from 'react';
 import authServiceObject from '../appwrite';
 
@@ -39,9 +38,9 @@ function page() {
   return (
     
     <Provider store={store}>
-      {/* <AuthLayout userProfile={user}> */}
+      
         <SignupPage />
-      {/* </AuthLayout> */}
+      
     </Provider>
   )
 }
