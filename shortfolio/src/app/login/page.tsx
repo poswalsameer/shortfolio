@@ -36,9 +36,9 @@ function page() {
 
   return (
     <Provider store={store}>
-      <AuthLayout userProfile={user}>
+      {/* <AuthLayout userProfile={user}> */}
           < LoginPage />
-      </AuthLayout>
+      {/* </AuthLayout> */}
     </Provider>
   )
 }

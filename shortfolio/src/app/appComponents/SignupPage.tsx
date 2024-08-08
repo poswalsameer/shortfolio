@@ -9,6 +9,7 @@ import authServiceObject from '../appwrite';
 import { useDispatch } from 'react-redux';
 import { checkLogin } from '../features/auth.slice';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 // import Router from 'next/router';
 
 function page() {
@@ -31,6 +32,17 @@ function page() {
 
       if( signUpDetails ){
         const userData = await authServiceObject.getLoggedInUser();
+
+        // SETTING THE COOKIE AFTER USER LOGIN
+        Cookies.set( 'userCookie', '12345678' );
+        const userCookieValue = Cookies.get('userCookie');
+        if( userCookieValue ){
+            console.log( "The value of the cookie is: " ,userCookieValue);
+        }
+        else{
+          console.log("User cookie not found");
+          
+        }
 
         const username = userData.name.split(" ").join('');
 

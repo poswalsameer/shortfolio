@@ -10,6 +10,7 @@ import authServiceObject from '../appwrite';
 import { useRouter } from 'next/navigation';
 import { checkLogout } from '../features/auth.slice';
 import { useDispatch } from 'react-redux';
+import Cookie from 'js-cookie';
 
 
 function page({params}:{params:any}) {
@@ -27,6 +28,14 @@ function page({params}:{params:any}) {
             
             await authServiceObject.logoutUser();
             dispatch(checkLogout());
+
+            Cookie.remove('userCookie');
+
+            // DELETING COOKIE AFTER LOGGING OUT THE USER
+            const cookieAfterDeletion = Cookie.get('userCookie');
+            console.log("value of cookie after deleting is: ", cookieAfterDeletion);
+            // AFTER LOGGING OUT, THE COOKIE BECOMES UNDEFINED
+
             router.push('/login');
 
         } catch (error: any) {

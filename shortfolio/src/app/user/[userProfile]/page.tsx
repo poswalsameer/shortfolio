@@ -16,11 +16,11 @@ function page() {
         setUserName('');
 
         const currentUser = await authServiceObject.getLoggedInUser();
-        console.log("Details of the current user: ", currentUser);
+        // console.log("Details of the current user: ", currentUser);
         
 
         if( currentUser ){
-            console.log(currentUser.name);
+            // console.log(currentUser.name);
             setUserName(currentUser.name);
         }
         else{
@@ -36,9 +36,9 @@ function page() {
 
   return (
     <Provider store={store}>
-        <AuthLayout userProfile={userName}>
+        {/* <AuthLayout userProfile={userName}> */}
             <UserProfile params={userName}/>
-        </AuthLayout>
+        {/* </AuthLayout> */}
 
     </Provider>
   )
