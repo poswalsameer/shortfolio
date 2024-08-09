@@ -18,7 +18,7 @@ export class DatabaseService{
     }
 
     // FEEDING THE USER DETAILS INTO THE DATABASE
-    async userDetails({usernameFrontend, bioFrontend, twitterFrontend, githubFrontend, instagramFrontend, behanceFrontend, linkedinFrontend, textFrontend, profilePhotoFrontend} : {usernameFrontend: string, bioFrontend: string, twitterFrontend: string, githubFrontend: string, instagramFrontend: string, behanceFrontend: string, linkedinFrontend: string, textFrontend: string, profilePhotoFrontend: string}){
+    async userDetails({usernameFrontend, bioFrontend, twitterFrontend, githubFrontend, instagramFrontend, behanceFrontend, linkedinFrontend, textFrontend, profilePhotoFrontend, fullNameFrontend} : {usernameFrontend: string, bioFrontend: string, twitterFrontend: string, githubFrontend: string, instagramFrontend: string, behanceFrontend: string, linkedinFrontend: string, textFrontend: string, profilePhotoFrontend: string, fullNameFrontend: string}){
 
         try {
             
@@ -35,7 +35,8 @@ export class DatabaseService{
                     'behanceURL' : behanceFrontend ? behanceFrontend : '',
                     'linkedinURL' : linkedinFrontend ? linkedinFrontend : '',
                     'TextArea' : textFrontend ? textFrontend : '',
-                    'profilePhoto' : profilePhotoFrontend
+                    'profilePhoto' : profilePhotoFrontend,
+                    'fullName' : fullNameFrontend ? fullNameFrontend : ''
                 }
             )
             
@@ -52,7 +53,7 @@ export class DatabaseService{
     }
 
     // UPDATING THE USER DETAILS INTO THE DATABASE
-    async updateUserDetails({usernameFrontend, bioFrontend, twitterFrontend, githubFrontend, instagramFrontend, behanceFrontend, linkedinFrontend, textFrontend, profilePhotoFrontend} : {usernameFrontend: string, bioFrontend: string, twitterFrontend: string, githubFrontend: string, instagramFrontend: string, behanceFrontend: string, linkedinFrontend: string, textFrontend: string, profilePhotoFrontend: string}){
+    async updateUserDetails({usernameFrontend, bioFrontend, twitterFrontend, githubFrontend, instagramFrontend, behanceFrontend, linkedinFrontend, textFrontend, profilePhotoFrontend, fullNameFrontend} : {usernameFrontend: string, bioFrontend: string, twitterFrontend: string, githubFrontend: string, instagramFrontend: string, behanceFrontend: string, linkedinFrontend: string, textFrontend: string, profilePhotoFrontend: string, fullNameFrontend: string}){
 
         try {
             
@@ -69,7 +70,8 @@ export class DatabaseService{
                     'behanceURL' : behanceFrontend ? behanceFrontend : '',
                     'linkedinURL' : linkedinFrontend ? linkedinFrontend : '',
                     'TextArea' : textFrontend ? textFrontend : '',
-                    'profilePhoto' : profilePhotoFrontend
+                    'profilePhoto' : profilePhotoFrontend,
+                    'fullName' : fullNameFrontend ? fullNameFrontend : ''
                 },
                 // ["read("any")"]
             )
