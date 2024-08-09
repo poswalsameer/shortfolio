@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/Label';
 import Link from 'next/link';
 import authServiceObject from '../appwrite';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import databaseServiceObject from '../database.appwrite'
 
 function page() {
 
@@ -49,6 +50,43 @@ function page() {
 
       console.log("The data coming from these input field is: ", data);
 
+      // console.log(" Logging current user details before going in the try block ",currentUserDetails);
+      
+      // RIGHT NOW, THE TRY BLOCK IS NOT WORKING BECAUSE THE DOCUMENT IS NOT CREATED TILL NOW AND WE ARE UPDATING THE DOCUMENT, SO TOMORROW, CREATE DOCUMENT WHILE CREATING THE USER AND THEN TEST THIS FUNCTION
+
+      // IMAGE UPLOAD IS WORKING FINE
+
+      try {
+
+        // HANDLING THE IMAGE UPLOAD FIRST
+        const uploadedImage = await databaseServiceObject.fileUpload(data.profilePhoto[0]);
+
+        if( uploadedImage ){
+          console.log("Image uploaded successfully");
+        }
+        else{
+          console.log("Cannot upload the image");
+          
+        }
+
+        const updatedDetails =  await databaseServiceObject.updateUserDetails( currentUserDetails.$id, {
+          ...data,
+          profilePhotoFrontend: uploadedImage
+        } )
+        
+        if( updatedDetails ){
+          console.log("The updated details are: ", updatedDetails);
+        }
+        else{
+          console.log("Error while updating details of the user");
+          
+        }
+
+      } catch (error:any) {
+          console.log("Error after clicking the button:", error.message);
+          
+      }
+
   }
 
   return (
@@ -70,7 +108,7 @@ function page() {
             </div>
 
             <div className='h-[50%] w-[50%] flex justify-start' >
-              <Input type="text" id='fullname' placeholder="..." value={ currentUserDetails ? currentUserDetails.name : "..." } className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
+              <Input type="text" id='fullname' placeholder="..." value={ currentUserDetails ? currentUserDetails.name : "" } className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
               
               {...register( "fullName", {
                 required: true,

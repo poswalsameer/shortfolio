@@ -1,4 +1,5 @@
 import { Client, Databases, ID, Storage } from 'appwrite';
+import { v4 as uuidv4 } from 'uuid';
 
 export class DatabaseService{
 
@@ -21,6 +22,8 @@ export class DatabaseService{
     async userDetails({usernameFrontend, bioFrontend, twitterFrontend, githubFrontend, instagramFrontend, behanceFrontend, linkedinFrontend, textFrontend, profilePhotoFrontend, fullNameFrontend} : {usernameFrontend: string, bioFrontend: string, twitterFrontend: string, githubFrontend: string, instagramFrontend: string, behanceFrontend: string, linkedinFrontend: string, textFrontend: string, profilePhotoFrontend: string, fullNameFrontend: string}){
 
         try {
+
+            // const uniqueID = uuidv4();
             
             const createdDetails = await this.databases.createDocument(
                 process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID,
@@ -36,7 +39,7 @@ export class DatabaseService{
                     'linkedinURL' : linkedinFrontend ? linkedinFrontend : '',
                     'TextArea' : textFrontend ? textFrontend : '',
                     'profilePhoto' : profilePhotoFrontend,
-                    'fullName' : fullNameFrontend ? fullNameFrontend : ''
+                    'fullName' : fullNameFrontend
                 }
             )
             
@@ -53,14 +56,14 @@ export class DatabaseService{
     }
 
     // UPDATING THE USER DETAILS INTO THE DATABASE
-    async updateUserDetails({usernameFrontend, bioFrontend, twitterFrontend, githubFrontend, instagramFrontend, behanceFrontend, linkedinFrontend, textFrontend, profilePhotoFrontend, fullNameFrontend} : {usernameFrontend: string, bioFrontend: string, twitterFrontend: string, githubFrontend: string, instagramFrontend: string, behanceFrontend: string, linkedinFrontend: string, textFrontend: string, profilePhotoFrontend: string, fullNameFrontend: string}){
+    async updateUserDetails( profileId:any, {usernameFrontend, bioFrontend, twitterFrontend, githubFrontend, instagramFrontend, behanceFrontend, linkedinFrontend, textFrontend, profilePhotoFrontend, fullNameFrontend} : {usernameFrontend: string, bioFrontend: string, twitterFrontend: string, githubFrontend: string, instagramFrontend: string, behanceFrontend: string, linkedinFrontend: string, textFrontend: string, profilePhotoFrontend: string, fullNameFrontend: string}){
 
         try {
             
             const updatedDetails = await this.databases.updateDocument(
                 process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID,
                 process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID,
-                ID.unique(),
+                profileId,
                 {
                     'username' : usernameFrontend,
                     'bio' : bioFrontend,
@@ -71,7 +74,7 @@ export class DatabaseService{
                     'linkedinURL' : linkedinFrontend ? linkedinFrontend : '',
                     'TextArea' : textFrontend ? textFrontend : '',
                     'profilePhoto' : profilePhotoFrontend,
-                    'fullName' : fullNameFrontend ? fullNameFrontend : ''
+                    'fullName' : fullNameFrontend
                 },
                 // ["read("any")"]
             )
