@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/Link";
 import { useForm } from 'react-hook-form'
 import authServiceObject from '../appwrite';
+import databaseServiceObject from '../database.appwrite';
 import { useDispatch } from 'react-redux';
 import { checkLogin } from '../features/auth.slice';
 import { useRouter } from 'next/navigation';
@@ -23,6 +24,37 @@ function page() {
   const signupUserFunction = async(data:any) => {
 
     console.log( "This is the data coming from all the signup fields: " ,data);
+
+    // UPLOADING THE PHOTO TO THE BACKEND
+    // try {
+    //   const uploadedImage = await databaseServiceObject.fileUpload(data.profilePhoto[0]);
+
+    //   if( uploadedImage ){
+    //     console.log( "image uploaded successfully" );
+    //   }
+    //   else{
+    //     console.log(uploadedImage);
+        
+    //     console.log("cannot upload the image");
+    //   }
+    // } catch (error) {
+    //   console.log("error in the catch part:", error);
+    // }
+
+    // CREATING A NEW DOCUMENT AFTER THE USER CLICKS SIGNUP BUTTON
+    // const createdDocument = await databaseServiceObject.userDetails({ usernameFrontend: data.username, bioFrontend: '', twitterFrontend: '', githubFrontend: '', instagramFrontend: '', behanceFrontend:  '', linkedinFrontend: '', textFrontend: '', profilePhotoFrontend: data.profilePic[0], fullNameFrontend: data.fullName, passwordFrontend: data.password, emailFrontend: data.email });
+    
+    // console.log("created document:", createdDocument);
+    
+
+    // if( createdDocument ){
+    //   console.log("Document created successfully: ", createdDocument);
+    // }
+    // else{
+    //   console.log("Cannot create the document after registration.");
+    // }
+
+    
 
     setError('');
 
@@ -104,6 +136,13 @@ function page() {
               {...register("username", {
                 required:true,
               })}
+              />
+
+              {/* PROFILE PHOTO FIELD */}
+              <Input type="file" id='profilePic' 
+                {...register( "profilePhoto", {
+                  required: true
+                } )}
               />
 
               <Button variant="destructive">Create account</Button>

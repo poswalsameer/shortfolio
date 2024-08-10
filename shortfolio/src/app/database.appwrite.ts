@@ -31,7 +31,7 @@ export class DatabaseService{
                 ID.unique(),
                 {
                     'username' : usernameFrontend,
-                    'bio' : bioFrontend,
+                    'bio' : bioFrontend ? bioFrontend : '',
                     'twitterURL' : twitterFrontend ? twitterFrontend : '',
                     'githubURL' : githubFrontend ? githubFrontend : '',
                     'instagramURL' : instagramFrontend ? instagramFrontend : '',
@@ -46,7 +46,7 @@ export class DatabaseService{
             if( createdDetails ){
                 return createdDetails;
             }
-            return null;
+            // return null;
 
         } catch (error) {
             console.log("Error while adding details in the database:", error);
@@ -66,7 +66,7 @@ export class DatabaseService{
                 profileId,
                 {
                     'username' : usernameFrontend,
-                    'bio' : bioFrontend,
+                    'bio' : bioFrontend ? bioFrontend : '',
                     'twitterURL' : twitterFrontend ? twitterFrontend : '',
                     'githubURL' : githubFrontend ? githubFrontend : '',
                     'instagramURL' : instagramFrontend ? instagramFrontend : '',
@@ -146,6 +146,34 @@ export class DatabaseService{
 
         } catch (error) {
             console.log("Error while updating the file:", error);
+            
+        }
+
+    }
+
+    // async getFile(  )
+
+    async getUser( userId: any ){
+
+        try {
+            
+            const currentUser = await this.databases.getDocument(
+                process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID,
+                process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID,
+                userId
+            )
+
+            if( currentUser ){
+                console.log( "Details of the current user: ", currentUser );
+                return true;         
+            }
+            else{
+                console.log("Cannot get details of the user");
+                return false;
+            }
+
+        } catch (error) {
+            console.log("Error fetching the user details: ", error);
             
         }
 

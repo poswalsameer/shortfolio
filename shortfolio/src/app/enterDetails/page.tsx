@@ -13,6 +13,7 @@ import databaseServiceObject from '../database.appwrite'
 function page() {
 
   const [currentUserDetails, setCurrentUserDetails] = useState<any>({});
+  const [userExists, setUserExists] = useState<boolean>(false);
 
   const getCurrentUserDetails = async () => {
 
@@ -25,6 +26,21 @@ function page() {
       if( currentUser ){
           setCurrentUserDetails(currentUser);
           console.log("Details of the current user:", currentUser);
+
+          // try {
+          //   const userID = currentUserDetails.$id;
+          //   const userDetails = await databaseServiceObject.getUser(userID);
+
+          //   if( userDetails ){
+          //     console.log("Current user exists");
+          //   }
+          //   else{
+          //     console.log("Current user does not exists");
+          //   }
+          // } catch (error) {
+          //   console.log("Cannot find the current user in db: ", error);
+          // }
+
       }
       else{
         console.log("Cannot fetch the current user from backend");
@@ -38,9 +54,36 @@ function page() {
 
   }
 
+  const findUserInDB = async () => {
+
+    try {
+
+      setUserExists(false);
+      
+      const userID = currentUserDetails.$id;
+      const userDetails = await databaseServiceObject.getUser(userID);
+
+      if( userDetails ){
+        setUserExists(true);
+        console.log("Current user exists");
+      }
+      else{
+        setUserExists(false);
+        console.log("Current user does not exists");
+        
+      }
+
+    } catch (error) {
+      console.log("Cannot find the current user in db: ", error);
+      
+    }
+
+  }
+
   useEffect( () => {
 
     getCurrentUserDetails();
+    findUserInDB();
 
   }, [] )
 
@@ -50,41 +93,94 @@ function page() {
 
       console.log("The data coming from these input field is: ", data);
 
-      // console.log(" Logging current user details before going in the try block ",currentUserDetails);
-      
-      // RIGHT NOW, THE TRY BLOCK IS NOT WORKING BECAUSE THE DOCUMENT IS NOT CREATED TILL NOW AND WE ARE UPDATING THE DOCUMENT, SO TOMORROW, CREATE DOCUMENT WHILE CREATING THE USER AND THEN TEST THIS FUNCTION
+      console.log("Current user status: ", userExists);
 
       // IMAGE UPLOAD IS WORKING FINE
+      if( userExists ){
 
-      try {
+        try {
 
-        // HANDLING THE IMAGE UPLOAD FIRST
-        const uploadedImage = await databaseServiceObject.fileUpload(data.profilePhoto[0]);
-
-        if( uploadedImage ){
-          console.log("Image uploaded successfully");
-        }
-        else{
-          console.log("Cannot upload the image");
+          // HANDLING THE IMAGE UPLOAD FIRST
+          const uploadedImage = await databaseServiceObject.fileUpload(data.profilePhoto[0]);
+  
+          if( uploadedImage ){
+            console.log("Image uploaded successfully");
+          }
+          else{
+            console.log("Cannot upload the image");
+            
+          }
+  
+          const updatedDetails =  await databaseServiceObject.userDetails({ usernameFrontend: data.username,
+            bioFrontend: data.bio,
+            twitterFrontend: data.twitterUsername,
+            githubFrontend: data.githubUsername,
+            instagramFrontend: data.instagramUsername,
+            behanceFrontend: data.behanceUsername,
+            linkedinFrontend: data.linkedinUsername,
+            textFrontend: data.extraText,
+            profilePhotoFrontend: uploadedImage.$id,
+            fullNameFrontend: data.fullName
+            })
           
+          if( updatedDetails ){
+            console.log("The updated details are: ", updatedDetails);
+          }
+          else{
+            console.log("Error while updating details of the user");
+            
+          }
+  
+        } catch (error:any) {
+            console.log("Error after clicking the button:", error.message);
+            
         }
 
-        const updatedDetails =  await databaseServiceObject.updateUserDetails( currentUserDetails.$id, {
-          ...data,
-          profilePhotoFrontend: uploadedImage
-        } )
+      }
+      else{
+
+        try {
+
+          // HANDLING THE IMAGE UPLOAD FIRST
+          const uploadedImage = await databaseServiceObject.fileUpload(data.profilePhoto[0]);
+  
+          if( uploadedImage ){
+            console.log("Image uploaded successfully");
+            console.log(uploadedImage);
+          }
+          else{
+            console.log("Cannot upload the image");
+            
+          }
+
+          const createdUser = await databaseServiceObject.userDetails({ usernameFrontend: data.username,
+          bioFrontend: data.bio,
+          twitterFrontend: data.twitterUsername,
+          githubFrontend: data.githubUsername,
+          instagramFrontend: data.instagramUsername,
+          behanceFrontend: data.behanceUsername,
+          linkedinFrontend: data.linkedinUsername,
+          textFrontend: data.extraText,
+          profilePhotoFrontend: uploadedImage.$id,
+          fullNameFrontend: data.fullName
+          })
+
+          if( createdUser ){
+            console.log( "Created user in the db is: ", createdUser );
+          }
+          else{
+            console.log( "User cannot created" );
+          }
+ 
+        } catch (error) {
+          
+          console.log("Cannot create the user: ", error);
+          
+
+        }
+
         
-        if( updatedDetails ){
-          console.log("The updated details are: ", updatedDetails);
-        }
-        else{
-          console.log("Error while updating details of the user");
-          
-        }
 
-      } catch (error:any) {
-          console.log("Error after clicking the button:", error.message);
-          
       }
 
   }
@@ -263,7 +359,7 @@ function page() {
             </div>
 
             <div className='h-[50%] w-[50%] flex justify-start' >
-              <Input type="file" id='profilePic' className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105 hover:cursor-pointer'
+              <Input type="file" id='profilePhoto' className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105 hover:cursor-pointer'
               
               {...register( "profilePhoto", {
                 required: true
