@@ -17,11 +17,13 @@ function Homepage() {
 
     if( currentSession ){
         // IF CURRENT SESSION EXISTS, THEN FIND THE USER DETAILS
+        console.log("Logging just before the getting logged in user details");
+        
         const currentUser = await authServiceObject.getLoggedInUser();
 
         if( currentUser ){
           // IF USER EXISTS, THEN DIRECTLY REDIRECT TO THE USER PROFILE
-          console.log(currentUser);
+          console.log(currentUser.$id);
           
           const username = currentUser.name.split(" ").join('');
           router.push(`/user/${username}`)

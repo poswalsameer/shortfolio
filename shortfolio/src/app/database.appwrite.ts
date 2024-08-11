@@ -40,7 +40,7 @@ export class DatabaseService{
                     'TextArea' : textFrontend ? textFrontend : '',
                     'profilePhoto' : profilePhotoFrontend,
                     'fullName' : fullNameFrontend,
-                    'emailFrontend': emailFrontend
+                    'email': emailFrontend ? emailFrontend : '' 
                 }
             )
             
@@ -57,14 +57,14 @@ export class DatabaseService{
     }
 
     // UPDATING THE USER DETAILS INTO THE DATABASE
-    async updateUserDetails( profileId:any, {usernameFrontend, bioFrontend, twitterFrontend, githubFrontend, instagramFrontend, behanceFrontend, linkedinFrontend, textFrontend, profilePhotoFrontend, fullNameFrontend} : {usernameFrontend: string, bioFrontend: string, twitterFrontend: string, githubFrontend: string, instagramFrontend: string, behanceFrontend: string, linkedinFrontend: string, textFrontend: string, profilePhotoFrontend: string, fullNameFrontend: string}){
+    async updateUserDetails( {usernameFrontend, bioFrontend, twitterFrontend, githubFrontend, instagramFrontend, behanceFrontend, linkedinFrontend, textFrontend, profilePhotoFrontend, fullNameFrontend, emailFrontend} : {usernameFrontend: string, bioFrontend: string, twitterFrontend: string, githubFrontend: string, instagramFrontend: string, behanceFrontend: string, linkedinFrontend: string, textFrontend: string, profilePhotoFrontend: string, fullNameFrontend: string, emailFrontend: string}){
 
         try {
             
             const updatedDetails = await this.databases.updateDocument(
                 process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID,
                 process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID,
-                profileId,
+                emailFrontend,
                 {
                     'username' : usernameFrontend,
                     'bio' : bioFrontend ? bioFrontend : '',
@@ -75,7 +75,8 @@ export class DatabaseService{
                     'linkedinURL' : linkedinFrontend ? linkedinFrontend : '',
                     'TextArea' : textFrontend ? textFrontend : '',
                     'profilePhoto' : profilePhotoFrontend,
-                    'fullName' : fullNameFrontend
+                    'fullName' : fullNameFrontend,
+                    'email' : emailFrontend ? emailFrontend : ''
                 },
                 // ["read("any")"]
             )
@@ -153,6 +154,28 @@ export class DatabaseService{
     }
 
     // async getFile(  )
+    async getAllDocuments( username: any ){
+
+        try {
+            
+            const allDocs = await this.databases.listDocuments(
+                process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID,
+                process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID,
+                [ Query.equal("username", username) ]
+            )
+
+            if (allDocs.documents && allDocs.documents.length > 0) {
+                return allDocs.documents[0]; 
+            } else {
+                return null; 
+            }
+
+        } catch (error) {
+            console.log("Error while getting all documents: ", error);
+            
+        }
+
+    }
 
     async getUser( userId:any ){
 

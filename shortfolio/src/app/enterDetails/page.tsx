@@ -22,20 +22,20 @@ function page() {
   const convertEmailToString = (data: any) => {
 
       let n = data.length;
-      let returnString = "";
+      let convertedString = "";
 
       for(let i=0; i<n; i++){
 
           if( data[i] === '@' || data[i] === '.' ){
-            returnString = returnString + '0';
+            convertedString = convertedString + '0';
           }
           else{
-            returnString = returnString + data[i];
+            convertedString = convertedString + data[i];
           }
 
       }
 
-      return returnString;
+      return convertedString;
 
   }
 
@@ -94,26 +94,123 @@ function page() {
       console.log("this log is after calling the image upload function in createDocument function");
       
       // TODO: Create the user after running a query, check if a user with the username already exists or not
-      // const createdUser = await databaseServiceObject.userDetails({
-      //   usernameFrontend: userId,
-      //   bioFrontend: data.bio,
-      //   twitterFrontend: data.twitterUsername,
-      //   githubFrontend: data.githubUsername,
-      //   instagramFrontend: data.instagramUsername,
-      //   behanceFrontend: data.behanceUsername,
-      //   linkedinFrontend: data.linkedinUsername,
-      //   textFrontend: data.extraText,
-      //   profilePhotoFrontend: uploadedImage.$id,
-      //   fullNameFrontend: data.fullName
-      // })
 
-      // if( createdUser ){
-      //   console.log("User created successfully!");
-      //   return createdUser;
-      // }
-      // else{
-      //   console.log("Cannot create the user!");
-      // }
+      const findUser = await databaseServiceObject.getUser(data.username);
+
+      if( findUser ){
+        alert(" Username already exists : INSIDE CREATE DOCUMENT FUNCTION ");
+      }
+      else{
+
+        const createdUser = await databaseServiceObject.userDetails({
+        usernameFrontend: data.username,
+        bioFrontend: data.bio,
+        twitterFrontend: data.twitterUsername,
+        githubFrontend: data.githubUsername,
+        instagramFrontend: data.instagramUsername,
+        behanceFrontend: data.behanceUsername,
+        linkedinFrontend: data.linkedinUsername,
+        textFrontend: data.extraText,
+        profilePhotoFrontend: uploadedImage.$id,
+        fullNameFrontend: data.fullName,
+        emailFrontend: userId
+      })
+
+      if( createdUser ){
+        console.log("User created successfully!");
+        return createdUser;
+      }
+      else{
+        console.log("Cannot create the user!");
+      }
+
+
+      }
+
+  }
+
+  const updateDocument = async ( userEmail: any, data: any ) => {
+
+    const uploadedImage = await uploadImageFunction(data);
+    console.log("this log is after calling the image upload function in uploadDocument function");
+
+    // finding the username entered in the input field in document database
+    const findUser = await databaseServiceObject.getAllDocuments(data.username);
+    console.log("Searching for username:", data.username);
+    console.log( "Find User: ", findUser);
+    
+
+    // IF USER IS FOUND WITH ENTERED USERNAME, THEN WO GO IN THIS IF STATEMENT
+    if( findUser ){
+      console.log("Details of the existing user: ", findUser);
+
+      // IF THE USER ENTERED A NEW USERNAME, AND THE NEW USERNAME ALREADY EXISTS, THEN WE DO THE BELOW THING
+
+      //getting the ID of the returned document
+      const returnedDocID = findUser.$id;
+      console.log( "ID of the returned document: ", returnedDocID);
+      
+
+      // if the ID of the returned document is same as of userEmail, this means user didn't changed his username while updating the details, so we can simply update the document with new details
+      if( returnedDocID === userEmail ){
+
+        const updatedUserDetails = await databaseServiceObject.updateUserDetails({
+          usernameFrontend: data.username,
+          bioFrontend: data.bio,
+          twitterFrontend: data.twitterUsername,
+          githubFrontend: data.githubUsername,
+          instagramFrontend: data.instagramUsername,
+          behanceFrontend: data.behanceUsername,
+          linkedinFrontend: data.linkedinUsername,
+          textFrontend: data.extraText,
+          profilePhotoFrontend: uploadedImage.$id,
+          fullNameFrontend: data.fullName,
+          emailFrontend: userEmail
+        })
+
+        if( updatedUserDetails ){
+          console.log("These are the details after updating: ", updatedUserDetails);
+        }
+        else{
+          console.log("There is some error while updating the user details : INSIDE THE IF WHERE WE ARE CHECKING THE DOC IDs ");
+        }
+
+      }
+      else if( returnedDocID !== userEmail ){
+        alert("Username already exists");
+      }
+
+    }
+
+    //IF USER NOT FOUND WITH ENTERED USERNAME, THEN UPDATE DETAILS WITH NEW USERNAME
+    else{
+
+        // console.log("User not found with the same username");
+        
+
+      const updatedUserDetails = await databaseServiceObject.updateUserDetails({
+        usernameFrontend: data.username,
+        bioFrontend: data.bio,
+        twitterFrontend: data.twitterUsername,
+        githubFrontend: data.githubUsername,
+        instagramFrontend: data.instagramUsername,
+        behanceFrontend: data.behanceUsername,
+        linkedinFrontend: data.linkedinUsername,
+        textFrontend: data.extraText,
+        profilePhotoFrontend: uploadedImage.$id,
+        fullNameFrontend: data.fullName,
+        emailFrontend: userEmail
+      })
+
+      if( updatedUserDetails ){
+        console.log("Details of the user after updating the document : INSIDE IF WHEN USER IS NOT FOUND WITH THE SAME ENTERED USERNAME", updatedUserDetails);
+      }
+      else{
+        console.log("There is some error while updating the user details : INSIDE IF WHEN USER IS NOT FOUND WITH THE SAME ENTERED USERNAME.");
+        
+      }
+
+    }
 
   }
 
@@ -140,13 +237,22 @@ function page() {
         if( userDocument ){
 
           // TODO: This will be function where we will simply work on updating the document but the catch is, we will run a query which will return a doc, and if the returnedDocID !== currDocID, then that username already exists, if the returnedDocID === currDocID, then that username belongs to this user
-          console.log("Document with this id exists");
+          console.log("Details of the user before updating: ", data);
+          
+          const updatedDetailOfTheUser  = await updateDocument(userEmail, data);
+          console.log("Details of the user after updating: ", updatedDetailOfTheUser);
+          
         }
         else{
           console.log("Document with this id does not exists");
 
           // TODO: Have to work from here tomorrow, create the document when document with current email is not found
           const createdUser = await createDocument(userEmail, data);
+
+          if( createdUser ){
+            console.log("User created successfully!");
+            console.log("Details of the user: ", createdUser);
+          }
         }
 
       } catch (error) {
