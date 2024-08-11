@@ -19,7 +19,7 @@ export class AuthService{
     };
 
     // FUNCTION TO REGISTER USER
-    async registerUser({ email, password, fullName ,username}: { email: string, password: string, fullName:string ,username: string}){
+    async registerUser({ email, password, fullName}: { email: string, password: string, fullName:string ,username: string}){
 
         if (!this.isValidEmail(email)) {
             console.log("Invalid email address format.");
@@ -27,7 +27,7 @@ export class AuthService{
         }
 
         try {
-            const createdUser = await this.account.create( ID.unique(), email, password, fullName ,username);
+            const createdUser = await this.account.create( ID.unique(), email, password, fullName);
 
             if( createdUser ){
                 // redirect to login page and login the user

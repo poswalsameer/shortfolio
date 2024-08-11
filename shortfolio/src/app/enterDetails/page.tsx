@@ -13,7 +13,9 @@ import databaseServiceObject from '../database.appwrite'
 function page() {
 
   const [currentUserDetails, setCurrentUserDetails] = useState<any>({});
-  const [userExists, setUserExists] = useState<boolean>(false);
+  // const [currentUserFound, setCurrentUserFound] = useState<any>(false);
+  // const [userExists, setUserExists] = useState<boolean>(false);
+  // const [ username, setUsername ] = useState<string>('');
 
   const getCurrentUserDetails = async () => {
 
@@ -22,24 +24,15 @@ function page() {
       setCurrentUserDetails({});
       
       const currentUser = await authServiceObject.getLoggedInUser();
+      // console.log("logging this after getting current user from auth service");
+      
 
       if( currentUser ){
+          console.log("get current user method running");       
+          
+          //WHEN USER SIGNS UP AND THEN COMES ON THIS PAGE, THEN THIS currentUser OBJECT WILL BE EMPTY
           setCurrentUserDetails(currentUser);
-          console.log("Details of the current user:", currentUser);
-
-          // try {
-          //   const userID = currentUserDetails.$id;
-          //   const userDetails = await databaseServiceObject.getUser(userID);
-
-          //   if( userDetails ){
-          //     console.log("Current user exists");
-          //   }
-          //   else{
-          //     console.log("Current user does not exists");
-          //   }
-          // } catch (error) {
-          //   console.log("Cannot find the current user in db: ", error);
-          // }
+          console.log(currentUserDetails);
 
       }
       else{
@@ -54,134 +47,175 @@ function page() {
 
   }
 
-  const findUserInDB = async () => {
+  useEffect( () => {
+    getCurrentUserDetails();
+  }, [])
 
-    try {
 
-      setUserExists(false);
-      
-      const userID = currentUserDetails.$id;
-      const userDetails = await databaseServiceObject.getUser(userID);
+  // FUNCTION TO UPLOAD IMAGE ON APPWRITE
+  const uploadImageFunction = async (data: any) => {
 
-      if( userDetails ){
-        setUserExists(true);
-        console.log("Current user exists");
+      const uploadedImage = await databaseServiceObject.fileUpload(data.profilePhoto[0]);
+
+      if( uploadedImage ){
+        console.log("Image uploaded successfully : INSIDE THE UPLOAD IMAGE FUNCTION");
+        return uploadedImage;
       }
       else{
-        setUserExists(false);
-        console.log("Current user does not exists");
+        console.log("Image cannot be uploaded : INSIDE THE UPLOAD IMAGE FUNCTION");
         
       }
 
-    } catch (error) {
-      console.log("Cannot find the current user in db: ", error);
+  }
+
+  
+  // CREATING A FUNCTION THAT CREATES A NEW DOCUMENT WITH THE USERNAME
+  const createDocument = async (userId: any, data: any) => {
+
+      const uploadedImage = await uploadImageFunction(data);
+      console.log("this log is after calling the image upload function in createDocument function");
       
-    }
+
+      const createdUser = await databaseServiceObject.userDetails({
+        usernameFrontend: userId,
+        bioFrontend: data.bio,
+        twitterFrontend: data.twitterUsername,
+        githubFrontend: data.githubUsername,
+        instagramFrontend: data.instagramUsername,
+        behanceFrontend: data.behanceUsername,
+        linkedinFrontend: data.linkedinUsername,
+        textFrontend: data.extraText,
+        profilePhotoFrontend: uploadedImage.$id,
+        fullNameFrontend: data.fullName
+      })
+
+      if( createdUser ){
+        console.log("User created successfully!");
+        return createdUser;
+      }
+      else{
+        console.log("Cannot create the user!");
+      }
 
   }
 
-  useEffect( () => {
-
-    getCurrentUserDetails();
-    findUserInDB();
-
-  }, [] )
 
   const { register, handleSubmit } = useForm();
 
   const detailUpdateButton = async (data: any) => {
 
       console.log("The data coming from these input field is: ", data);
+      console.log("The username coming from the input field is: ", data.username);
+      const username = data.username;
+      
+      // FINDING A DOCUMENT WITH ID OF THIS USERNAME
+      try {
+        
+        const userDetails = await databaseServiceObject.getUser(username);
 
-      console.log("Current user status: ", userExists);
+        if( userDetails ){
+          alert("This username is already taken");
+        }
+        else{
+          const createdUser = await createDocument(username, data);
+          console.log("These are the details of the created user: ", createdUser);
+        }
+
+      } catch (error) {
+        console.log( "Error while fetching details of the document of the current user: ", error );
+        
+      }
+
+
 
       // IMAGE UPLOAD IS WORKING FINE
-      if( userExists ){
+      // if( userExists ){
 
-        try {
+      //   try {
 
-          // HANDLING THE IMAGE UPLOAD FIRST
-          const uploadedImage = await databaseServiceObject.fileUpload(data.profilePhoto[0]);
+      //     // HANDLING THE IMAGE UPLOAD FIRST
+      //     const uploadedImage = await databaseServiceObject.fileUpload(data.profilePhoto[0]);
   
-          if( uploadedImage ){
-            console.log("Image uploaded successfully");
-          }
-          else{
-            console.log("Cannot upload the image");
+      //     if( uploadedImage ){
+      //       console.log("Image uploaded successfully");
+      //     }
+      //     else{
+      //       console.log("Cannot upload the image");
             
-          }
+      //     }
   
-          const updatedDetails =  await databaseServiceObject.userDetails({ usernameFrontend: data.username,
-            bioFrontend: data.bio,
-            twitterFrontend: data.twitterUsername,
-            githubFrontend: data.githubUsername,
-            instagramFrontend: data.instagramUsername,
-            behanceFrontend: data.behanceUsername,
-            linkedinFrontend: data.linkedinUsername,
-            textFrontend: data.extraText,
-            profilePhotoFrontend: uploadedImage.$id,
-            fullNameFrontend: data.fullName
-            })
+      //     const updatedDetails =  await databaseServiceObject.userDetails({ 
+      //       usernameFrontend: data.username,
+      //       bioFrontend: data.bio,
+      //       twitterFrontend: data.twitterUsername,
+      //       githubFrontend: data.githubUsername,
+      //       instagramFrontend: data.instagramUsername,
+      //       behanceFrontend: data.behanceUsername,
+      //       linkedinFrontend: data.linkedinUsername,
+      //       textFrontend: data.extraText,
+      //       profilePhotoFrontend: uploadedImage.$id,
+      //       fullNameFrontend: data.fullName
+      //       })
           
-          if( updatedDetails ){
-            console.log("The updated details are: ", updatedDetails);
-          }
-          else{
-            console.log("Error while updating details of the user");
+      //     if( updatedDetails ){
+      //       console.log("The updated details are: ", updatedDetails);
+      //     }
+      //     else{
+      //       console.log("Error while updating details of the user");
             
-          }
+      //     }
   
-        } catch (error:any) {
-            console.log("Error after clicking the button:", error.message);
+      //   } catch (error:any) {
+      //       console.log("Error after clicking the button:", error.message);
             
-        }
+      //   }
 
-      }
-      else{
+      // }
+      // else{
 
-        try {
+      //   try {
 
-          // HANDLING THE IMAGE UPLOAD FIRST
-          const uploadedImage = await databaseServiceObject.fileUpload(data.profilePhoto[0]);
+      //     // HANDLING THE IMAGE UPLOAD FIRST
+      //     const uploadedImage = await databaseServiceObject.fileUpload(data.profilePhoto[0]);
   
-          if( uploadedImage ){
-            console.log("Image uploaded successfully");
-            console.log(uploadedImage);
-          }
-          else{
-            console.log("Cannot upload the image");
+      //     if( uploadedImage ){
+      //       console.log("Image uploaded successfully");
+      //       console.log(uploadedImage);
+      //     }
+      //     else{
+      //       console.log("Cannot upload the image");
             
-          }
+      //     }
 
-          const createdUser = await databaseServiceObject.userDetails({ usernameFrontend: data.username,
-          bioFrontend: data.bio,
-          twitterFrontend: data.twitterUsername,
-          githubFrontend: data.githubUsername,
-          instagramFrontend: data.instagramUsername,
-          behanceFrontend: data.behanceUsername,
-          linkedinFrontend: data.linkedinUsername,
-          textFrontend: data.extraText,
-          profilePhotoFrontend: uploadedImage.$id,
-          fullNameFrontend: data.fullName
-          })
+      //     const createdUser = await databaseServiceObject.userDetails({ usernameFrontend: data.username,
+      //     bioFrontend: data.bio,
+      //     twitterFrontend: data.twitterUsername,
+      //     githubFrontend: data.githubUsername,
+      //     instagramFrontend: data.instagramUsername,
+      //     behanceFrontend: data.behanceUsername,
+      //     linkedinFrontend: data.linkedinUsername,
+      //     textFrontend: data.extraText,
+      //     profilePhotoFrontend: uploadedImage.$id,
+      //     fullNameFrontend: data.fullName
+      //     })
 
-          if( createdUser ){
-            console.log( "Created user in the db is: ", createdUser );
-          }
-          else{
-            console.log( "User cannot created" );
-          }
+      //     if( createdUser ){
+      //       console.log( "Created user in the db is: ", createdUser );
+      //     }
+      //     else{
+      //       console.log( "User cannot created" );
+      //     }
  
-        } catch (error) {
+      //   } catch (error) {
           
-          console.log("Cannot create the user: ", error);
+      //     console.log("Cannot create the user: ", error);
           
 
-        }
+      //   }
 
         
 
-      }
+      // }
 
   }
 

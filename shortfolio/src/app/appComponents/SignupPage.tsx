@@ -83,7 +83,8 @@ function page() {
         }
 
         //NAVIGATING THE PAGE TO LOGIN PAGE AFTER SUCCESSFULL SIGNUP
-        router.push(`/user/${username}`);
+        router.push('/enterDetails');
+        // router.push(`/user/${username}`);
 
       }
 
@@ -132,18 +133,18 @@ function page() {
               />
 
               {/* USERNAME INPUT FIELD */}
-              <Input type="text" placeholder="Username" 
+              {/* <Input type="text" placeholder="Username" 
               {...register("username", {
                 required:true,
               })}
-              />
+              /> */}
 
               {/* PROFILE PHOTO FIELD */}
-              <Input type="file" id='profilePic' 
+              {/* <Input type="file" id='profilePic' 
                 {...register( "profilePhoto", {
                   required: true
                 } )}
-              />
+              /> */}
 
               <Button variant="destructive">Create account</Button>
             

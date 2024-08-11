@@ -1,4 +1,4 @@
-import { Client, Databases, ID, Storage } from 'appwrite';
+import { Client, Databases, ID, Query, Storage } from 'appwrite';
 import { v4 as uuidv4 } from 'uuid';
 
 export class DatabaseService{
@@ -28,7 +28,7 @@ export class DatabaseService{
             const createdDetails = await this.databases.createDocument(
                 process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID,
                 process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID,
-                ID.unique(),
+                usernameFrontend,
                 {
                     'username' : usernameFrontend,
                     'bio' : bioFrontend ? bioFrontend : '',
@@ -153,22 +153,22 @@ export class DatabaseService{
 
     // async getFile(  )
 
-    async getUser( userId: any ){
+    async getUser( userId:any ){
 
         try {
             
             const currentUser = await this.databases.getDocument(
                 process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID,
                 process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID,
-                userId
+                userId,
             )
 
             if( currentUser ){
-                console.log( "Details of the current user: ", currentUser );
+                // console.log( "Details of the current user: ", currentUser );
                 return true;         
             }
             else{
-                console.log("Cannot get details of the user");
+                // console.log("Cannot get details of the user");
                 return false;
             }
 
