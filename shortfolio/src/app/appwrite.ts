@@ -31,9 +31,12 @@ export class AuthService{
 
             if( createdUser ){
                 // redirect to login page and login the user
+                // console.log("User created successfully");
+                // return true;
                 return this.loginUser({email, password});
             }
             else{
+                return false;
                 console.log("User cannot be created");
                 
             }

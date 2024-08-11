@@ -19,7 +19,7 @@ export class DatabaseService{
     }
 
     // FEEDING THE USER DETAILS INTO THE DATABASE
-    async userDetails({usernameFrontend, bioFrontend, twitterFrontend, githubFrontend, instagramFrontend, behanceFrontend, linkedinFrontend, textFrontend, profilePhotoFrontend, fullNameFrontend} : {usernameFrontend: string, bioFrontend: string, twitterFrontend: string, githubFrontend: string, instagramFrontend: string, behanceFrontend: string, linkedinFrontend: string, textFrontend: string, profilePhotoFrontend: string, fullNameFrontend: string}){
+    async userDetails({usernameFrontend, bioFrontend, twitterFrontend, githubFrontend, instagramFrontend, behanceFrontend, linkedinFrontend, textFrontend, profilePhotoFrontend, fullNameFrontend, emailFrontend} : {usernameFrontend: string, bioFrontend: string, twitterFrontend: string, githubFrontend: string, instagramFrontend: string, behanceFrontend: string, linkedinFrontend: string, textFrontend: string, profilePhotoFrontend: string, fullNameFrontend: string, emailFrontend: string}){
 
         try {
 
@@ -28,7 +28,7 @@ export class DatabaseService{
             const createdDetails = await this.databases.createDocument(
                 process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID,
                 process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID,
-                usernameFrontend,
+                emailFrontend,
                 {
                     'username' : usernameFrontend,
                     'bio' : bioFrontend ? bioFrontend : '',
@@ -39,7 +39,8 @@ export class DatabaseService{
                     'linkedinURL' : linkedinFrontend ? linkedinFrontend : '',
                     'TextArea' : textFrontend ? textFrontend : '',
                     'profilePhoto' : profilePhotoFrontend,
-                    'fullName' : fullNameFrontend
+                    'fullName' : fullNameFrontend,
+                    'emailFrontend': emailFrontend
                 }
             )
             

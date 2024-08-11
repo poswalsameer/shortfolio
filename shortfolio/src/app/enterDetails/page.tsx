@@ -12,44 +12,61 @@ import databaseServiceObject from '../database.appwrite'
 
 function page() {
 
-  const [currentUserDetails, setCurrentUserDetails] = useState<any>({});
+  
   // const [currentUserFound, setCurrentUserFound] = useState<any>(false);
   // const [userExists, setUserExists] = useState<boolean>(false);
   // const [ username, setUsername ] = useState<string>('');
+  const [currentUserDetails, setCurrentUserDetails] = useState<any>({});
+
+  // FUNCTION TO CONVERT EMAIL INTO NORMAL STRING
+  const convertEmailToString = (data: any) => {
+
+      let n = data.length;
+      let returnString = "";
+
+      for(let i=0; i<n; i++){
+
+          if( data[i] === '@' || data[i] === '.' ){
+            returnString = returnString + '0';
+          }
+          else{
+            returnString = returnString + data[i];
+          }
+
+      }
+
+      return returnString;
+
+  }
 
   const getCurrentUserDetails = async () => {
 
     try {
 
       setCurrentUserDetails({});
-      
       const currentUser = await authServiceObject.getLoggedInUser();
-      // console.log("logging this after getting current user from auth service");
-      
 
       if( currentUser ){
           console.log("get current user method running");       
           
           //WHEN USER SIGNS UP AND THEN COMES ON THIS PAGE, THEN THIS currentUser OBJECT WILL BE EMPTY
           setCurrentUserDetails(currentUser);
-          console.log(currentUserDetails);
-
       }
       else{
         console.log("Cannot fetch the current user from backend");
-        
       }
-
     } catch (error) {
       console.log("Cannot get the current user details: ", error);
-      
     }
-
   }
 
   useEffect( () => {
-    getCurrentUserDetails();
+    getCurrentUserDetails();    
   }, [])
+
+  useEffect(() => {
+    console.log("details in the second use effect: ", currentUserDetails);
+  }, [currentUserDetails])
 
 
   // FUNCTION TO UPLOAD IMAGE ON APPWRITE
@@ -72,30 +89,31 @@ function page() {
   // CREATING A FUNCTION THAT CREATES A NEW DOCUMENT WITH THE USERNAME
   const createDocument = async (userId: any, data: any) => {
 
+      // TODO: Optimise here also, as the image will be uploaded twice when the user clicks this more than once
       const uploadedImage = await uploadImageFunction(data);
       console.log("this log is after calling the image upload function in createDocument function");
       
+      // TODO: Create the user after running a query, check if a user with the username already exists or not
+      // const createdUser = await databaseServiceObject.userDetails({
+      //   usernameFrontend: userId,
+      //   bioFrontend: data.bio,
+      //   twitterFrontend: data.twitterUsername,
+      //   githubFrontend: data.githubUsername,
+      //   instagramFrontend: data.instagramUsername,
+      //   behanceFrontend: data.behanceUsername,
+      //   linkedinFrontend: data.linkedinUsername,
+      //   textFrontend: data.extraText,
+      //   profilePhotoFrontend: uploadedImage.$id,
+      //   fullNameFrontend: data.fullName
+      // })
 
-      const createdUser = await databaseServiceObject.userDetails({
-        usernameFrontend: userId,
-        bioFrontend: data.bio,
-        twitterFrontend: data.twitterUsername,
-        githubFrontend: data.githubUsername,
-        instagramFrontend: data.instagramUsername,
-        behanceFrontend: data.behanceUsername,
-        linkedinFrontend: data.linkedinUsername,
-        textFrontend: data.extraText,
-        profilePhotoFrontend: uploadedImage.$id,
-        fullNameFrontend: data.fullName
-      })
-
-      if( createdUser ){
-        console.log("User created successfully!");
-        return createdUser;
-      }
-      else{
-        console.log("Cannot create the user!");
-      }
+      // if( createdUser ){
+      //   console.log("User created successfully!");
+      //   return createdUser;
+      // }
+      // else{
+      //   console.log("Cannot create the user!");
+      // }
 
   }
 
@@ -105,26 +123,37 @@ function page() {
   const detailUpdateButton = async (data: any) => {
 
       console.log("The data coming from these input field is: ", data);
-      console.log("The username coming from the input field is: ", data.username);
-      const username = data.username;
-      
-      // FINDING A DOCUMENT WITH ID OF THIS USERNAME
-      try {
-        
-        const userDetails = await databaseServiceObject.getUser(username);
 
-        if( userDetails ){
-          alert("This username is already taken");
+      console.log("The email coming from the user detail is: ", currentUserDetails.email);
+      let userEmail = currentUserDetails.email;
+
+      userEmail = convertEmailToString(userEmail);
+
+      console.log("This is user email after converting the string: ", userEmail);
+      
+      
+      
+      // FINDING A DOCUMENT WITH ID OF THIS EMAIL
+      try {
+        const userDocument = await databaseServiceObject.getUser(userEmail);
+      
+        if( userDocument ){
+
+          // TODO: This will be function where we will simply work on updating the document but the catch is, we will run a query which will return a doc, and if the returnedDocID !== currDocID, then that username already exists, if the returnedDocID === currDocID, then that username belongs to this user
+          console.log("Document with this id exists");
         }
         else{
-          const createdUser = await createDocument(username, data);
-          console.log("These are the details of the created user: ", createdUser);
+          console.log("Document with this id does not exists");
+
+          // TODO: Have to work from here tomorrow, create the document when document with current email is not found
+          const createdUser = await createDocument(userEmail, data);
         }
 
       } catch (error) {
-        console.log( "Error while fetching details of the document of the current user: ", error );
+        console.log("Error while finding the doc: ", error);
         
       }
+      
 
 
 

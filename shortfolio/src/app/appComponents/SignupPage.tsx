@@ -88,6 +88,8 @@ function page() {
 
       }
 
+      router.push('/enterDetails');
+
     } catch (error:any) {
         setError(error.message);
     }
