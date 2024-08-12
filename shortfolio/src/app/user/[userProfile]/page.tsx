@@ -11,27 +11,27 @@ function page() {
 
     const [ userName, setUserName ] = useState('');
 
-    const getCurrentUserDetails = async () => {
+    // const getCurrentUserDetails = async () => {
 
-        setUserName('');
+    //     setUserName('');
 
-        const currentUser = await authServiceObject.getLoggedInUser();
-        // console.log("Details of the current user: ", currentUser);
+    //     const currentUser = await authServiceObject.getLoggedInUser();
+    //     // console.log("Details of the current user: ", currentUser);
         
 
-        if( currentUser ){
-            // console.log(currentUser.name);
-            setUserName(currentUser.name);
-        }
-        else{
-            console.log("Current user not found");
+    //     if( currentUser ){
+    //         // console.log(currentUser.name);
+    //         setUserName(currentUser.name);
+    //     }
+    //     else{
+    //         console.log("Current user not found");
             
-        }
-    }
+    //     }
+    // }
 
-    useEffect( () => {
-        getCurrentUserDetails();
-    }, [] );
+    // useEffect( () => {
+    //     getCurrentUserDetails();
+    // }, [] );
     
 
   return (

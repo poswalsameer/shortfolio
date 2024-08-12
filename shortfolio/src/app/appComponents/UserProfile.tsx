@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Link2 } from 'lucide-react';
 import { PenLine } from 'lucide-react';
@@ -11,11 +11,14 @@ import { useRouter } from 'next/navigation';
 import { checkLogout } from '../features/auth.slice';
 import { useDispatch } from 'react-redux';
 import Cookie from 'js-cookie';
+import databaseServiceObject from '../database.appwrite';
 
 
 function page({params}:{params:any}) {
 
     const [error, setError] = useState('');
+
+    const [userDetails, setUserDetails] = useState<any>({});
 
     const dispatch = useDispatch();
     const router = useRouter();
@@ -44,6 +47,72 @@ function page({params}:{params:any}) {
 
     }
 
+    // FUNCTION TO CONVERT EMAIL TO NORMAL STRING
+  const convertEmailToString = (data: any) => {
+
+        let n = data.length;
+        let convertedString = "";
+
+        for(let i=0; i<n; i++){
+
+            if( data[i] === '@' || data[i] === '.' ){
+            convertedString = convertedString + '0';
+            }
+            else{
+            convertedString = convertedString + data[i];
+            }
+
+        }
+
+        return convertedString;
+
+    }
+
+    const getCurrentUserDetails = async () => {
+
+        try {
+            
+            const currentUser = await authServiceObject.getLoggedInUser();
+
+            if( currentUser ){
+                console.log( "Details of the current user: ", currentUser );
+
+                // TODO: If current user is found, then first convert the email to string, then find for the document with the userEmail string id
+
+                // Converting the email to normal string
+                const convertedEmail = convertEmailToString(currentUser.email);
+                console.log("Converted mail: ", convertedEmail);
+
+                //find document with string mail id
+                const userEmail = await databaseServiceObject.getUser(convertedEmail);
+
+                if( userEmail ){
+                    console.log("Details of the document with this id: ", userEmail);
+                    setUserDetails(userEmail);
+                }
+                else{
+                    setUserDetails({});
+                    console.log("Document not found with this id");
+                }
+                
+            }
+            else{
+                console.log("User details not found");
+            }
+
+        } catch (error) {
+            console.log("Error finding the details of the user: ", error);
+            
+        }
+
+    }
+
+    useEffect( () => {
+
+        getCurrentUserDetails();
+
+    }, [] ) 
+
   return (
     // <div>
     //   {params.userProfile}
@@ -63,12 +132,12 @@ function page({params}:{params:any}) {
 
                 {/* NAME */}
                 <div className=' w-[80%] text-3xl font-bold flex justify-center items-center'>
-                    {params}
+                    {userDetails.fullName}
                 </div>
 
                 {/* BIO */}
                 <div className='w-[80%] text-lg text-center text-gray-400 font-bold flex justify-center items-center'>
-                    This is the bio which I have written and it is dummy right now, so you are seeing this text.
+                   {userDetails.bio}
                 </div>
 
 

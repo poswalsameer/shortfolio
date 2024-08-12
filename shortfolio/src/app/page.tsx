@@ -9,32 +9,32 @@ import authServiceObject from "./appwrite";
 
 export default function Home() {
 
-  const [user, setUser] = useState('');
+  // const [user, setUser] = useState('');
 
-  const findCurrentUser = async () => {
+  // const findCurrentUser = async () => {
 
-      setUser('');
+  //     setUser('');
 
-      const currentUser = await authServiceObject.getLoggedInUser();
+  //     const currentUser = await authServiceObject.getLoggedInUser();
 
-      if( currentUser ){
-        const username = currentUser.name.split(" ").join('');
-        console.log("The username is:", username);
+  //     if( currentUser ){
+  //       const username = currentUser.name.split(" ").join('');
+  //       console.log("The username is:", username);
         
-        setUser(username);
-      }
-      else{
-        setUser('');
-      }
+  //       setUser(username);
+  //     }
+  //     else{
+  //       setUser('');
+  //     }
 
-  }
+  // }
 
-  useEffect( () => {
+  // useEffect( () => {
 
-    // CALLING THE FUNCTION TO FIND THE CURRENT USER AS SOON AS THE PAGE LOADS
-    findCurrentUser(); 
+  //   // CALLING THE FUNCTION TO FIND THE CURRENT USER AS SOON AS THE PAGE LOADS
+  //   findCurrentUser(); 
 
-  }, [] )
+  // }, [] )
 
   return (
     <Provider store={store} >

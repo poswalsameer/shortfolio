@@ -189,11 +189,11 @@ export class DatabaseService{
 
             if( currentUser ){
                 // console.log( "Details of the current user: ", currentUser );
-                return true;         
+                return currentUser;         
             }
             else{
                 // console.log("Cannot get details of the user");
-                return false;
+                return undefined;
             }
 
         } catch (error) {
