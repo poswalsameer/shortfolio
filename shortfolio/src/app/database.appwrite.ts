@@ -117,6 +117,55 @@ export class DatabaseService{
 
     }
 
+    async getFilePreview( fileId: string ){
+
+        try {
+            
+            const file = await this.storage.getFilePreview(
+                process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID,
+                fileId
+            )
+
+            if( file ){
+                console.log("File found in the DB.");
+                return file;
+            }
+            else{
+                console.log("File not found!");
+                return undefined;
+            }
+
+        } catch (error) {
+            console.log( "Cannot fetch the file from the backend due to some issue: ", error );
+        }
+
+    }
+
+    async getFile( fileId: string ){
+
+        try {
+            
+            const file = await this.storage.getFile(
+                process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID,
+                fileId
+            )
+
+            if( file ){
+                console.log("Found the file in the database");
+                return file;
+            }
+            else{
+                console.log("File not found in the database");
+                return undefined;
+            }
+
+        } catch (error) {
+            console.log("Error while getting the details of the file: ", error);
+            
+        }
+
+    }
+
     // DELETING FILE FROM STORAGE
     async deleteFile(fileId:any){
         try {
@@ -153,7 +202,6 @@ export class DatabaseService{
 
     }
 
-    // async getFile(  )
     async getAllDocuments( username: any ){
 
         try {

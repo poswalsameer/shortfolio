@@ -19,6 +19,7 @@ function page({params}:{params:any}) {
     const [error, setError] = useState('');
 
     const [userDetails, setUserDetails] = useState<any>({});
+    const [userImage, setUserImage] = useState<string>('');
 
     const dispatch = useDispatch();
     const router = useRouter();
@@ -48,7 +49,7 @@ function page({params}:{params:any}) {
     }
 
     // FUNCTION TO CONVERT EMAIL TO NORMAL STRING
-  const convertEmailToString = (data: any) => {
+    const convertEmailToString = (data: any) => {
 
         let n = data.length;
         let convertedString = "";
@@ -65,6 +66,28 @@ function page({params}:{params:any}) {
         }
 
         return convertedString;
+
+    }
+
+    const getFileID = async ( fileId:string ) => {
+
+        try {
+            
+            const file = await databaseServiceObject.getFilePreview(fileId);
+
+            if( file ){
+                console.log("Got the file from the backend");
+                return file;
+            }
+            else{
+                console.log("Didn't got the file from the backend");
+                return undefined;
+            }
+
+        } catch (error) {
+            console.log("Error from the frontend side while getting the file: ", error);
+            
+        }
 
     }
 
@@ -85,10 +108,18 @@ function page({params}:{params:any}) {
 
                 //find document with string mail id
                 const userEmail = await databaseServiceObject.getUser(convertedEmail);
+                const photoFile = await getFileID( userEmail.profilePhoto );
+
+                if( photoFile ){
+                    setUserImage(photoFile);
+                }
+                console.log("The file we got is: ", photoFile);
+                
 
                 if( userEmail ){
                     console.log("Details of the document with this id: ", userEmail);
                     setUserDetails(userEmail);
+                    // setUserDetails({...userEmail, photoFile})
                 }
                 else{
                     setUserDetails({});
@@ -110,8 +141,8 @@ function page({params}:{params:any}) {
     useEffect( () => {
 
         getCurrentUserDetails();
-
-    }, [] ) 
+        
+    }, [] )  
 
   return (
     // <div>
@@ -127,7 +158,8 @@ function page({params}:{params:any}) {
             <div className='h-[65%] w-full bg-red-300 flex flex-col justify-center items-center gap-y-5 rounded-tr-3xl'>
 
                 {/* IMAGE */}
-                <div className=' h-52 w-52 rounded-full bg-white'>
+                <div className=' h-60 w-60 rounded-full '>
+                    <img src={userImage} alt="" className='h-full w-full rounded-full'/>
                 </div>
 
                 {/* NAME */}
@@ -182,19 +214,19 @@ function page({params}:{params:any}) {
 
                 {/* twitter wala div */}
                 <div className='h-full w-[50%] flex justify-center items-center rounded-xl bg-black'>
-                    TWITTER ACCOUNT
+                    {userDetails.twitterURL}
                 </div>
                 
                 {/* github wala div */}
                 <div className='h-full w-[50%] flex justify-center items-center rounded-xl bg-slate-500'>
-                    GITHUB ACCOUNT
+                    {userDetails.githubURL}
                 </div>
 
             </div>
 
             {/* linkedin wala div */}
             <div className='h-[21.5%] w-[95%] flex justify-center items-center bg-blue-600 rounded-xl'>
-                LINKEDIN ACCOUNT
+                {userDetails.linkedinURL}
             </div>
 
             {/* behance instagram wala div */}
@@ -202,19 +234,19 @@ function page({params}:{params:any}) {
 
                 {/* behance wala div */}
                 <div className='h-full w-[28%] flex justify-center items-center rounded-xl bg-orange-600'>
-                    BEHANCE ACCOUNT
+                    {userDetails.behanceURL}
                 </div>
 
                 {/* instagram wala div */}
                 <div className='h-full w-[72%] flex justify-center items-center rounded-xl bg-purple-600'>
-                    INSTAGRAM ACCOUNT
+                    {userDetails.instagramURL}
                 </div>
 
             </div>
 
             {/* textarea wala div */}
             <div className='h-[21.5%] w-[95%] flex justify-center items-center bg-black rounded-xl'>
-                EXTRA TEXT AREA
+                {userDetails.TextArea}
             </div>
             
         </div>
