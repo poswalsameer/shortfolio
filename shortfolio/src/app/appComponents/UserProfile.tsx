@@ -12,6 +12,12 @@ import { checkLogout } from '../features/auth.slice';
 import { useDispatch } from 'react-redux';
 import Cookie from 'js-cookie';
 import databaseServiceObject from '../database.appwrite';
+import { FaSquareXTwitter } from "react-icons/fa6";
+import { FaGithub } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
+import { FaReddit } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+
 
 
 function page({params}:{params:any}) {
@@ -214,32 +220,72 @@ function page({params}:{params:any}) {
 
                 {/* twitter wala div */}
                 <div className='h-full w-[50%] flex justify-center items-center rounded-xl bg-black'>
-                    {userDetails.twitterURL}
+
+                    <div className='h-full w-[40%] flex justify-center items-center'>
+                        <FaSquareXTwitter className='h-16 w-16'/>
+                    </div>
+                    
+                    <div className='h-full w-[60%] flex justify-start items-center'>
+                        {userDetails.twitterURL}
+                    </div>
+                    
                 </div>
                 
                 {/* github wala div */}
                 <div className='h-full w-[50%] flex justify-center items-center rounded-xl bg-slate-500'>
-                    {userDetails.githubURL}
+
+                    <div className='h-full w-[40%] flex justify-center items-center'>
+                        <FaGithub className='h-16 w-16' />
+                    </div>
+                    
+                    <div className='h-full w-[60%] flex justify-start items-center'>
+                        {userDetails.twitterURL}
+                    </div>
+                    
                 </div>
 
             </div>
 
             {/* linkedin wala div */}
             <div className='h-[21.5%] w-[95%] flex justify-center items-center bg-blue-600 rounded-xl'>
-                {userDetails.linkedinURL}
+
+                <div className='h-full w-[40%] flex justify-center items-center'>
+                    <FaLinkedin className='h-16 w-16'/>
+                </div>
+                    
+                <div className='h-full w-[60%] flex justify-start items-center'>
+                    {userDetails.linkedinURL}
+                </div>
+                
             </div>
 
             {/* behance instagram wala div */}
             <div className='h-[21.5%] w-[95%] flex justify-center items-center gap-x-5 rounded-xl'>
 
                 {/* behance wala div */}
-                <div className='h-full w-[28%] flex justify-center items-center rounded-xl bg-orange-600'>
-                    {userDetails.behanceURL}
+                <div className='h-full w-[33%] flex justify-center items-center rounded-xl bg-orange-600'>
+
+                    <div className='h-full w-[40%] flex justify-center items-center'>
+                        <FaReddit className='h-16 w-16'/>
+                    </div>
+                        
+                    <div className='h-full w-[60%] flex justify-start items-center'>
+                        {userDetails.behanceURL}
+                    </div>
+                    
                 </div>
 
                 {/* instagram wala div */}
-                <div className='h-full w-[72%] flex justify-center items-center rounded-xl bg-purple-600'>
-                    {userDetails.instagramURL}
+                <div className='h-full w-[67%] flex justify-center items-center rounded-xl bg-purple-600'>
+
+                    <div className='h-full w-[40%] flex justify-center items-center'>
+                        <FaInstagram className='h-16 w-16'/>
+                    </div>
+                        
+                    <div className='h-full w-[60%] flex justify-start items-center'>
+                        {userDetails.instagramURL}
+                    </div>
+                    
                 </div>
 
             </div>
