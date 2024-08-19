@@ -45,3 +45,21 @@
     filter: blur(2px);
     /* background-size: cover; */
 }
+
+#bodyDiv{
+    background: linear-gradient(#1A1B1F,#2D2E32, #4D4B50);
+    
+}
+#leftDiv{
+    /* background: linear-gradient( #dddddd, #858C8D); */
+    background: linear-gradient(#EDF1F4,#C3CBDC);
+    border: 1px solid white;
+    border-left: none;
+    /* background-color: #858C8D; */
+}
+
+#rightDiv{
+    background: linear-gradient(#EDF1F4,#C3CBDC);
+    border: 1px solid white;
+    border-right: none;
+}
