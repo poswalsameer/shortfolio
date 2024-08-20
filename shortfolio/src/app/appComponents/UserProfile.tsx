@@ -17,6 +17,7 @@ import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaReddit } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
+import { useToast } from "@/components/ui/use-toast"
 import { Boxes } from "@/components/ui/background-boxes";
 import { cn } from "@/lib/utils";
 
@@ -29,6 +30,7 @@ function page({ params }: { params: any }) {
 
   const dispatch = useDispatch();
   const router = useRouter();
+  const { toast } = useToast();
 
   const logoutButtonClicked = async () => {
     setError("");
@@ -49,6 +51,16 @@ function page({ params }: { params: any }) {
       setError(error.message);
     }
   };
+
+  // FUNCTION TO COPY THE CURRENT URL
+  const copyURL = () => {
+    const currentUrl = window.location.href;
+    navigator.clipboard.writeText(currentUrl);
+
+    toast({
+      title: "URL copied to your clipboard",
+    })
+  }
 
   // FUNCTION TO CONVERT EMAIL TO NORMAL STRING
   const convertEmailToString = (data: any) => {
@@ -154,12 +166,12 @@ function page({ params }: { params: any }) {
           </div>
 
           {/* NAME */}
-          <div className=" w-[80%] text-4xl font-bold flex justify-center items-center">
+          <div className=" w-[80%] text-4xl font-bold flex justify-center items-center" id="fullName">
             {userDetails.fullName}
           </div>
 
           {/* BIO */}
-          <div className="w-[80%] text-xl text-center text-gray-700 font-base flex justify-center items-center">
+          <div className="w-[80%] text-xl text-center text-gray-700 font-base flex justify-center items-center ">
             {userDetails.bio}
           </div>
         </div>
@@ -181,6 +193,7 @@ function page({ params }: { params: any }) {
             <Button
               variant="secondary"
               className=" h-9 w-24 text-xs font-semibold flex flex-row justify-center items-center gap-x-2 transition-all delay-75 ease-in bg-black hover:bg-gray-700"
+              onClick={copyURL}
             >
               Copy
               <Link2 className="h-4 w-4" />
@@ -218,12 +231,12 @@ function page({ params }: { params: any }) {
         {/* twitter github wala div */}
         <div className="h-[21.5%] w-[95%] flex justify-center items-center gap-x-5 ">
           {/* twitter wala div */}
-          <div className="h-full w-[50%] flex justify-center items-center rounded-xl bg-black">
+          <div className="h-full w-[50%] flex justify-center items-center rounded-xl bg-black shadow-md shadow-gray-600">
             <div className="h-full w-[40%] flex justify-center items-center">
               <FaSquareXTwitter className="h-16 w-16" />
             </div>
 
-            <div className="h-full w-[60%] text-2xl font-semibold flex flex-col justify-center items-start">
+            <div className="h-full w-[60%] text-2xl font-semibold flex flex-col justify-center items-start ">
               <div>
                 <Link
                   href={`https://x.com/${userDetails.twitterURL}`}
@@ -239,7 +252,7 @@ function page({ params }: { params: any }) {
           </div>
 
           {/* github wala div */}
-          <div className="h-full w-[50%] flex justify-center items-center rounded-xl bg-[#25292F]">
+          <div className="h-full w-[50%] flex justify-center items-center rounded-xl bg-[#25292F] shadow-md shadow-gray-800">
             <div className="h-full w-[40%] flex justify-center items-center">
               <FaGithub className="h-16 w-16" />
             </div>
@@ -261,7 +274,7 @@ function page({ params }: { params: any }) {
         </div>
 
         {/* linkedin wala div */}
-        <div className="h-[21.5%] w-[95%] flex justify-center items-center bg-[#086BC9] rounded-xl">
+        <div className="h-[21.5%] w-[95%] flex justify-center items-center bg-[#086BC9] border border-blue-600 rounded-xl shadow-md shadow-blue-700">
           <div className="h-full w-[40%] flex justify-center items-center">
             <FaLinkedin className="h-16 w-16" />
           </div>
@@ -284,7 +297,7 @@ function page({ params }: { params: any }) {
         {/* behance instagram wala div */}
         <div className="h-[21.5%] w-[95%] flex justify-center items-center gap-x-5 rounded-xl">
           {/* behance wala div */}
-          <div className="h-full w-[40%] flex justify-center items-center rounded-xl bg-[#0057FF]">
+          <div className="h-full w-[40%] flex justify-center items-center rounded-xl bg-[#0057FF] shadow-md shadow-blue-800 border border-[#0057FF]">
             <div className="h-full w-[40%] flex justify-center items-center">
               <FaBehance className="h-16 w-16" />
             </div>
@@ -305,7 +318,7 @@ function page({ params }: { params: any }) {
           </div>
 
           {/* instagram wala div */}
-          <div className="h-full w-[67%] flex justify-center items-center rounded-xl bg-[#FF7D43]">
+          <div className="h-full w-[67%] flex justify-center items-center rounded-xl bg-[#FF7D43] shadow-md shadow-[#d37c54] border border-[#FF7D43]">
             <div className="h-full w-[40%] flex justify-center items-center">
               <FaInstagram className="h-16 w-16" />
             </div>
@@ -329,7 +342,7 @@ function page({ params }: { params: any }) {
         </div>
 
         {/* textarea wala div */}
-        <div className="h-[21.5%] w-[95%] flex justify-center items-center bg-black rounded-xl">
+        <div className="h-[21.5%] w-[95%] text-lg flex justify-center items-center bg-[#333533] rounded-xl shadow-md shadow-gray-600">
           {userDetails.TextArea}
         </div>
       </div>

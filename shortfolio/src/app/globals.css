@@ -64,3 +64,7 @@
     border-right: none; */
     /* background-color: transparent; */
 /* } */
+
+#fullName{
+    letter-spacing: -1.2px;
+}
