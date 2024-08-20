@@ -47,19 +47,20 @@
 }
 
 #bodyDiv{
-    background: linear-gradient(#1A1B1F,#2D2E32, #4D4B50);
-    
+    /* background: linear-gradient(#1A1B1F,#2D2E32, #4D4B50); */
+    background: linear-gradient( to right,#8e9eab,#e9e4f0);
 }
-#leftDiv{
+/* #leftDiv{ */
     /* background: linear-gradient( #dddddd, #858C8D); */
-    background: linear-gradient(#EDF1F4,#C3CBDC);
+    /* background: linear-gradient(#EDF1F4,#C3CBDC);
     border: 1px solid white;
-    border-left: none;
+    border-left: none; */
     /* background-color: #858C8D; */
-}
+/* } */
 
-#rightDiv{
-    background: linear-gradient(#EDF1F4,#C3CBDC);
+/* #rightDiv{ */
+    /* background: linear-gradient(#EDF1F4,#C3CBDC);
     border: 1px solid white;
-    border-right: none;
-}
+    border-right: none; */
+    /* background-color: transparent; */
+/* } */
