@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link2 } from "lucide-react";
 import { PenLine } from "lucide-react";
@@ -17,9 +17,12 @@ import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaReddit } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
-import { useToast } from "@/components/ui/use-toast"
+import { useToast } from "@/components/ui/use-toast";
+import Cropper from "react-easy-crop";
+import getCroppedImg from "../features/getCroppedImg";
 import { Boxes } from "@/components/ui/background-boxes";
 import { cn } from "@/lib/utils";
+import EditBox from "./EditBox";
 
 function page({ params }: { params: any }) {
   const [error, setError] = useState("");
@@ -59,8 +62,8 @@ function page({ params }: { params: any }) {
 
     toast({
       title: "URL copied to your clipboard",
-    })
-  }
+    });
+  };
 
   // FUNCTION TO CONVERT EMAIL TO NORMAL STRING
   const convertEmailToString = (data: any) => {
@@ -140,6 +143,41 @@ function page({ params }: { params: any }) {
     getCurrentUserDetails();
   }, []);
 
+  // implementing image edit part here
+
+  const [editMode, setEditMode] = useState(false);
+
+  const closeEditBox = () => {
+    setEditMode(false);
+  };
+
+  const openEditBox = () => {
+    setEditMode(true);
+  };
+
+  // const [image, setImage] = useState(userImage);
+  // const [crop, setCrop] = useState({ x: 0, y: 0 });
+  // const [zoom, setZoom] = useState(1);
+  // const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  // const [editMode, setEditMode] = useState(false);
+
+  // const onCropComplete = useCallback((croppedAreaPixels: any) => {
+  //   setCroppedAreaPixels(croppedAreaPixels);
+  // }, []);
+
+  // const saveCroppedImage = useCallback(async () => {
+  //   try {
+  //     const croppedImage: string = await getCroppedImg(
+  //       userImage,
+  //       croppedAreaPixels
+  //     );
+  //     setImage(croppedImage); // Save the cropped image
+  //     setEditMode(false); // Exit edit mode
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // }, [croppedAreaPixels, image]);
+
   return (
     // <div>
     //   {params.userProfile}
@@ -155,37 +193,49 @@ function page({ params }: { params: any }) {
         id="leftDiv"
       >
         {/* profile photo + name + bio wala div */}
-        <div className="h-[65%] w-full  flex flex-col justify-center items-center gap-y-4 rounded-tr-3xl">
+        <div className="h-[70%] w-full flex flex-col justify-center items-center gap-y-16 rounded-tr-3xl">
           {/* IMAGE */}
-          <div className=" h-60 w-60 rounded-full ">
-            <img
-              src={userImage}
-              alt=""
-              className="h-full w-full rounded-full"
-            />
-          </div>
+
+          {!editMode ? (
+            <div className="h-60 w-60 rounded-full">
+              <button className=" relative" onClick={openEditBox}>
+                <PenLine />
+              </button>
+              <img
+                src={userImage}
+                alt=""
+                className="h-full w-full rounded-full"
+              />
+            </div>
+          ) : (
+            <EditBox closeButtonFunction={closeEditBox} userProfileImage={userImage} />
+          )}
+
 
           {/* NAME */}
-          <div className=" w-[80%] text-4xl font-bold flex justify-center items-center" id="fullName">
-            {userDetails.fullName}
-          </div>
+          <div className=" w-[80%] flex flex-col justify-center items-center ">
+            <div
+              className=" w-full text-4xl font-bold flex justify-center items-center"
+              id="fullName"
+            >
+              {userDetails.fullName}
+            </div>
 
-          {/* BIO */}
-          <div className="w-[80%] text-xl text-center text-gray-700 font-base flex justify-center items-center ">
-            {userDetails.bio}
+            {/* BIO */}
+            <div className="w-full text-xl text-center text-gray-700 font-base flex justify-center items-center ">
+              {userDetails.bio}
+            </div>
           </div>
         </div>
 
         {/* extra link wala div */}
-        <div className="h-[15%] w-full font-semibold flex flex-col text-black justify-center items-center gap-y-3">
-        </div>
+        <div className="h-[15%] w-full font-semibold flex flex-col text-black justify-center items-center gap-y-3"></div>
 
         {/* button wala div */}
 
         <div className=" h-[20%] w-full  flex flex-col justify-center items-center">
-
           <div className="h-[25%] w-full font-semibold text-black flex justify-center items-center">
-              {userEmail}
+            {userEmail}
           </div>
 
           <div className="h-[75%] w-full flex flex-row justify-center items-center gap-x-10 rounded-br-3xl">
@@ -220,7 +270,6 @@ function page({ params }: { params: any }) {
             </Button>
           </div>
         </div>
-
       </div>
 
       {/* RIGHT SIDE WALA DIV */}
