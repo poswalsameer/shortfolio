@@ -23,8 +23,7 @@ import getCroppedImg from "../features/getCroppedImg";
 import { Boxes } from "@/components/ui/background-boxes";
 import { cn } from "@/lib/utils";
 import EditBox from "./EditBox";
-import ImageContextProvider from "../contexts/ImageContextProvider";
-import ImageContext from "../contexts/ImageContext";
+
 
 function page({ params }: { params: any }) {
   const [error, setError] = useState("");
@@ -157,37 +156,10 @@ function page({ params }: { params: any }) {
     setEditMode(true);
   };
 
-  // const { profileImage, setProfileImage } = useContext(ImageContext);
-
-  // const [image, setImage] = useState(userImage);
-  // const [crop, setCrop] = useState({ x: 0, y: 0 });
-  // const [zoom, setZoom] = useState(1);
-  // const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-  // const [editMode, setEditMode] = useState(false);
-
-  // const onCropComplete = useCallback((croppedAreaPixels: any) => {
-  //   setCroppedAreaPixels(croppedAreaPixels);
-  // }, []);
-
-  // const saveCroppedImage = useCallback(async () => {
-  //   try {
-  //     const croppedImage: string = await getCroppedImg(
-  //       userImage,
-  //       croppedAreaPixels
-  //     );
-  //     setImage(croppedImage); // Save the cropped image
-  //     setEditMode(false); // Exit edit mode
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // }, [croppedAreaPixels, image]);
 
   return (
-    // <div>
-    //   {params.userProfile}
-    // </div>
 
-    <ImageContextProvider>
+    
     <div
       className=" h-screen w-screen flex flex-row justify-center items-center gap-x-10 text-black"
       id="bodyDiv"
@@ -401,7 +373,7 @@ function page({ params }: { params: any }) {
         </div>
       </div>
     </div>
-    </ImageContextProvider>
+
   );
 }
 
