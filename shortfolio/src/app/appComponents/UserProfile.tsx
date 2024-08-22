@@ -24,9 +24,9 @@ import { Boxes } from "@/components/ui/background-boxes";
 import { cn } from "@/lib/utils";
 import EditBox from "./EditBox";
 import ImageContextProvider from "../contexts/ImageContextProvider";
+import ImageContext from "../contexts/ImageContext";
 
-
-function page({ params }: { params: any }) {
+function page({params}: any) {
   const [error, setError] = useState("");
 
   const [userDetails, setUserDetails] = useState<any>({});
@@ -157,10 +157,21 @@ function page({ params }: { params: any }) {
     setEditMode(true);
   };
 
+  const context = useContext(ImageContext);
+
+    // Check if the context is undefined
+  if (!context) {
+    throw new Error("ProfileComponent must be used within an ImageContextProvider");
+  }
+  
+  // Now that TypeScript knows the context is defined, you can safely destructure it
+  const { profileImage, setProfileImage } = context;
+  console.log("The profileImage coming is: ", profileImage);
+  
 
   return (
 
-    <ImageContextProvider>
+    // <ImageContextProvider>
     <div
       className=" h-screen w-screen flex flex-row justify-center items-center gap-x-10 text-black"
       id="bodyDiv"
@@ -180,7 +191,7 @@ function page({ params }: { params: any }) {
                 <PenLine />
               </button>
               <img
-                src={userImage}
+                src={profileImage ? profileImage : userImage }
                 alt=""
                 className="h-full w-full rounded-full"
               />
@@ -374,7 +385,7 @@ function page({ params }: { params: any }) {
         </div>
       </div>
     </div>
-    </ImageContextProvider>
+    // </ImageContextProvider>
 
   );
 }

@@ -1,10 +1,11 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Provider } from 'react-redux'
 import UserProfile from '../../appComponents/UserProfile';
 import { store } from '../../reduxStore/store';
 import authServiceObject from '../../appwrite';
+import ImageContextProvider from '@/app/contexts/ImageContextProvider';
 
 
 function page() {
@@ -32,14 +33,17 @@ function page() {
     // useEffect( () => {
     //     getCurrentUserDetails();
     // }, [] );
-    
 
   return (
+
     <Provider store={store}>
 
-            <UserProfile params={userName}/>
+        <ImageContextProvider>
+          <UserProfile params={userName} />
+        </ImageContextProvider>
 
     </Provider>
+   
   )
 }
 
