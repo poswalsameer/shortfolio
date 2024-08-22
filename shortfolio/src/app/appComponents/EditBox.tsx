@@ -4,6 +4,8 @@ import React, { useContext, useRef, useState } from "react";
 import ReactCrop, { convertToPixelCrop, type Crop } from "react-image-crop";
 import { makeAspectCrop, centerCrop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css'
+import ImageContext from "../contexts/ImageContext";
+import ImageContextProvider from "../contexts/ImageContextProvider";
 import setCanvasPreview from "../utils/setCanvas";
 
 
@@ -19,8 +21,16 @@ function EditBox(props: any) {
     const imageRef = useRef<HTMLImageElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
-    // const { profileImage } = useContext(ImageContext);
+    // const { profileImage, setProfileImage } = useContext(ImageContext);
+    const context = useContext(ImageContext);
 
+    // Check if the context is undefined
+    if (!context) {
+      throw new Error("ProfileComponent must be used within an ImageContextProvider");
+    }
+  
+    // Now that TypeScript knows the context is defined, you can safely destructure it
+    const { profileImage, setProfileImage } = context;
    
 
     const setNewImageToCanvas = () => {
@@ -37,9 +47,9 @@ function EditBox(props: any) {
 
       const newSetImage = canvasRef.current!.toDataURL();
       if( newSetImage ){
-        // setProfileImage(newSetImage)
-        setNewImage(newSetImage);
-        console.log("The new image set is: ", newSetImage);
+        setProfileImage(newSetImage)
+        // setNewImage(newSetImage);
+        // console.log("The new image set is: ", newSetImage);
         
       }
 
@@ -71,7 +81,6 @@ function EditBox(props: any) {
   return (
     <>
 
-     
 
       <div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-[90%] w-[40%] flex flex-col justify-center items-center bg-black text-white rounded-2xl">
 
@@ -124,15 +133,12 @@ function EditBox(props: any) {
 
       </div>
 
-      
     </>
   );
 }
 
 export default EditBox;
-// function makeAspectCrop(arg0: { unit: string; }) {
-//     throw new Error("Function not implemented.");
-// }
+
 
 // ORIGINAL FUNCTION WRITTEN INSIDE THE ONCLICK OF SAVE BUTTON
 // () => {

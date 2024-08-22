@@ -23,6 +23,7 @@ import getCroppedImg from "../features/getCroppedImg";
 import { Boxes } from "@/components/ui/background-boxes";
 import { cn } from "@/lib/utils";
 import EditBox from "./EditBox";
+import ImageContextProvider from "../contexts/ImageContextProvider";
 
 
 function page({ params }: { params: any }) {
@@ -159,7 +160,7 @@ function page({ params }: { params: any }) {
 
   return (
 
-    
+    <ImageContextProvider>
     <div
       className=" h-screen w-screen flex flex-row justify-center items-center gap-x-10 text-black"
       id="bodyDiv"
@@ -373,6 +374,7 @@ function page({ params }: { params: any }) {
         </div>
       </div>
     </div>
+    </ImageContextProvider>
 
   );
 }

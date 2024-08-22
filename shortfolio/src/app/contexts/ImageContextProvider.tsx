@@ -1,7 +1,7 @@
 import React, { ReactNode, useState } from 'react'
 import ImageContext from './ImageContext'
 
-function ImageContextProvider({children}: any) {
+function ImageContextProvider({ children }: { children: React.ReactNode }) {
 
     const [profileImage, setProfileImage] = useState<string>('');
 
