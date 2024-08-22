@@ -157,21 +157,22 @@ function page({params}: any) {
     setEditMode(true);
   };
 
+  // GETTING THE CONTEXT FROM THE IMAGECONTEXT CREATED
   const context = useContext(ImageContext);
 
-    // Check if the context is undefined
+  // IF CONTEXT NOT FOUND, THEN THROW A ERROR
   if (!context) {
     throw new Error("ProfileComponent must be used within an ImageContextProvider");
   }
   
-  // Now that TypeScript knows the context is defined, you can safely destructure it
+  // GETTING THE STATE AND THE FUNCTION FROM THE CONTEXT
   const { profileImage, setProfileImage } = context;
   console.log("The profileImage coming is: ", profileImage);
   
 
   return (
 
-    // <ImageContextProvider>
+    
     <div
       className=" h-screen w-screen flex flex-row justify-center items-center gap-x-10 text-black"
       id="bodyDiv"
@@ -385,7 +386,7 @@ function page({params}: any) {
         </div>
       </div>
     </div>
-    // </ImageContextProvider>
+    
 
   );
 }

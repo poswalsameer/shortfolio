@@ -21,18 +21,19 @@ function EditBox(props: any) {
     const imageRef = useRef<HTMLImageElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
-    // const { profileImage, setProfileImage } = useContext(ImageContext);
+    // GETTING THE CONTEXT FROM THE IMAGE CONTEXT
     const context = useContext(ImageContext);
 
-    // Check if the context is undefined
+    // THROW ERROR IF THE CONTEXT IS NOT FOUND
     if (!context) {
       throw new Error("ProfileComponent must be used within an ImageContextProvider");
     }
   
-    // Now that TypeScript knows the context is defined, you can safely destructure it
+    // GETTING THE STATE AND THE FUNCTION FROM THE CONTEXT
     const { profileImage, setProfileImage } = context;
    
 
+    // FUNCTION THAT SETS THE NEW IMAGE ON THE CANVAS, AND THEN IT GETS TRANSFERRED TO THE USER PROFILE FROM CANVAS BY DATA URL
     const setNewImageToCanvas = () => {
 
       setCanvasPreview(
@@ -57,8 +58,7 @@ function EditBox(props: any) {
 
     }
 
-    // const setNewImageToCanvas = setCanvasPreview()
-
+    // FUNCTION THAT DEALS WITH THE CROPPING PART WHEN THE IMAGE GETS LOADED
     const onImageLoadFunction = (e:any) => {
 
         const {width, height} = e.currentTarget;

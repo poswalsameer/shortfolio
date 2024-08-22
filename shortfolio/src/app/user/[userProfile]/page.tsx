@@ -38,6 +38,7 @@ function page() {
 
     <Provider store={store}>
 
+        {/* WRAPPING THE WHOLE USERPROFILE COMPONENT WITH THE IMAGE CONTEXT PROVIDER */}
         <ImageContextProvider>
           <UserProfile params={userName} />
         </ImageContextProvider>
