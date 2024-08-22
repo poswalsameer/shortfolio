@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import Homepage from "./appComponents/Homepage";
 import { useState, useEffect } from "react"; 
 import authServiceObject from "./appwrite";
-
+import 'react-image-crop/dist/ReactCrop.css'
 export default function Home() {
 
   // const [user, setUser] = useState('');
