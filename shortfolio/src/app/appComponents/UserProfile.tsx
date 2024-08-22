@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link2 } from "lucide-react";
 import { PenLine } from "lucide-react";
@@ -23,6 +23,8 @@ import getCroppedImg from "../features/getCroppedImg";
 import { Boxes } from "@/components/ui/background-boxes";
 import { cn } from "@/lib/utils";
 import EditBox from "./EditBox";
+import ImageContextProvider from "../contexts/ImageContextProvider";
+import ImageContext from "../contexts/ImageContext";
 
 function page({ params }: { params: any }) {
   const [error, setError] = useState("");
@@ -155,6 +157,8 @@ function page({ params }: { params: any }) {
     setEditMode(true);
   };
 
+  // const { profileImage, setProfileImage } = useContext(ImageContext);
+
   // const [image, setImage] = useState(userImage);
   // const [crop, setCrop] = useState({ x: 0, y: 0 });
   // const [zoom, setZoom] = useState(1);
@@ -183,6 +187,7 @@ function page({ params }: { params: any }) {
     //   {params.userProfile}
     // </div>
 
+    <ImageContextProvider>
     <div
       className=" h-screen w-screen flex flex-row justify-center items-center gap-x-10 text-black"
       id="bodyDiv"
@@ -396,6 +401,7 @@ function page({ params }: { params: any }) {
         </div>
       </div>
     </div>
+    </ImageContextProvider>
   );
 }
 

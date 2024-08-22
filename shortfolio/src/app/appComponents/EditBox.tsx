@@ -1,9 +1,12 @@
 'use client'
 
-import React, { useState } from "react";
-import ReactCrop, { type Crop } from "react-image-crop";
+import React, { useContext, useRef, useState } from "react";
+import ReactCrop, { convertToPixelCrop, type Crop } from "react-image-crop";
 import { makeAspectCrop, centerCrop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css'
+import ImageContext from "../contexts/ImageContext";
+import ImageContextProvider from "../contexts/ImageContextProvider";
+import setCanvasPreview from "../utils/setCanvas";
 
 
 function EditBox(props: any) {
@@ -12,15 +15,46 @@ function EditBox(props: any) {
     const aspectRatio = 1;
 
     const [crop, setCrop] = useState<Crop>();
-   
+    const [newImage, setNewImage] = useState<string>();
+
+    //refs for the image and the canvas
+    const imageRef = useRef<HTMLImageElement>(null);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+
+    // const { profileImage } = useContext(ImageContext);
+
+    const { profileImage, setProfileImage } = useContext(ImageContext);
+
+    const setNewImageToCanvas = () => {
+
+      setCanvasPreview(
+        imageRef.current,
+        canvasRef.current,
+        convertToPixelCrop(
+          crop!,
+          imageRef.current!.width,
+          imageRef.current!.height
+        )
+      );
+
+      const newSetImage = canvasRef.current!.toDataURL();
+      if( newSetImage ){
+        setProfileImage(newSetImage);
+      }
+
+      props.closeButtonFunction();
+
+    }
+
+    // const setNewImageToCanvas = setCanvasPreview()
 
     const onImageLoadFunction = (e:any) => {
 
         const {width, height} = e.currentTarget;
 
         const crop = makeAspectCrop({
-            unit: "px",
-            width: minDimension,
+            unit: "%",
+            width: 50,
         }, 
         aspectRatio,
         width, 
@@ -35,6 +69,9 @@ function EditBox(props: any) {
 
   return (
     <>
+
+      <ImageContextProvider>
+
       <div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-[90%] w-[40%] flex flex-col justify-center items-center bg-black text-white rounded-2xl">
 
         <div className="flex justify-center items-center font-semibold text-xl">EDIT IMAGE</div>
@@ -42,21 +79,26 @@ function EditBox(props: any) {
         {/* THE CROP FEATURE */}
         <ReactCrop 
             crop={crop}
-            onChange={(newCrop) => setCrop(newCrop)} 
+            onChange={(pixelCrop, percentCrop) => setCrop(percentCrop)}
+            // onChange={(newCrop) => setCrop(newCrop)} 
             circularCrop
             keepSelection
             aspect={aspectRatio}
             minWidth={minDimension}
             className="h-72 w-64 my-14"
         >
-            <img src={props.userProfileImage} alt="" onLoad={onImageLoadFunction} className="h-72 w-64"/>
+            <img src={props.userProfileImage} alt="" onLoad={onImageLoadFunction} 
+            ref={imageRef}
+            className="h-72 w-64"/>
         </ReactCrop>
         
 
         {/* BUTTONS WALA DIV */}
         <div className="flex justify-center items-center w-full gap-x-3">
 
-          <button className="h-10 w-32 bg-green-500 rounded-md text-black">
+          <button className="h-10 w-32 bg-green-500 rounded-md text-black"
+          onClick={ setNewImageToCanvas }
+          >
             Save
           </button>
 
@@ -69,8 +111,17 @@ function EditBox(props: any) {
 
         </div>
         
+        {
+          crop && 
+          <canvas 
+          ref={canvasRef}
+          className="hidden"
+          />
+        }
 
       </div>
+
+      </ImageContextProvider>
     </>
   );
 }
@@ -80,3 +131,20 @@ export default EditBox;
 //     throw new Error("Function not implemented.");
 // }
 
+// ORIGINAL FUNCTION WRITTEN INSIDE THE ONCLICK OF SAVE BUTTON
+// () => {
+//   setCanvasPreview(
+//     imageRef.current,
+//     canvasRef.current,
+//     convertToPixelCrop(
+//       crop!,
+//       imageRef.current!.width,
+//       imageRef.current!.height
+//     )
+//   );
+
+//   const newSetImage = canvasRef.current!.toDataURL();
+//   if( newSetImage ){
+//     setNewImage(newSetImage);
+//   }
+// }
