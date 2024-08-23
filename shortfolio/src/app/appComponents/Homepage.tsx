@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { checkLogin, checkLogout } from "../features/auth.slice";
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '../../components/ui/button';
@@ -34,6 +34,12 @@ function Homepage() {
 
   }
 
+  // useEffect( () => {
+
+  //   const currentSessionDetails = await authServiceObject.getCurrentSession();
+
+  // }, [])
+
   const loginButtonClicked = async () => {
 
     // GETTING ANY ACTIVE SESSION IF ANY
@@ -46,6 +52,8 @@ function Homepage() {
         const currentUser = await authServiceObject.getLoggedInUser();
 
         if( currentUser ){
+          
+          console.log("The current session details are: ", currentUser);
           
           const convertedEmail = convertEmailToString(currentUser.email);
           console.log("Email after conversion: ", convertedEmail);
