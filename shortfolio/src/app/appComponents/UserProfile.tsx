@@ -141,9 +141,9 @@ function page({params}: any) {
     }
   };
 
-  useEffect(() => {
-    getCurrentUserDetails();
-  }, []);
+  // useEffect(() => {
+  //   getCurrentUserDetails();
+  // }, []);
 
   // implementing image edit part here
 
@@ -168,6 +168,37 @@ function page({params}: any) {
   // GETTING THE STATE AND THE FUNCTION FROM THE CONTEXT
   const { profileImage, setProfileImage } = context;
   console.log("The profileImage coming is: ", profileImage);
+
+
+  // THIS USE-EFFECT SAVES THE CROPPED IMAGE TO THE LOCAL STORAGE AFTER CONVERTING IT TO BASE64
+  useEffect(() => {
+    if (profileImage) {
+      try {
+        // Convert the image to base64 before saving
+        const base64Image = profileImage.split(",")[1];
+        localStorage.setItem("profilePhoto", base64Image);
+        console.log("Profile image saved to local storage.");
+      } catch (error) {
+        console.error("Error saving the profile image: ", error);
+      }
+    }
+  }, [profileImage]);
+
+
+  // THIS USE EFFECT RETRIEVES THE STORED IMAGE FROM LOCAL STORAGE AND ALSO GETS THE CURRENT USER DETAILS
+  useEffect(() => {
+    try {
+      const storedImage = localStorage.getItem("profilePhoto");
+      console.log("Retrieved image from local storage: ", storedImage);
+      if (storedImage) {
+        const imageUrl = `data:image/png;base64,${storedImage}`;
+        setProfileImage(imageUrl);
+      }
+    } catch (error) {
+      console.error("Error retrieving the profile image: ", error);
+    }
+    getCurrentUserDetails();
+  }, []);
   
 
   return (

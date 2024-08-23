@@ -48,10 +48,7 @@ function EditBox(props: any) {
 
       const newSetImage = canvasRef.current!.toDataURL();
       if( newSetImage ){
-        setProfileImage(newSetImage)
-        // setNewImage(newSetImage);
-        // console.log("The new image set is: ", newSetImage);
-        
+        setProfileImage(newSetImage)    
       }
 
       props.closeButtonFunction();
