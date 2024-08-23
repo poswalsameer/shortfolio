@@ -76,10 +76,12 @@ function page() {
           
         }
 
-        const username = userData.name.split(" ").join('');
+        // const username = userData.name.split(" ").join('');
 
         if( userData ){
           dispatch(checkLogin(userData));
+          console.log("the user data is: ", userData);
+          
         }
 
         //NAVIGATING THE PAGE TO LOGIN PAGE AFTER SUCCESSFULL SIGNUP

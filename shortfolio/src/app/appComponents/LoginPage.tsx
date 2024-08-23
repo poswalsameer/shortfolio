@@ -29,9 +29,9 @@ function page() {
 
     try {
 
-      const loginSesson = await authServiceObject.loginUser(data);
+      const loginSession = await authServiceObject.loginUser(data);
 
-      if( loginSesson ){
+      if( loginSession ){
         setUser('');
         
         // Cookies.set( 'userCookie', '12345678' );

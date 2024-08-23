@@ -9,6 +9,9 @@ import Link from 'next/link';
 import authServiceObject from '../appwrite';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import databaseServiceObject from '../database.appwrite'
+import { useSelector } from 'react-redux'; 
+import { useRouter } from 'next/navigation';
+
 
 function page() {
 
@@ -17,6 +20,12 @@ function page() {
   // const [userExists, setUserExists] = useState<boolean>(false);
   // const [ username, setUsername ] = useState<string>('');
   const [currentUserDetails, setCurrentUserDetails] = useState<any>({});
+
+  const router = useRouter();
+
+  // const loginStatus = useSelector( (state: RootState) => state.authCheck.status )
+  // console.log("The login status is: ", loginStatus);
+  
 
   // FUNCTION TO CONVERT EMAIL INTO NORMAL STRING
   const convertEmailToString = (data: any) => {
@@ -66,7 +75,15 @@ function page() {
 
   useEffect(() => {
     console.log("details in the second use effect: ", currentUserDetails);
+
   }, [currentUserDetails])
+
+  // useEffect( () => {
+
+  //   const username = currentUserDetails.name.split(" ").join('');
+  //   console.log("The username formed is: ", username);
+
+  // }, [] )
 
 
   // FUNCTION TO UPLOAD IMAGE ON APPWRITE
@@ -236,7 +253,7 @@ function page() {
       
         if( userDocument ){
 
-          // TODO: This will be function where we will simply work on updating the document but the catch is, we will run a query which will return a doc, and if the returnedDocID !== currDocID, then that username already exists, if the returnedDocID === currDocID, then that username belongs to this user
+          
           console.log("Details of the user before updating: ", data);
           
           const updatedDetailOfTheUser  = await updateDocument(userEmail, data);
@@ -246,7 +263,7 @@ function page() {
         else{
           console.log("Document with this id does not exists");
 
-          // TODO: Have to work from here tomorrow, create the document when document with current email is not found
+          
           const createdUser = await createDocument(userEmail, data);
 
           if( createdUser ){
@@ -254,6 +271,20 @@ function page() {
             console.log("Details of the user: ", createdUser);
           }
         }
+
+        const username = currentUserDetails.name.split(" ").join('');
+        console.log("The username formed is: ", username);
+
+        if( username ){
+          router.push(`/user/${username}`);
+          localStorage.clear();
+        }
+        else{
+          console.log("Username was not valid");
+          
+        }
+        
+        // router.push
 
       } catch (error) {
         console.log("Error while finding the doc: ", error);
