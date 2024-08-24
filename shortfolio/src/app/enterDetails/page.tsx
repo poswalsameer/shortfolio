@@ -39,7 +39,7 @@ function page() {
   // console.log("The login status is: ", loginStatus);
   
 
-  // FUNCTION TO CONVERT EMAIL INTO NORMAL STRING
+  // FUNCTION TO CONVERT EMAIL INTO NORMAL STRING two
   const convertEmailToString = (data: any) => {
 
       let n = data.length;
