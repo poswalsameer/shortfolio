@@ -17,6 +17,7 @@ function page() {
 
   const [currentUserDetails, setCurrentUserDetails] = useState<any>({});
   const [currentUserDocument, setCurrentUserDocument] = useState<any>({});
+  const [imageInDB, setImageInDB] = useState<any>('');
 
   const { register, handleSubmit, reset } = useForm();
 
@@ -140,7 +141,28 @@ function page() {
 
   }
 
+  // FUNCTION THAT GETS A FILE ID
+  const getFileID = async (fileId: string) => {
+    try {
+      const file = await databaseServiceObject.getFilePreview(fileId);
+
+      if (file) {
+        console.log("Got the file from the backend");
+        return file;
+      } else {
+        console.log("Didn't got the file from the backend");
+        return undefined;
+      }
+    } catch (error) {
+      console.log(
+        "Error from the frontend side while getting the file: ",
+        error
+      );
+    }
+  };
+
   // FUNCTION THAT UPDATES A DOCUMENT
+  // TODO: issue ye hai ki, agar profile photo daalte hai to upload hori hai wo bucket par but agar profile photo nahi daalre to storage me upload nahi hori, iss wajah se wo available nahi hai
   const updateDocument = async ( userEmail: any, data: any ) => {
 
     let uploadedImage;
@@ -148,8 +170,31 @@ function page() {
       uploadedImage = await uploadImageFunction(data);
       console.log("Image uploaded successfully: ", uploadedImage);
     }
+    // THIS ELSE IS FOR JAB USER NE IMAGE INPUT ME KUCH NAHI DIYA
     else{
-      console.log("Image cannot be uploaded because the image was not found");
+
+      // AGAR KUCH NAHI DIYA, MATLAB YA TO PICTURE ALREADY UPLOADED HAI
+      // if( currentUserDocument.profilePhoto ){
+
+      //   // getFile function ko fileID dete hai wo url de deta hai
+      //   const userImage = await getFileID(currentUserDocument.profilePhoto);
+      //   if( userImage ){
+      //     console.log( "Image we got from the storage is: ", userImage );
+      //   } 
+      //   else{
+      //     console.log("cannot get image from the storage");
+          
+      //   }
+
+        
+
+      // }
+      // YA FIR PICTURE HAI HI NAHI
+      // else{
+        // console.log("Image not uploaded by the user");
+      // }
+      // console.log("Image cannot be uploaded because the image was not found");
+      // uploadedImage = currentUserDocument.profilePhoto;
     }
 
     // finding the username entered in the input field in document database
@@ -283,12 +328,16 @@ function page() {
   }
 
   useEffect( () => {
-    getCurrentUserDetails();    
+    getCurrentUserDetails();
+    
+    // getImageFromDatabase();
   }, [])
 
   useEffect(() => {
     console.log("details in the second use effect: ", currentUserDetails);
     console.log("The current user details in the stored document is: ", currentUserDocument);
+    console.log("The image found from db is: ", currentUserDocument.profilePhoto);
+    
 
     reset({
 
