@@ -181,7 +181,7 @@ function page() {
           behanceFrontend: data.behanceUsername,
           linkedinFrontend: data.linkedinUsername,
           textFrontend: data.extraText,
-          profilePhotoFrontend: uploadedImage.$id,
+          profilePhotoFrontend: uploadedImage ? uploadedImage.$id : '',
           fullNameFrontend: data.fullName,
           emailFrontend: userEmail
         })
@@ -233,15 +233,11 @@ function page() {
   const detailUpdateButton = async (data: any) => {
 
       console.log("The data coming from these input field is: ", data);
-
       console.log("The email coming from the user detail is: ", currentUserDetails.email);
       let userEmail = currentUserDetails.email;
 
       userEmail = convertEmailToString(userEmail);
-
       console.log("This is user email after converting the string: ", userEmail);
-      
-      
       
       // FINDING A DOCUMENT WITH ID OF THIS EMAIL
       try {
@@ -249,7 +245,6 @@ function page() {
       
         if( userDocument ){
 
-          
           console.log("Details of the user before updating: ", data);
           
           const updatedDetailOfTheUser  = await updateDocument(userEmail, data);
