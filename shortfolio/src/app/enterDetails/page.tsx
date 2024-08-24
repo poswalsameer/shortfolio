@@ -20,6 +20,7 @@ function page() {
   // const [userExists, setUserExists] = useState<boolean>(false);
   // const [ username, setUsername ] = useState<string>('');
   const [currentUserDetails, setCurrentUserDetails] = useState<any>({});
+  const [currentUserDocument, setCurrentUserDocument] = useState<any>({});
 
   const router = useRouter();
 
@@ -56,7 +57,19 @@ function page() {
       const currentUser = await authServiceObject.getLoggedInUser();
 
       if( currentUser ){
-          console.log("get current user method running");       
+          console.log("get current user method running");   
+          
+          const convertedEmail = convertEmailToString(currentUser.email);
+          console.log("Email converted: ", convertedEmail);
+          
+          const currentUserDoc = await databaseServiceObject.getUser(convertedEmail); 
+
+          if( currentUserDoc ){
+            setCurrentUserDocument(currentUserDoc);
+          }
+          else{
+            console.log("User doc not found");
+          }
           
           //WHEN USER SIGNS UP AND THEN COMES ON THIS PAGE, THEN THIS currentUser OBJECT WILL BE EMPTY
           setCurrentUserDetails(currentUser);
@@ -75,7 +88,7 @@ function page() {
 
   useEffect(() => {
     console.log("details in the second use effect: ", currentUserDetails);
-
+    console.log("The current user details in the stored document is: ", currentUserDocument);
   }, [currentUserDetails])
 
   // useEffect( () => {
@@ -421,7 +434,9 @@ function page() {
             </div>
             
             <div className='h-[50%] w-[50%] flex justify-start' >
-              <Input type="text" id='username' placeholder="..." className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
+              <Input type="text" id='username' placeholder="..."
+              value={currentUserDocument.username ? currentUserDocument.username : '' }
+              className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
               
               {...register( "username", {
                 required: true
@@ -439,7 +454,9 @@ function page() {
             </div>
 
             <div className='h-[50%] w-[50%] flex justify-start' >
-              <Textarea placeholder='...' id='bio' className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
+              <Textarea placeholder='...' 
+              value={currentUserDocument.bio ? currentUserDocument.bio : '' }
+              id='bio' className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
               
               {...register( "bio", {
                 required: true
@@ -457,7 +474,9 @@ function page() {
             </div>
 
             <div className='h-[50%] w-[50%] flex justify-start' >
-              <Input type="text" id='twitter' placeholder="..." className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
+              <Input type="text" id='twitter' placeholder="..." 
+              value={currentUserDocument.twitterURL ? currentUserDocument.twitterURL : '' }
+              className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
               
               {...register( "twitterUsername", {
                 required: false
@@ -474,7 +493,9 @@ function page() {
             </div>
 
             <div className='h-[50%] w-[50%] flex justify-start' >
-              <Input type="text" id='github' placeholder="..." className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
+              <Input type="text" id='github' placeholder="..." 
+              value={currentUserDocument.githubURL ? currentUserDocument.githubURL : '' }
+              className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
               
               {...register( "githubUsername", {
                 required: false
@@ -491,7 +512,9 @@ function page() {
             </div>
 
             <div className='h-[50%] w-[50%] flex justify-start' >
-              <Input type="text" id='insta' placeholder="..." className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
+              <Input type="text" id='insta' placeholder="..." 
+              value={currentUserDocument.instagramURL ? currentUserDocument.instagramURL : '' }
+              className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
               
               {...register( "instagramUsername", {
                 required: false
@@ -508,7 +531,9 @@ function page() {
             </div>
 
             <div className='h-[50%] w-[50%] flex justify-start' >
-              <Input type="text" id='behance' placeholder="..." className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
+              <Input type="text" id='behance' placeholder="..." 
+              value={currentUserDocument.behanceURL ? currentUserDocument.behanceURL : '' }
+              className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
               
               {...register( "behanceUsername", {
                 required: false
@@ -525,7 +550,9 @@ function page() {
             </div>  
 
             <div className='h-[50%] w-[50%] flex justify-start' >
-              <Input type="text" id='linkedin' placeholder="..." className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
+              <Input type="text" id='linkedin' placeholder="..." 
+              value={currentUserDocument.linkedinURL ? currentUserDocument.linkedinURL : '' }
+              className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
               
               {...register( "linkedinUsername", {
                 required: false
@@ -542,7 +569,9 @@ function page() {
             </div>
 
             <div className='h-[50%] w-[50%] flex justify-start' >
-              <Input type="text" id='extraText' placeholder="..." className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
+              <Input type="text" id='extraText' placeholder="..." 
+              value={currentUserDocument.TextArea ? currentUserDocument.TextArea : '' }
+              className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
               
               {...register( "extraText", {
                 required: false
