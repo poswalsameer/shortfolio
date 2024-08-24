@@ -42,6 +42,7 @@ function page() {
   // FUNCTION TO CONVERT EMAIL INTO NORMAL STRING two
   const convertEmailToString = (data: any) => {
 
+    // length of the data incoming
       let n = data.length;
       let convertedString = "";
 
