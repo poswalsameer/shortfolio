@@ -18,23 +18,7 @@ function page() {
   const [currentUserDetails, setCurrentUserDetails] = useState<any>({});
   const [currentUserDocument, setCurrentUserDocument] = useState<any>({});
 
-  const { register, handleSubmit } = useForm({
-
-    defaultValues: {
-      fullName: currentUserDocument.fullname || '',
-      username: currentUserDocument.username || '', 
-      bio: currentUserDocument.bio || '',
-      twitterUsername: currentUserDocument.twitterURL || '',
-      githubUsername: currentUserDocument.githubURL || '',
-      instagramUsername: currentUserDocument.instagramURL || '',
-      behanceUsername: currentUserDocument.behanceURL || '',
-      linkedinUsername: currentUserDocument.linkedinURL || '',
-      extraText: currentUserDocument.Textarea || '',
-      profilePhoto: currentUserDocument.profilePhoto || ''
-
-    }
-
-  });
+  const { register, handleSubmit, reset } = useForm();
 
   const router = useRouter();
 
@@ -46,14 +30,12 @@ function page() {
       let convertedString = "";
 
       for(let i=0; i<n; i++){
-
           if( data[i] === '@' || data[i] === '.' ){
             convertedString = convertedString + '0';
           }
           else{
             convertedString = convertedString + data[i];
           }
-
       }
 
       return convertedString;
@@ -93,16 +75,6 @@ function page() {
     }
   }
 
-  useEffect( () => {
-    getCurrentUserDetails();    
-  }, [])
-
-  useEffect(() => {
-    console.log("details in the second use effect: ", currentUserDetails);
-    console.log("The current user details in the stored document is: ", currentUserDocument);
-  }, [currentUserDetails])
-
-
   // FUNCTION TO UPLOAD IMAGE ON APPWRITE
   const uploadImageFunction = async (data: any) => {
 
@@ -119,7 +91,6 @@ function page() {
 
   }
 
-  
   // CREATING A FUNCTION THAT CREATES A NEW DOCUMENT WITH THE USERNAME
   const createDocument = async (userId: any, data: any) => {
 
@@ -169,6 +140,7 @@ function page() {
 
   }
 
+  // FUNCTION THAT UPDATES A DOCUMENT
   const updateDocument = async ( userEmail: any, data: any ) => {
 
     let uploadedImage;
@@ -257,6 +229,7 @@ function page() {
 
   }
 
+  // FUNCTION THAT TRIGGERS WHEN BUTTON IS CLICKED
   const detailUpdateButton = async (data: any) => {
 
       console.log("The data coming from these input field is: ", data);
@@ -313,6 +286,30 @@ function page() {
       }
 
   }
+
+  useEffect( () => {
+    getCurrentUserDetails();    
+  }, [])
+
+  useEffect(() => {
+    console.log("details in the second use effect: ", currentUserDetails);
+    console.log("The current user details in the stored document is: ", currentUserDocument);
+
+    reset({
+
+      fullName: currentUserDetails.name || '',
+      username: currentUserDocument.username || '', 
+      bio: currentUserDocument.bio || '',
+      twitterUsername: currentUserDocument.twitterURL || '',
+      githubUsername: currentUserDocument.githubURL || '',
+      instagramUsername: currentUserDocument.instagramURL || '',
+      behanceUsername: currentUserDocument.behanceURL || '',
+      linkedinUsername: currentUserDocument.linkedinURL || '',
+      extraText: currentUserDocument.Textarea || '',
+      profilePhoto: currentUserDocument.profilePhoto || ''
+
+    })
+  }, [currentUserDetails])
 
   return (
     <div className=' h-full w-full flex flex-col justify-center items-center bg-[#FFF6F2] text-black'>

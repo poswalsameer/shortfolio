@@ -118,14 +118,20 @@ function page({params}: any) {
 
         //find document with string mail id
         const userEmail = await databaseServiceObject.getUser(convertedEmail);
-        const photoFile = await getFileID(userEmail.profilePhoto);
 
-        if (photoFile) {
-          setUserImage(photoFile);
-          console.log("This is the photo we got after getting the user: ", photoFile);
+        if( userEmail.profilePhoto ){
+          const photoFile = await getFileID(userEmail.profilePhoto);
+
+          if (photoFile) {
+            setUserImage(photoFile);
+            console.log("This is the photo we got after getting the user: ", photoFile);
+          }
+          else{
+            console.log("The file cannot be found because it was not uploaded");
+          }
         }
         else{
-          console.log("The file cannot be found because it was not uploaded");
+          setUserImage('/userProfile.png');
         }
 
         if (userEmail) {
