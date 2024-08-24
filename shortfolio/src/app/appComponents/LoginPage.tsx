@@ -35,8 +35,6 @@ function page() {
 
       if( loginSession ){
         setUser('');
-        
-        // Cookies.set( 'userCookie', '12345678' );
 
         const userData = await authServiceObject.getLoggedInUser();
         console.log(userData);

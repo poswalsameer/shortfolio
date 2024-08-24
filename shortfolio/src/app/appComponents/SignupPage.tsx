@@ -25,37 +25,6 @@ function page() {
 
     console.log( "This is the data coming from all the signup fields: " ,data);
 
-    // UPLOADING THE PHOTO TO THE BACKEND
-    // try {
-    //   const uploadedImage = await databaseServiceObject.fileUpload(data.profilePhoto[0]);
-
-    //   if( uploadedImage ){
-    //     console.log( "image uploaded successfully" );
-    //   }
-    //   else{
-    //     console.log(uploadedImage);
-        
-    //     console.log("cannot upload the image");
-    //   }
-    // } catch (error) {
-    //   console.log("error in the catch part:", error);
-    // }
-
-    // CREATING A NEW DOCUMENT AFTER THE USER CLICKS SIGNUP BUTTON
-    // const createdDocument = await databaseServiceObject.userDetails({ usernameFrontend: data.username, bioFrontend: '', twitterFrontend: '', githubFrontend: '', instagramFrontend: '', behanceFrontend:  '', linkedinFrontend: '', textFrontend: '', profilePhotoFrontend: data.profilePic[0], fullNameFrontend: data.fullName, passwordFrontend: data.password, emailFrontend: data.email });
-    
-    // console.log("created document:", createdDocument);
-    
-
-    // if( createdDocument ){
-    //   console.log("Document created successfully: ", createdDocument);
-    // }
-    // else{
-    //   console.log("Cannot create the document after registration.");
-    // }
-
-    
-
     setError('');
 
     try {
@@ -76,8 +45,6 @@ function page() {
           
         }
 
-        // const username = userData.name.split(" ").join('');
-
         if( userData ){
           dispatch(checkLogin(userData));
           console.log("the user data is: ", userData);
@@ -86,8 +53,6 @@ function page() {
 
         //NAVIGATING THE PAGE TO LOGIN PAGE AFTER SUCCESSFULL SIGNUP
         router.push('/enterDetails');
-        // router.push(`/user/${username}`);
-
       }
 
       router.push('/enterDetails');

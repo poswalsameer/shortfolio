@@ -10,8 +10,6 @@ import Cookies from 'js-cookie';
 
 function Homepage() {
 
-  // const [sessionDetails, setSessionDetails] = useState<any>({});
-
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -36,19 +34,6 @@ function Homepage() {
 
   }
 
-  // const userCurrentSession = async () => {
-
-  //   const currentSession = await authServiceObject.getCurrentSession();
-  //   setSessionDetails(currentSession);
-    
-  // }
-  
-  // useEffect( () => {
-
-  //     userCurrentSession();
-  //     console.log("The current session details are: ", sessionDetails);
-      
-  //   }, [])
 
   const loginButtonClicked = async () => {
 
@@ -56,8 +41,6 @@ function Homepage() {
     const currentSession = await authServiceObject.getCurrentSession();
 
     if( currentSession ){
-        
-        // TODO: If there is any current session: 1. Convert email to string. 2. find that email/string in database, if present then, get the username from it, and redirect to that username
         
         const currentUser = await authServiceObject.getLoggedInUser();
 
@@ -97,13 +80,6 @@ function Homepage() {
             console.log("User not found in DB");
           }
           
-          // IF USER EXISTS, THEN DIRECTLY REDIRECT TO THE USER PROFILE
-          // console.log(currentUser);
-          
-          // const username = currentUser.name.split(" ").join('');
-          // console.log("This is the username: ", username);
-          
-          // router.push(`/user/${username}`)
         }
     }
     else{

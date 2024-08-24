@@ -141,12 +141,8 @@ function page({params}: any) {
     }
   };
 
-  // useEffect(() => {
-  //   getCurrentUserDetails();
-  // }, []);
 
   // implementing image edit part here
-
   const [editMode, setEditMode] = useState(false);
 
   const closeEditBox = () => {
