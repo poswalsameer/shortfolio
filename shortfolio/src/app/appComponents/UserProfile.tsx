@@ -127,12 +127,10 @@ function page({params}: any) {
         else{
           console.log("The file cannot be found because it was not uploaded");
         }
-        // console.log("The file we got is: ", photoFile);
 
         if (userEmail) {
           console.log("Details of the document with this id: ", userEmail);
           setUserDetails(userEmail);
-          // setUserDetails({...userEmail, photoFile})
         } else {
           setUserDetails({});
           console.log("Document not found with this id");
@@ -144,10 +142,6 @@ function page({params}: any) {
       console.log("Error finding the details of the user: ", error);
     }
   };
-
-  // useEffect(() => {
-  //   getCurrentUserDetails();
-  // }, []);
 
   // implementing image edit part here
 

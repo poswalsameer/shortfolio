@@ -35,8 +35,6 @@ function page() {
 
       if( loginSession ){
         setUser('');
-        
-        // Cookies.set( 'userCookie', '12345678' );
 
         const userData = await authServiceObject.getLoggedInUser();
         console.log(userData);
@@ -54,7 +52,6 @@ function page() {
         
         
         setUser(userData);
-        // const user = userData.name;
 
         //CREATING USERNAME WITHOUT SPACES FOR URL
         const username = userData.name.split(" ").join('');
@@ -85,7 +82,6 @@ function page() {
 
         <div className='flex flex-col justify-center items-center gap-y-1'>
           <h1 className=' text-9xl font-bold'>Shortfolio.</h1>
-          {/* <h1 className='text-2xl text-gray-500 '>Login</h1> */}
         </div>
 
         <form onSubmit={handleSubmit(loginUserFunction)}>

@@ -15,32 +15,30 @@ import { useRouter } from 'next/navigation';
 
 function page() {
 
-  //back to main branch
-  
-  // const [currentUserFound, setCurrentUserFound] = useState<any>(false);
-  // const [userExists, setUserExists] = useState<boolean>(false);
-  // const [ username, setUsername ] = useState<string>('');
   const [currentUserDetails, setCurrentUserDetails] = useState<any>({});
   const [currentUserDocument, setCurrentUserDocument] = useState<any>({});
 
-  // name: '',
-  // username: '',
-  // bio: '',
-  // twitterURL: '',
-  // githubURL: '',
-  // instagramURL: '',
-  // behanceURL: '',
-  // linkedinURL: '',
-  // textarea: '',
-  // profilePhoto: ''
+  const { register, handleSubmit } = useForm({
+
+    defaultValues: {
+      fullName: currentUserDocument.fullname || '',
+      username: currentUserDocument.username || '', 
+      bio: currentUserDocument.bio || '',
+      twitterUsername: currentUserDocument.twitterURL || '',
+      githubUsername: currentUserDocument.githubURL || '',
+      instagramUsername: currentUserDocument.instagramURL || '',
+      behanceUsername: currentUserDocument.behanceURL || '',
+      linkedinUsername: currentUserDocument.linkedinURL || '',
+      extraText: currentUserDocument.Textarea || '',
+      profilePhoto: currentUserDocument.profilePhoto || ''
+
+    }
+
+  });
 
   const router = useRouter();
 
-  // const loginStatus = useSelector( (state: RootState) => state.authCheck.status )
-  // console.log("The login status is: ", loginStatus);
-  
-
-  // FUNCTION TO CONVERT EMAIL INTO NORMAL STRING two
+  // FUNCTION TO CONVERT EMAIL INTO NORMAL STRING
   const convertEmailToString = (data: any) => {
 
     // length of the data incoming
@@ -103,13 +101,6 @@ function page() {
     console.log("details in the second use effect: ", currentUserDetails);
     console.log("The current user details in the stored document is: ", currentUserDocument);
   }, [currentUserDetails])
-
-  // useEffect( () => {
-
-  //   const username = currentUserDetails.name.split(" ").join('');
-  //   console.log("The username formed is: ", username);
-
-  // }, [] )
 
 
   // FUNCTION TO UPLOAD IMAGE ON APPWRITE
@@ -188,7 +179,6 @@ function page() {
     else{
       console.log("Image cannot be uploaded because the image was not found");
     }
-    // console.log("this log is after calling the image upload function in uploadDocument function");
 
     // finding the username entered in the input field in document database
     const findUser = await databaseServiceObject.getAllDocuments(data.username);
@@ -241,9 +231,6 @@ function page() {
     //IF USER NOT FOUND WITH ENTERED USERNAME, THEN UPDATE DETAILS WITH NEW USERNAME
     else{
 
-        // console.log("User not found with the same username");
-        //test commit
-
       const updatedUserDetails = await databaseServiceObject.updateUserDetails({
         usernameFrontend: data.username,
         bioFrontend: data.bio,
@@ -269,25 +256,6 @@ function page() {
     }
 
   }
-
-
-  const { register, handleSubmit } = useForm({
-
-    defaultValues: {
-      fullName: currentUserDocument.fullname || '',
-      username: currentUserDocument.username || '', 
-      bio: currentUserDocument.bio || '',
-      twitterUsername: currentUserDocument.twitterURL || '',
-      githubUsername: currentUserDocument.githubURL || '',
-      instagramUsername: currentUserDocument.instagramURL || '',
-      behanceUsername: currentUserDocument.behanceURL || '',
-      linkedinUsername: currentUserDocument.linkedinURL || '',
-      extraText: currentUserDocument.Textarea || '',
-      profilePhoto: currentUserDocument.profilePhoto || ''
-
-    }
-
-  });
 
   const detailUpdateButton = async (data: any) => {
 
@@ -338,8 +306,6 @@ function page() {
           console.log("Username was not valid");
           
         }
-        
-        // router.push
 
       } catch (error) {
         console.log("Error while finding the doc: ", error);
