@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { checkLogin, checkLogout } from "../features/auth.slice";
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '../../components/ui/button';
@@ -6,11 +6,13 @@ import Link from 'next/link';
 import authServiceObject from '../appwrite';
 import { useRouter } from 'next/navigation';
 import databaseServiceObject from '../database.appwrite';
+import Cookies from 'js-cookie';
 
 function Homepage() {
 
-  const router = useRouter();
+  // const [sessionDetails, setSessionDetails] = useState<any>({});
 
+  const router = useRouter();
   const dispatch = useDispatch();
 
   // FUNCTION TO CONVERT EMAIL TO NORMAL STRING
@@ -34,11 +36,19 @@ function Homepage() {
 
   }
 
+  // const userCurrentSession = async () => {
+
+  //   const currentSession = await authServiceObject.getCurrentSession();
+  //   setSessionDetails(currentSession);
+    
+  // }
+  
   // useEffect( () => {
 
-  //   const currentSessionDetails = await authServiceObject.getCurrentSession();
-
-  // }, [])
+  //     userCurrentSession();
+  //     console.log("The current session details are: ", sessionDetails);
+      
+  //   }, [])
 
   const loginButtonClicked = async () => {
 
@@ -50,6 +60,16 @@ function Homepage() {
         // TODO: If there is any current session: 1. Convert email to string. 2. find that email/string in database, if present then, get the username from it, and redirect to that username
         
         const currentUser = await authServiceObject.getLoggedInUser();
+
+        Cookies.set( 'userCookie', '12345678' );
+        const userCookieValue = Cookies.get('userCookie');
+        if( userCookieValue ){
+            console.log( "The value of the cookie is: " ,userCookieValue);
+        }
+        else{
+          console.log("User cookie not found");
+          
+        }
 
         if( currentUser ){
           
@@ -64,7 +84,11 @@ function Homepage() {
             console.log( "User found in DB: ", userInDB );
 
             const username = userInDB.username;
+            console.log("The username is: ", username);
+            
+            dispatch(checkLogin(currentUser));
 
+            console.log("Redirecting to:", `/user/${username}`);
             router.push(`/user/${username}`)
             console.log("User pushed to the route");
             

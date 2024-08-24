@@ -25,6 +25,8 @@ function page() {
 
     console.log(" This is the data coming from the input field: ",data);
 
+    localStorage.clear();
+
     setError('');
 
     try {
