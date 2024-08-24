@@ -22,6 +22,17 @@ function page() {
   const [currentUserDetails, setCurrentUserDetails] = useState<any>({});
   const [currentUserDocument, setCurrentUserDocument] = useState<any>({});
 
+  // name: '',
+  // username: '',
+  // bio: '',
+  // twitterURL: '',
+  // githubURL: '',
+  // instagramURL: '',
+  // behanceURL: '',
+  // linkedinURL: '',
+  // textarea: '',
+  // profilePhoto: ''
+
   const router = useRouter();
 
   // const loginStatus = useSelector( (state: RootState) => state.authCheck.status )
@@ -119,11 +130,17 @@ function page() {
   // CREATING A FUNCTION THAT CREATES A NEW DOCUMENT WITH THE USERNAME
   const createDocument = async (userId: any, data: any) => {
 
-      // TODO: Optimise here also, as the image will be uploaded twice when the user clicks this more than once
-      const uploadedImage = await uploadImageFunction(data);
-      console.log("this log is after calling the image upload function in createDocument function");
       
-      // TODO: Create the user after running a query, check if a user with the username already exists or not
+      let uploadedImage;
+      if( data.profilePhoto ){
+        uploadedImage = await uploadImageFunction(data);
+        console.log("this log is after calling the image upload function in createDocument function");
+      }
+      else{
+        console.log("Cannot upload the image because image was not uploaded");
+        
+      }      
+      
 
       const findUser = await databaseServiceObject.getUser(data.username);
 
@@ -141,7 +158,7 @@ function page() {
         behanceFrontend: data.behanceUsername,
         linkedinFrontend: data.linkedinUsername,
         textFrontend: data.extraText,
-        profilePhotoFrontend: uploadedImage.$id,
+        profilePhotoFrontend: uploadedImage ? uploadedImage.$id : '',
         fullNameFrontend: data.fullName,
         emailFrontend: userId
       })
@@ -161,8 +178,15 @@ function page() {
 
   const updateDocument = async ( userEmail: any, data: any ) => {
 
-    const uploadedImage = await uploadImageFunction(data);
-    console.log("this log is after calling the image upload function in uploadDocument function");
+    let uploadedImage;
+    if( data.profilePhoto ){
+      uploadedImage = await uploadImageFunction(data);
+      console.log("Image uploaded successfully: ", uploadedImage);
+    }
+    else{
+      console.log("Image cannot be uploaded because the image was not found");
+    }
+    // console.log("this log is after calling the image upload function in uploadDocument function");
 
     // finding the username entered in the input field in document database
     const findUser = await databaseServiceObject.getAllDocuments(data.username);
@@ -227,7 +251,7 @@ function page() {
         behanceFrontend: data.behanceUsername,
         linkedinFrontend: data.linkedinUsername,
         textFrontend: data.extraText,
-        profilePhotoFrontend: uploadedImage.$id,
+        profilePhotoFrontend: uploadedImage ? uploadedImage.$id : null,
         fullNameFrontend: data.fullName,
         emailFrontend: userEmail
       })
@@ -245,7 +269,23 @@ function page() {
   }
 
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm({
+
+    defaultValues: {
+      fullName: currentUserDocument.fullname || '',
+      username: currentUserDocument.username || '', 
+      bio: currentUserDocument.bio || '',
+      twitterUsername: currentUserDocument.twitterURL || '',
+      githubUsername: currentUserDocument.githubURL || '',
+      instagramUsername: currentUserDocument.instagramURL || '',
+      behanceUsername: currentUserDocument.behanceURL || '',
+      linkedinUsername: currentUserDocument.linkedinURL || '',
+      extraText: currentUserDocument.Textarea || '',
+      profilePhoto: currentUserDocument.profilePhoto || ''
+
+    }
+
+  });
 
   const detailUpdateButton = async (data: any) => {
 
@@ -276,7 +316,7 @@ function page() {
         else{
           console.log("Document with this id does not exists");
 
-          
+          // data.profilePhoto
           const createdUser = await createDocument(userEmail, data);
 
           if( createdUser ){
@@ -303,98 +343,6 @@ function page() {
         console.log("Error while finding the doc: ", error);
         
       }
-      
-
-
-
-      // IMAGE UPLOAD IS WORKING FINE
-      // if( userExists ){
-
-      //   try {
-
-      //     // HANDLING THE IMAGE UPLOAD FIRST
-      //     const uploadedImage = await databaseServiceObject.fileUpload(data.profilePhoto[0]);
-  
-      //     if( uploadedImage ){
-      //       console.log("Image uploaded successfully");
-      //     }
-      //     else{
-      //       console.log("Cannot upload the image");
-            
-      //     }
-  
-      //     const updatedDetails =  await databaseServiceObject.userDetails({ 
-      //       usernameFrontend: data.username,
-      //       bioFrontend: data.bio,
-      //       twitterFrontend: data.twitterUsername,
-      //       githubFrontend: data.githubUsername,
-      //       instagramFrontend: data.instagramUsername,
-      //       behanceFrontend: data.behanceUsername,
-      //       linkedinFrontend: data.linkedinUsername,
-      //       textFrontend: data.extraText,
-      //       profilePhotoFrontend: uploadedImage.$id,
-      //       fullNameFrontend: data.fullName
-      //       })
-          
-      //     if( updatedDetails ){
-      //       console.log("The updated details are: ", updatedDetails);
-      //     }
-      //     else{
-      //       console.log("Error while updating details of the user");
-            
-      //     }
-  
-      //   } catch (error:any) {
-      //       console.log("Error after clicking the button:", error.message);
-            
-      //   }
-
-      // }
-      // else{
-
-      //   try {
-
-      //     // HANDLING THE IMAGE UPLOAD FIRST
-      //     const uploadedImage = await databaseServiceObject.fileUpload(data.profilePhoto[0]);
-  
-      //     if( uploadedImage ){
-      //       console.log("Image uploaded successfully");
-      //       console.log(uploadedImage);
-      //     }
-      //     else{
-      //       console.log("Cannot upload the image");
-            
-      //     }
-
-      //     const createdUser = await databaseServiceObject.userDetails({ usernameFrontend: data.username,
-      //     bioFrontend: data.bio,
-      //     twitterFrontend: data.twitterUsername,
-      //     githubFrontend: data.githubUsername,
-      //     instagramFrontend: data.instagramUsername,
-      //     behanceFrontend: data.behanceUsername,
-      //     linkedinFrontend: data.linkedinUsername,
-      //     textFrontend: data.extraText,
-      //     profilePhotoFrontend: uploadedImage.$id,
-      //     fullNameFrontend: data.fullName
-      //     })
-
-      //     if( createdUser ){
-      //       console.log( "Created user in the db is: ", createdUser );
-      //     }
-      //     else{
-      //       console.log( "User cannot created" );
-      //     }
- 
-      //   } catch (error) {
-          
-      //     console.log("Cannot create the user: ", error);
-          
-
-      //   }
-
-        
-
-      // }
 
   }
 
@@ -417,7 +365,8 @@ function page() {
             </div>
 
             <div className='h-[50%] w-[50%] flex justify-start' >
-              <Input type="text" id='fullname' placeholder="..." value={ currentUserDetails ? currentUserDetails.name : "" } className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
+              <Input type="text" id='fullname' placeholder="..."
+              className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
               
               {...register( "fullName", {
                 required: true,
@@ -435,7 +384,6 @@ function page() {
             
             <div className='h-[50%] w-[50%] flex justify-start' >
               <Input type="text" id='username' placeholder="..."
-              value={currentUserDocument.username ? currentUserDocument.username : '' }
               className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
               
               {...register( "username", {
@@ -455,7 +403,6 @@ function page() {
 
             <div className='h-[50%] w-[50%] flex justify-start' >
               <Textarea placeholder='...' 
-              value={currentUserDocument.bio ? currentUserDocument.bio : '' }
               id='bio' className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
               
               {...register( "bio", {
@@ -475,7 +422,6 @@ function page() {
 
             <div className='h-[50%] w-[50%] flex justify-start' >
               <Input type="text" id='twitter' placeholder="..." 
-              value={currentUserDocument.twitterURL ? currentUserDocument.twitterURL : '' }
               className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
               
               {...register( "twitterUsername", {
@@ -494,7 +440,6 @@ function page() {
 
             <div className='h-[50%] w-[50%] flex justify-start' >
               <Input type="text" id='github' placeholder="..." 
-              value={currentUserDocument.githubURL ? currentUserDocument.githubURL : '' }
               className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
               
               {...register( "githubUsername", {
@@ -513,7 +458,6 @@ function page() {
 
             <div className='h-[50%] w-[50%] flex justify-start' >
               <Input type="text" id='insta' placeholder="..." 
-              value={currentUserDocument.instagramURL ? currentUserDocument.instagramURL : '' }
               className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
               
               {...register( "instagramUsername", {
@@ -532,7 +476,6 @@ function page() {
 
             <div className='h-[50%] w-[50%] flex justify-start' >
               <Input type="text" id='behance' placeholder="..." 
-              value={currentUserDocument.behanceURL ? currentUserDocument.behanceURL : '' }
               className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
               
               {...register( "behanceUsername", {
@@ -551,7 +494,6 @@ function page() {
 
             <div className='h-[50%] w-[50%] flex justify-start' >
               <Input type="text" id='linkedin' placeholder="..." 
-              value={currentUserDocument.linkedinURL ? currentUserDocument.linkedinURL : '' }
               className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
               
               {...register( "linkedinUsername", {
@@ -570,7 +512,6 @@ function page() {
 
             <div className='h-[50%] w-[50%] flex justify-start' >
               <Input type="text" id='extraText' placeholder="..." 
-              value={currentUserDocument.TextArea ? currentUserDocument.TextArea : '' }
               className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
               
               {...register( "extraText", {
@@ -591,7 +532,7 @@ function page() {
               <Input type="file" id='profilePhoto' className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105 hover:cursor-pointer'
               
               {...register( "profilePhoto", {
-                required: true
+                required: false
               } )}
               />
             </div>

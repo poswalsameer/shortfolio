@@ -122,8 +122,12 @@ function page({params}: any) {
 
         if (photoFile) {
           setUserImage(photoFile);
+          console.log("This is the photo we got after getting the user: ", photoFile);
         }
-        console.log("The file we got is: ", photoFile);
+        else{
+          console.log("The file cannot be found because it was not uploaded");
+        }
+        // console.log("The file we got is: ", photoFile);
 
         if (userEmail) {
           console.log("Details of the document with this id: ", userEmail);

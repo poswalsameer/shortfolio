@@ -38,7 +38,7 @@ export class DatabaseService{
                     'behanceURL' : behanceFrontend ? behanceFrontend : '',
                     'linkedinURL' : linkedinFrontend ? linkedinFrontend : '',
                     'TextArea' : textFrontend ? textFrontend : '',
-                    'profilePhoto' : profilePhotoFrontend,
+                    'profilePhoto' : profilePhotoFrontend ? profilePhotoFrontend : '',
                     'fullName' : fullNameFrontend,
                     'email': emailFrontend ? emailFrontend : '' 
                 }
@@ -74,7 +74,7 @@ export class DatabaseService{
                     'behanceURL' : behanceFrontend ? behanceFrontend : '',
                     'linkedinURL' : linkedinFrontend ? linkedinFrontend : '',
                     'TextArea' : textFrontend ? textFrontend : '',
-                    'profilePhoto' : profilePhotoFrontend,
+                    'profilePhoto' : profilePhotoFrontend ? profilePhotoFrontend : '',
                     'fullName' : fullNameFrontend,
                     'email' : emailFrontend ? emailFrontend : ''
                 },
