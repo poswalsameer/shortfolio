@@ -9,6 +9,7 @@ import { Provider, useDispatch } from 'react-redux';
 import authServiceObject from '../appwrite';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
+import { useToast } from "@/components/ui/use-toast";
 
 
 function page() {
@@ -20,6 +21,7 @@ function page() {
 
   const dispatch = useDispatch();
   const router = useRouter();
+  const {toast} = useToast();
 
   const loginUserFunction = async(data:any) => {
 
@@ -32,6 +34,12 @@ function page() {
     try {
 
       const loginSession = await authServiceObject.loginUser(data);
+
+      if( !loginSession ){
+        toast({
+          title: "Incorrect credentials",
+        });
+      }
 
       if( loginSession ){
         setUser('');

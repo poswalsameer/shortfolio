@@ -11,6 +11,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import databaseServiceObject from '../database.appwrite'
 import { useSelector } from 'react-redux'; 
 import { useRouter } from 'next/navigation';
+import { useToast } from "@/components/ui/use-toast";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 
 function page() {
@@ -19,9 +21,14 @@ function page() {
   const [currentUserDocument, setCurrentUserDocument] = useState<any>({});
   const [imageInDB, setImageInDB] = useState<any>('');
 
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset,formState: { errors } } = useForm();
+
+  // if( errors.fullName?.message ){
+  //   alert(errors.fullName?.message);
+  // }
 
   const router = useRouter();
+  const {toast} = useToast();
 
   // FUNCTION TO CONVERT EMAIL INTO NORMAL STRING
   const convertEmailToString = (data: any) => {
@@ -274,12 +281,24 @@ function page() {
 
   }
 
+  // USE EFFECT TO HANDLE THE TOAST WHEN THERE THE FULLNAME FIELD IS EMPTY
+  useEffect(() => {
+    if (errors.fullName?.message) {
+      toast({
+        title: errors.fullName?.message as string,
+      });
+    }
+  }, [errors.fullName]);
+
+
   // FUNCTION THAT TRIGGERS WHEN BUTTON IS CLICKED
   const detailUpdateButton = async (data: any) => {
 
       console.log("The data coming from these input field is: ", data);
       console.log("The email coming from the user detail is: ", currentUserDetails.email);
       let userEmail = currentUserDetails.email;
+
+      
 
       userEmail = convertEmailToString(userEmail);
       console.log("This is user email after converting the string: ", userEmail);
@@ -356,6 +375,9 @@ function page() {
   }, [currentUserDetails])
 
   return (
+
+    <>
+
     <div className=' h-full w-full flex flex-col justify-center items-center bg-[#FFF6F2] text-black'>
 
       <div className=' my-20 h-full w-[70%] flex flex-col gap-y-16 justify-center items-center'>
@@ -378,11 +400,12 @@ function page() {
               className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
               
               {...register( "fullName", {
-                required: true,
+                required: "Full Name is required",
               } )}
 
               /> 
             </div>
+
           </div>
 
           {/* USERNAME INPUT DIV */}
@@ -557,6 +580,8 @@ function page() {
       </div>
 
     </div>
+
+    </>
   )
 }
 

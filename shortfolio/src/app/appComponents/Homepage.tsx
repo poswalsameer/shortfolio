@@ -8,10 +8,13 @@ import { useRouter } from 'next/navigation';
 import databaseServiceObject from '../database.appwrite';
 import Cookies from 'js-cookie';
 
+
+
 function Homepage() {
 
   const router = useRouter();
   const dispatch = useDispatch();
+  
 
   // FUNCTION TO CONVERT EMAIL TO NORMAL STRING
   const convertEmailToString = (data: any) => {
