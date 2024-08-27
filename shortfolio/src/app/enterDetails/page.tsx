@@ -288,7 +288,19 @@ function page() {
         title: errors.fullName?.message as string,
       });
     }
-  }, [errors.fullName]);
+
+    if( errors.username?.message ){
+      toast({
+        title: errors.username?.message as string,
+      });
+    }
+
+    if( errors.bio?.message ){
+      toast({
+        title: errors.bio?.message as string,
+      });
+    }
+  }, [errors.fullName, errors.username, errors.bio]);
 
 
   // FUNCTION THAT TRIGGERS WHEN BUTTON IS CLICKED
@@ -419,7 +431,7 @@ function page() {
               className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
               
               {...register( "username", {
-                required: true
+                required: "Username is required",
               } )}
               
               />
@@ -438,7 +450,7 @@ function page() {
               id='bio' className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
               
               {...register( "bio", {
-                required: true
+                required: "Bio is required",
               } )}
               
               />

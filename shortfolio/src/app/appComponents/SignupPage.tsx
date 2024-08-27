@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/Link";
@@ -25,14 +25,6 @@ function page() {
   const dispatch = useDispatch();
   const router = useRouter();
   const { toast } = useToast();
-
-  if (errors.password?.message) {
-    console.log("password length is too small");
-    alert(errors.password?.message);
-    // toast({
-    //   title: errors.password?.message as string,
-    // })
-  }
 
   const signupUserFunction = async (data: any) => {
     console.log("This is the data coming from all the signup fields: ", data);
@@ -78,6 +70,26 @@ function page() {
     }
   };
 
+  useEffect(() => {
+    if (errors.password?.message) {
+      toast({
+        title: errors.password?.message as string,
+      });
+    }
+
+    if( errors.email?.message ){
+      toast({
+        title: errors.email?.message as string,
+      });
+    }
+
+    if( errors.fullName?.message ){
+      toast({
+        title: errors.fullName?.message as string,
+      });
+    }
+  }, [errors.password, errors.email, errors.fullName]);
+
   return (
     <div className=" h-screen w-screen flex flex-col justify-center items-center bg-[#FFF6F2] text-black">
       <div className="h-[80%] w-[70%] flex flex-col gap-y-10 justify-center items-center">
@@ -93,7 +105,7 @@ function page() {
               type="email"
               placeholder="Email"
               {...register("email", {
-                required: true,
+                required: "Email address is required",
                 validate: {
                   matchPattern: (value) =>
                     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ||
@@ -107,10 +119,10 @@ function page() {
               type="password"
               placeholder="Password"
               {...register("password", {
-                required: true,
+                required: "Password is required",
                 minLength: {
                   value: 8,
-                  message: "Password should be a minimum of 8 characters",
+                  message: "Password should be minimum of 8 characters",
                 },
               })}
             />
@@ -120,7 +132,7 @@ function page() {
               type="text"
               placeholder="Full Name"
               {...register("fullName", {
-                required: true,
+                required: "Full Name is required",
               })}
             />
 

@@ -14,7 +14,7 @@ import { useToast } from "@/components/ui/use-toast";
 
 function page() {
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit,formState: { errors } } = useForm();
 
   const [error, setError] = useState('');
   const [user, setUser] = useState('');
@@ -82,6 +82,14 @@ function page() {
 
   }
 
+  useEffect(() => {
+    if (errors.password?.message) {
+      toast({
+        title: errors.password?.message as string,
+      });
+    }
+  }, [errors.password]);
+
   return (
     
     <div className=' h-screen w-screen flex flex-col justify-center items-center bg-[#FFF6F2] text-black'>
@@ -109,7 +117,10 @@ function page() {
                 <Input type="password" placeholder="Password" 
                 {...register("password", {
                     required: true,
-                    minLength: 8,
+                    minLength: {
+                      value: 8,
+                      message: "Password should be minimum of 8 characters",
+                    },
                 })}
                 />
                 <Button type='submit' variant="secondary" className='h-9'>Login</Button>

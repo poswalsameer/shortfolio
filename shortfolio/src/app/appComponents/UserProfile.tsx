@@ -417,7 +417,7 @@ function page({params}: any) {
 
         {/* textarea wala div */}
         <div className="h-[21.5%] w-[95%] text-lg flex justify-center items-center bg-[#333533] rounded-xl shadow-md shadow-gray-600">
-          {userDetails.TextArea}
+          {userDetails.TextArea ? userDetails.TextArea : " Either you run the day or the day runs you " }
         </div>
       </div>
     </div>
