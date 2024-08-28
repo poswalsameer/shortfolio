@@ -33,6 +33,8 @@ function page({params}: any) {
   const [userImage, setUserImage] = useState<string>("");
   const [userEmail, setUserEmail] = useState<string>("");
 
+  const behanceGrid = false;
+
   const dispatch = useDispatch();
   const router = useRouter();
   const { toast } = useToast();
@@ -371,12 +373,36 @@ function page({params}: any) {
         {/* behance instagram wala div */}
         <div className="h-[21.5%] w-[95%] flex justify-center items-center gap-x-5 rounded-xl">
           {/* behance wala div */}
+
+          {/* {
+            behanceGrid && <div className="h-full w-[40%] flex justify-center items-center rounded-xl bg-[#0057FF] shadow-md shadow-blue-800 border border-[#0057FF]">
+            <div className="h-full w-[40%] flex justify-center items-center">
+              <FaBehance className="h-16 w-16" />
+            </div>
+
+            <div className="h-full w-[60%] text-2xl font-semibold flex flex-col justify-center items-start">
+
+              <div>
+                <Link
+                  href={`https://behance.com/${userDetails.behanceURL}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  @{userDetails.behanceURL}
+                </Link>
+              </div>
+
+              <div className="text-sm font-base text-blue-200">Behance.com</div>
+            </div>
+          </div>
+          } */}
           <div className="h-full w-[40%] flex justify-center items-center rounded-xl bg-[#0057FF] shadow-md shadow-blue-800 border border-[#0057FF]">
             <div className="h-full w-[40%] flex justify-center items-center">
               <FaBehance className="h-16 w-16" />
             </div>
 
             <div className="h-full w-[60%] text-2xl font-semibold flex flex-col justify-center items-start">
+
               <div>
                 <Link
                   href={`https://behance.com/${userDetails.behanceURL}`}
