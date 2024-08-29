@@ -391,25 +391,32 @@ function page() {
     <>
 
     <div className='
+    h-full w-screen flex flex-col justify-center items-center bg-[#FFF6F2] text-black
+    sm:h-full sm:w-full sm:flex sm:flex-col sm:justify-center sm:items-center sm:bg-[#FFF6F2] sm:text-black
     md:h-full md:w-full md:flex md:flex-col md:justify-center md:items-center md:bg-[#FFF6F2] md:text-black
     lg:h-full lg:w-full lg:flex lg:flex-col lg:justify-center lg:items-center lg:bg-[#FFF6F2] lg:text-black 
     xl:h-full xl:w-full xl:flex xl:flex-col xl:justify-center xl:items-center xl:bg-[#FFF6F2] xl:text-black 
-    2xl:h-full 2xl:w-full 2xl:flex 2xl:flex-col 2xl:justify-center 2xl:items-center 2xl:bg-[#FFF6F2] 2xl:text-black'>
+    2xl:h-full 2xl:w-full 2xl:flex 2xl:flex-col 2xl:justify-center 2xl:items-center 2xl:bg-[#FFF6F2] 2xl:text-black' id='mainDiv'>
 
       <div className='
+      my-20 h-full w-[90%] flex flex-col gap-y-16 justify-center items-center
+      sm:my-20 sm:h-full sm:w-[80%] sm:flex sm:flex-col sm:gap-y-16 sm:justify-center sm:items-center
       md:my-20 md:h-full md:w-[80%] md:flex md:flex-col md:gap-y-16 md:justify-center md:items-center
       lg:my-20 lg:h-full lg:w-[80%] lg:flex lg:flex-col lg:gap-y-16 lg:justify-center lg:items-center
       xl:my-20 xl:h-full xl:w-[70%] xl:flex xl:flex-col xl:gap-y-16 xl:justify-center xl:items-center 
       2xl:my-20 2xl:h-full 2xl:w-[70%] 2xl:flex 2xl:flex-col 2xl:gap-y-16 2xl:justify-center 2xl:items-center'>
 
         <div className='
+        flex flex-col justify-center items-center gap-y-1
+        sm:flex sm:flex-col sm:justify-center sm:items-center sm:gap-y-1
         md:flex md:flex-col md:justify-center md:items-center md:gap-y-1
         lg:flex lg:flex-col lg:justify-center lg:items-center lg:gap-y-1
         xl:flex xl:flex-col xl:justify-center xl:items-center xl:gap-y-1
         2xl:flex 2xl:flex-col 2xl:justify-center 2xl:items-center 2xl:gap-y-1'>
 
-          {/* TODO: Yaha se continue karna hai */}
           <h1 className='
+          text-xl font-bold
+          sm:text-3xl sm:font-bold
           md:text-4xl md:font-bold
           lg:text-5xl lg:font-bold
           xl:text-5xl xl:font-bold
@@ -421,22 +428,34 @@ function page() {
 
         <form onSubmit={handleSubmit(detailUpdateButton)}>
           <div className='
+          flex flex-col justify-center items-center gap-y-6
+          sm:flex sm:flex-col sm:justify-center sm:items-center sm:gap-y-6
+          md:flex md:flex-col md:justify-center md:items-center md:gap-y-6
           lg:flex lg:flex-col lg:justify-center lg:items-center lg:gap-y-6
           xl:flex xl:flex-col xl:justify-center xl:items-center xl:gap-y-6
           2xl:flex 2xl:flex-col 2xl:justify-center 2xl:items-center 2xl:gap-y-6'>
           
           {/* FULL NAME INPUT DIV */}
           <div className='
+          w-[25rem] flex flex-row justify-between items-center gap-x-3
+          sm:w-[38rem] sm:flex sm:flex-row sm:justify-between sm:items-center sm:gap-x-10
+          md:w-[43rem] md:flex md:flex-row md:justify-between md:items-center md:gap-x-10
           lg:w-[43rem] lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-x-20
           xl:w-[43rem] xl:flex xl:flex-row xl:justify-between xl:items-center xl:gap-x-20
           2xl:w-[43rem] 2xl:flex 2xl:flex-row 2xl:justify-between 2xl:items-center 2xl:gap-x-20 '>
 
             <div className='
+            h-[50%] w-[50%] flex justify-end
+            sm:h-[50%] sm:w-[50%] sm:flex sm:justify-end
+            md:h-[50%] md:w-[50%] md:flex md:justify-end
             lg:h-[50%] lg:w-[50%] lg:flex lg:justify-end
             xl:h-[50%] xl:w-[50%] xl:flex xl:justify-end
             2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-end' >
 
               <Label htmlFor='fullname' className='
+              text-xs font-bold hover:cursor-pointer
+              sm:text-base sm:font-semibold sm:hover:cursor-pointer
+              md:text-lg md:font-bold md:hover:cursor-pointer
               lg:text-lg lg:font-bold lg:hover:cursor-pointer
               xl:text-lg xl:font-bold xl:hover:cursor-pointer
               2xl:text-lg 2xl:font-bold 2xl:hover:cursor-pointer'>
@@ -446,12 +465,18 @@ function page() {
             </div>
 
             <div className='
+            h-[50%] w-[50%] flex justify-start
+            sm:h-[50%] sm:w-[60%] sm:flex sm:justify-start
+            md:h-[50%] md:w-[60%] md:flex md:justify-start
             lg:h-[50%] lg:w-[50%] lg:flex lg:justify-start
             xl:h-[50%] xl:w-[50%] xl:flex xl:justify-start
             2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-start' >
 
               <Input type="text" id='fullname' placeholder="..."
               className='
+              bg-white focus:bg-blue-100 border-blue-700 h-8 w-40 transition-all delay-75 focus:scale-105
+              sm:bg-white sm:focus:bg-blue-100 sm:border-blue-700 sm:h-10 sm:w-60 sm:transition-all sm:delay-75 sm:focus:scale-105
+              md:bg-white md:focus:bg-blue-100 md:border-blue-700 md:w-72 md:transition-all md:delay-75 md:focus:scale-105
               lg:bg-white lg:focus:bg-blue-100 lg:border-blue-700 lg:w-96 lg:transition-all lg:delay-75 lg:focus:scale-105
               xl:bg-white xl:focus:bg-blue-100 xl:border-blue-700 xl:w-96 xl:transition-all xl:delay-75 xl:focus:scale-105
               2xl:bg-white 2xl:focus:bg-blue-100 2xl:border-blue-700 2xl:w-96 2xl:transition-all 2xl:delay-75 2xl:focus:scale-105'
@@ -467,16 +492,25 @@ function page() {
 
           {/* USERNAME INPUT DIV */}
           <div className='
+          w-[25rem] flex flex-row justify-between items-center gap-x-3
+          sm:w-[38rem] sm:flex sm:flex-row sm:justify-between sm:items-center sm:gap-x-10
+          md:w-[43rem] md:flex md:flex-row md:justify-between md:items-center md:gap-x-10
           lg:w-[43rem] lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-x-20
           xl:w-[43rem] xl:flex xl:flex-row xl:justify-between xl:items-center xl:gap-x-20 
           2xl:w-[43rem] 2xl:flex 2xl:flex-row 2xl:justify-between 2xl:items-center 2xl:gap-x-20  '>
 
             <div className='
+            h-[50%] w-[50%] flex justify-end
+            sm:h-[50%] sm:w-[50%] sm:flex sm:justify-end
+            md:h-[50%] md:w-[50%] md:flex md:justify-end
             lg:h-[50%] lg:w-[50%] lg:flex lg:justify-end
             xl:h-[50%] xl:w-[50%] xl:flex xl:justify-end
             2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-end' >
 
               <Label htmlFor='username' className='
+              text-xs font-bold hover:cursor-pointer
+              sm:text-base sm:font-semibold sm:hover:cursor-pointer
+              md:text-lg md:font-bold md:hover:cursor-pointer
               lg:text-lg lg:font-bold lg:hover:cursor-pointer
               xl:text-lg xl:font-bold xl:hover:cursor-pointer
               2xl:text-lg 2xl:font-bold 2xl:hover:cursor-pointer'>
@@ -486,12 +520,18 @@ function page() {
             </div>
             
             <div className='
+            h-[50%] w-[50%] flex justify-start
+            sm:h-[50%] sm:w-[60%] sm:flex sm:justify-start
+            md:h-[50%] md:w-[60%] md:flex md:justify-start
             lg:h-[50%] lg:w-[50%] lg:flex lg:justify-start
             xl:h-[50%] xl:w-[50%] xl:flex xl:justify-start
             2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-start' >
 
               <Input type="text" id='username' placeholder="..."
               className='
+              bg-white focus:bg-blue-100 border-blue-700 h-8 w-40 transition-all delay-75 focus:scale-105
+              sm:bg-white sm:focus:bg-blue-100 sm:border-blue-700 sm:h-10 sm:w-60 sm:transition-all sm:delay-75 sm:focus:scale-105
+              md:bg-white md:focus:bg-blue-100 md:border-blue-700 md:w-72 md:transition-all md:delay-75 md:focus:scale-105
               lg:bg-white lg:focus:bg-blue-100 lg:border-blue-700 lg:w-96 lg:transition-all lg:delay-75 lg:focus:scale-105
               xl:bg-white xl:focus:bg-blue-100 xl:border-blue-700 xl:w-96 xl:transition-all xl:delay-75 xl:focus:scale-105
               2xl:bg-white 2xl:focus:bg-blue-100 2xl:border-blue-700 2xl:w-96 2xl:transition-all 2xl:delay-75 2xl:focus:scale-105'
@@ -506,16 +546,25 @@ function page() {
          
           {/* BIO INPUT DIV */}
           <div className='
+          w-[25rem] flex flex-row justify-between items-center gap-x-3
+          sm:w-[38rem] sm:flex sm:flex-row sm:justify-between sm:items-center sm:gap-x-10
+          md:w-[43rem] md:flex md:flex-row md:justify-between md:items-center md:gap-x-10
           lg:w-[43rem] lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-x-20
           xl:w-[43rem] xl:flex xl:flex-row xl:justify-between xl:items-center xl:gap-x-20 
           2xl:w-[43rem] 2xl:flex 2xl:flex-row 2xl:justify-between 2xl:items-center 2xl:gap-x-20 '>
 
             <div className='
+            h-[50%] w-[50%] flex justify-end
+            sm:h-[50%] sm:w-[50%] sm:flex sm:justify-end
+            md:h-[50%] md:w-[50%] md:flex md:justify-end
             lg:h-[50%] lg:w-[50%] lg:flex lg:justify-end
             xl:h-[50%] xl:w-[50%] xl:flex xl:justify-end
             2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-end' >
 
               <Label htmlFor='bio' className='
+              text-xs font-bold hover:cursor-pointer
+              sm:text-base sm:font-semibold sm:hover:cursor-pointer
+              md:text-lg md:font-bold md:hover:cursor-pointer
               lg:text-lg lg:font-bold lg:hover:cursor-pointer
               xl:text-lg xl:font-bold xl:hover:cursor-pointer
               2xl:text-lg 2xl:font-bold 2xl:hover:cursor-pointer'>
@@ -525,12 +574,18 @@ function page() {
             </div>
 
             <div className='
+            h-[50%] w-[50%] flex justify-start
+            sm:h-[50%] sm:w-[60%] sm:flex sm:justify-start
+            md:h-[50%] md:w-[60%] md:flex md:justify-start
             lg:h-[50%] lg:w-[50%] lg:flex lg:justify-start
             xl:h-[50%] xl:w-[50%] xl:flex xl:justify-start
             2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-start' >
 
               <Textarea placeholder='...' 
               id='bio' className='
+              bg-white focus:bg-blue-100 border-blue-700 h-8 w-40 transition-all delay-75 focus:scale-105
+              sm:bg-white sm:focus:bg-blue-100 sm:border-blue-700 sm:h-10 sm:w-60 sm:transition-all sm:delay-75 sm:focus:scale-105
+              md:bg-white md:focus:bg-blue-100 md:border-blue-700 md:w-72 md:transition-all md:delay-75 md:focus:scale-105
               lg:bg-white lg:focus:bg-blue-100 lg:border-blue-700 lg:w-96 lg:transition-all lg:delay-75 lg:focus:scale-105
               xl:bg-white xl:focus:bg-blue-100 xl:border-blue-700 xl:w-96 xl:transition-all xl:delay-75 xl:focus:scale-105
               2xl:bg-white 2xl:focus:bg-blue-100 2xl:border-blue-700 2xl:w-96 2xl:transition-all 2xl:delay-75 2xl:focus:scale-105'
@@ -545,16 +600,25 @@ function page() {
 
           {/* TWITTER USERNAME INPUT DIV */}
           <div className='
+          w-[25rem] flex flex-row justify-between items-center gap-x-3
+          sm:w-[38rem] sm:flex sm:flex-row sm:justify-between sm:items-center sm:gap-x-10
+          md:w-[43rem] md:flex md:flex-row md:justify-between md:items-center md:gap-x-10
           lg:w-[43rem] lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-x-20
           xl:w-[43rem] xl:flex xl:flex-row xl:justify-between xl:items-center xl:gap-x-20 
           2xl:w-[43rem] 2xl:flex 2xl:flex-row 2xl:justify-between 2xl:items-center 2xl:gap-x-20 '>
 
             <div className='
+            h-[50%] w-[50%] flex justify-end
+            sm:h-[50%] sm:w-[50%] sm:flex sm:justify-end
+            md:h-[50%] md:w-[50%] md:flex md:justify-end
             lg:h-[50%] lg:w-[50%] lg:flex lg:justify-end
             xl:h-[50%] xl:w-[50%] xl:flex xl:justify-end
             2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-end' >
 
               <Label htmlFor='twitter' className='
+              text-xs font-bold hover:cursor-pointer
+              sm:text-base sm:font-semibold sm:hover:cursor-pointer
+              md:text-lg md:font-bold md:hover:cursor-pointer
               lg:text-lg lg:font-bold lg:hover:cursor-pointer
               xl:text-lg xl:font-bold xl:hover:cursor-pointer
               2xl:text-lg 2xl:font-bold 2xl:hover:cursor-pointer'>
@@ -564,12 +628,18 @@ function page() {
             </div>
 
             <div className='
+            h-[50%] w-[50%] flex justify-start
+            sm:h-[50%] sm:w-[60%] sm:flex sm:justify-start
+            md:h-[50%] md:w-[60%] md:flex md:justify-start
             lg:h-[50%] lg:w-[50%] lg:flex lg:justify-start
             xl:h-[50%] xl:w-[50%] xl:flex xl:justify-start
             2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-start' >
 
               <Input type="text" id='twitter' placeholder="..." 
               className='
+              bg-white focus:bg-blue-100 border-blue-700 h-8 w-40 transition-all delay-75 focus:scale-105
+              sm:bg-white sm:focus:bg-blue-100 sm:border-blue-700 sm:h-10 sm:w-60 sm:transition-all sm:delay-75 sm:focus:scale-105
+              md:bg-white md:focus:bg-blue-100 md:border-blue-700 md:w-72 md:transition-all md:delay-75 md:focus:scale-105
               lg:bg-white lg:focus:bg-blue-100 lg:border-blue-700 lg:w-96 lg:transition-all lg:delay-75 lg:focus:scale-105
               xl:bg-white xl:focus:bg-blue-100 xl:border-blue-700 xl:w-96 xl:transition-all xl:delay-75 xl:focus:scale-105
               2xl:bg-white 2xl:focus:bg-blue-100 2xl:border-blue-700 2xl:w-96 2xl:transition-all 2xl:delay-75 2xl:focus:scale-105'
@@ -583,16 +653,25 @@ function page() {
 
           {/* GITHUB USERNAME INPUT DIV */}
           <div className='
+          w-[25rem] flex flex-row justify-between items-center gap-x-3
+          sm:w-[38rem] sm:flex sm:flex-row sm:justify-between sm:items-center sm:gap-x-10
+          md:w-[43rem] md:flex md:flex-row md:justify-between md:items-center md:gap-x-10
           lg:w-[43rem] lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-x-20
           xl:w-[43rem] xl:flex xl:flex-row xl:justify-between xl:items-center xl:gap-x-20 
           2xl:w-[43rem] 2xl:flex 2xl:flex-row 2xl:justify-between 2xl:items-center 2xl:gap-x-20 '>
 
             <div className='
+            h-[50%] w-[50%] flex justify-end
+            sm:h-[50%] sm:w-[50%] sm:flex sm:justify-end
+            md:h-[50%] md:w-[50%] md:flex md:justify-end
             lg:h-[50%] lg:w-[50%] lg:flex lg:justify-end
             xl:h-[50%] xl:w-[50%] xl:flex xl:justify-end
             2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-end' >
 
               <Label htmlFor='github' className='
+              text-xs font-bold hover:cursor-pointer
+              sm:text-base sm:font-semibold sm:hover:cursor-pointer
+              md:text-lg md:font-bold md:hover:cursor-pointer
               lg:text-lg lg:font-bold lg:hover:cursor-pointer
               xl:text-lg xl:font-bold xl:hover:cursor-pointer
               2xl:text-lg 2xl:font-bold 2xl:hover:cursor-pointer'>
@@ -602,12 +681,18 @@ function page() {
             </div>
 
             <div className='
+            h-[50%] w-[50%] flex justify-start
+            sm:h-[50%] sm:w-[60%] sm:flex sm:justify-start
+            md:h-[50%] md:w-[60%] md:flex md:justify-start
             lg:h-[50%] lg:w-[50%] lg:flex lg:justify-start
             xl:h-[50%] xl:w-[50%] xl:flex xl:justify-start
             2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-start' >
 
               <Input type="text" id='github' placeholder="..." 
               className='
+              bg-white focus:bg-blue-100 border-blue-700 h-8 w-40 transition-all delay-75 focus:scale-105
+              sm:bg-white sm:focus:bg-blue-100 sm:border-blue-700 sm:h-10 sm:w-60 sm:transition-all sm:delay-75 sm:focus:scale-105
+              md:bg-white md:focus:bg-blue-100 md:border-blue-700 md:w-72 md:transition-all md:delay-75 md:focus:scale-105
               lg:bg-white lg:focus:bg-blue-100 lg:border-blue-700 lg:w-96 lg:transition-all lg:delay-75 lg:focus:scale-105
               xl:bg-white xl:focus:bg-blue-100 xl:border-blue-700 xl:w-96 xl:transition-all xl:delay-75 xl:focus:scale-105
               2xl:bg-white 2xl:focus:bg-blue-100 2xl:border-blue-700 2xl:w-96 2xl:transition-all 2xl:delay-75 2xl:focus:scale-105'
@@ -621,16 +706,25 @@ function page() {
 
           {/* INSTAGRAM USERNAME INPUT DIV */}
           <div className='
+          w-[25rem] flex flex-row justify-between items-center gap-x-3
+          sm:w-[38rem] sm:flex sm:flex-row sm:justify-between sm:items-center sm:gap-x-10
+          md:w-[43rem] md:flex md:flex-row md:justify-between md:items-center md:gap-x-10
           lg:w-[43rem] lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-x-20
           xl:w-[43rem] xl:flex xl:flex-row xl:justify-between xl:items-center xl:gap-x-20 
           2xl:w-[43rem] 2xl:flex 2xl:flex-row 2xl:justify-between 2xl:items-center 2xl:gap-x-20 '>
 
             <div className='
+            h-[50%] w-[50%] flex justify-end
+            sm:h-[50%] sm:w-[50%] sm:flex sm:justify-end
+            md:h-[50%] md:w-[50%] md:flex md:justify-end
             lg:h-[50%] lg:w-[50%] lg:flex lg:justify-end
             xl:h-[50%] xl:w-[50%] xl:flex xl:justify-end
             2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-end' >
 
               <Label htmlFor='insta' className='
+              text-xs font-bold hover:cursor-pointer
+              sm:text-base sm:font-semibold sm:hover:cursor-pointer
+              md:text-lg md:font-bold md:hover:cursor-pointer
               lg:text-lg lg:font-bold lg:hover:cursor-pointer
               xl:text-lg xl:font-bold xl:hover:cursor-pointer
               2xl:text-lg 2xl:font-bold 2xl:hover:cursor-pointer'>
@@ -640,12 +734,18 @@ function page() {
             </div>
 
             <div className='
+            h-[50%] w-[50%] flex justify-start
+            sm:h-[50%] sm:w-[60%] sm:flex sm:justify-start
+            md:h-[50%] md:w-[60%] md:flex md:justify-start
             lg:h-[50%] lg:w-[50%] lg:flex lg:justify-start
             xl:h-[50%] xl:w-[50%] xl:flex xl:justify-start
             2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-start' >
 
               <Input type="text" id='insta' placeholder="..." 
               className='
+              bg-white focus:bg-blue-100 border-blue-700 h-8 w-40 transition-all delay-75 focus:scale-105
+              sm:bg-white sm:focus:bg-blue-100 sm:border-blue-700 sm:h-10 sm:w-60 sm:transition-all sm:delay-75 sm:focus:scale-105
+              md:bg-white md:focus:bg-blue-100 md:border-blue-700 md:w-72 md:transition-all md:delay-75 md:focus:scale-105
               lg:bg-white lg:focus:bg-blue-100 lg:border-blue-700 lg:w-96 lg:transition-all lg:delay-75 lg:focus:scale-105
               xl:bg-white xl:focus:bg-blue-100 xl:border-blue-700 xl:w-96 xl:transition-all xl:delay-75 xl:focus:scale-105
               2xl:bg-white 2xl:focus:bg-blue-100 2xl:border-blue-700 2xl:w-96 2xl:transition-all 2xl:delay-75 2xl:focus:scale-105'
@@ -659,16 +759,25 @@ function page() {
 
           {/* BEHANCE USERNAME INPUT DIV */}
           <div className='
+          w-[25rem] flex flex-row justify-between items-center gap-x-3
+          sm:w-[38rem] sm:flex sm:flex-row sm:justify-between sm:items-center sm:gap-x-10
+          md:w-[43rem] md:flex md:flex-row md:justify-between md:items-center md:gap-x-10
           lg:w-[43rem] lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-x-20
           xl:w-[43rem] xl:flex xl:flex-row xl:justify-between xl:items-center xl:gap-x-20 
           2xl:w-[43rem] 2xl:flex 2xl:flex-row 2xl:justify-between 2xl:items-center 2xl:gap-x-20 '>
 
             <div className='
+            h-[50%] w-[50%] flex justify-end
+            sm:h-[50%] sm:w-[50%] sm:flex sm:justify-end
+            md:h-[50%] md:w-[50%] md:flex md:justify-end
             lg:h-[50%] lg:w-[50%] lg:flex lg:justify-end
             xl:h-[50%] xl:w-[50%] xl:flex xl:justify-end
             2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-end' >
 
               <Label htmlFor='behance' className='
+              text-xs font-bold hover:cursor-pointer
+              sm:text-base sm:font-semibold sm:hover:cursor-pointer
+              md:text-lg md:font-bold md:hover:cursor-pointer
               lg:text-lg lg:font-bold lg:hover:cursor-pointer
               xl:text-lg xl:font-bold xl:hover:cursor-pointer
               2xl:text-lg 2xl:font-bold 2xl:hover:cursor-pointer'>
@@ -678,12 +787,18 @@ function page() {
             </div>
 
             <div className='
+            h-[50%] w-[50%] flex justify-start
+            sm:h-[50%] sm:w-[60%] sm:flex sm:justify-start
+            md:h-[50%] md:w-[60%] md:flex md:justify-start
             lg:h-[50%] lg:w-[50%] lg:flex lg:justify-start
             xl:h-[50%] xl:w-[50%] xl:flex xl:justify-start
             2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-start' >
 
               <Input type="text" id='behance' placeholder="..." 
               className='
+              bg-white focus:bg-blue-100 border-blue-700 h-8 w-40 transition-all delay-75 focus:scale-105
+              sm:bg-white sm:focus:bg-blue-100 sm:border-blue-700 sm:h-10 sm:w-60 sm:transition-all sm:delay-75 sm:focus:scale-105
+              md:bg-white md:focus:bg-blue-100 md:border-blue-700 md:w-72 md:transition-all md:delay-75 md:focus:scale-105
               lg:bg-white lg:focus:bg-blue-100 lg:border-blue-700 lg:w-96 lg:transition-all lg:delay-75 lg:focus:scale-105
               xl:bg-white xl:focus:bg-blue-100 xl:border-blue-700 xl:w-96 xl:transition-all xl:delay-75 xl:focus:scale-105
               2xl:bg-white 2xl:focus:bg-blue-100 2xl:border-blue-700 2xl:w-96 2xl:transition-all 2xl:delay-75 2xl:focus:scale-105'
@@ -697,16 +812,25 @@ function page() {
 
           {/* LINKEDIN USERNAME INPUT DIV */}
           <div className='
+          w-[25rem] flex flex-row justify-between items-center gap-x-3
+          sm:w-[38rem] sm:flex sm:flex-row sm:justify-between sm:items-center sm:gap-x-10
+          md:w-[43rem] md:flex md:flex-row md:justify-between md:items-center md:gap-x-10
           lg:w-[43rem] lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-x-20
           xl:w-[43rem] xl:flex xl:flex-row xl:justify-between xl:items-center xl:gap-x-20 
           2xl:w-[43rem] 2xl:flex 2xl:flex-row 2xl:justify-between 2xl:items-center 2xl:gap-x-20 '>
 
             <div className='
+            h-[50%] w-[50%] flex justify-end
+            sm:h-[50%] sm:w-[50%] sm:flex sm:justify-end
+            md:h-[50%] md:w-[50%] md:flex md:justify-end
             lg:h-[50%] lg:w-[50%] lg:flex lg:justify-end
             xl:h-[50%] xl:w-[50%] xl:flex xl:justify-end
             2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-end' >
 
               <Label htmlFor='linkedin' className='
+              text-xs font-bold hover:cursor-pointer
+              sm:text-base sm:font-semibold sm:hover:cursor-pointer
+              md:text-lg md:font-bold md:hover:cursor-pointer
               lg:text-lg lg:font-bold lg:hover:cursor-pointer
               xl:text-lg xl:font-bold xl:hover:cursor-pointer
               2xl:text-lg 2xl:font-bold 2xl:hover:cursor-pointer'>
@@ -716,12 +840,18 @@ function page() {
             </div>  
 
             <div className='
+            h-[50%] w-[50%] flex justify-start
+            sm:h-[50%] sm:w-[60%] sm:flex sm:justify-start
+            md:h-[50%] md:w-[60%] md:flex md:justify-start
             lg:h-[50%] lg:w-[50%] lg:flex lg:justify-start
             xl:h-[50%] xl:w-[50%] xl:flex xl:justify-start
             2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-start' >
 
               <Input type="text" id='linkedin' placeholder="..." 
               className='
+              bg-white focus:bg-blue-100 border-blue-700 h-8 w-40 transition-all delay-75 focus:scale-105
+              sm:bg-white sm:focus:bg-blue-100 sm:border-blue-700 sm:h-10 sm:w-60 sm:transition-all sm:delay-75 sm:focus:scale-105
+              md:bg-white md:focus:bg-blue-100 md:border-blue-700 md:w-72 md:transition-all md:delay-75 md:focus:scale-105
               lg:bg-white lg:focus:bg-blue-100 lg:border-blue-700 lg:w-96 lg:transition-all lg:delay-75 lg:focus:scale-105
               xl:bg-white xl:focus:bg-blue-100 xl:border-blue-700 xl:w-96 xl:transition-all xl:delay-75 xl:focus:scale-105
               2xl:bg-white 2xl:focus:bg-blue-100 2xl:border-blue-700 2xl:w-96 2xl:transition-all 2xl:delay-75 2xl:focus:scale-105'
@@ -735,16 +865,25 @@ function page() {
 
           {/* EXTRA TEXT INPUT DIV */}
           <div className='
+          w-[25rem] flex flex-row justify-between items-center gap-x-3
+          sm:w-[38rem] sm:flex sm:flex-row sm:justify-between sm:items-center sm:gap-x-10
+          md:w-[43rem] md:flex md:flex-row md:justify-between md:items-center md:gap-x-10
           lg:w-[43rem] lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-x-20
           xl:w-[43rem] xl:flex xl:flex-row xl:justify-between xl:items-center xl:gap-x-20 
           2xl:w-[43rem] 2xl:flex 2xl:flex-row 2xl:justify-between 2xl:items-center 2xl:gap-x-20 '>
 
             <div className='
+            h-[50%] w-[50%] flex justify-end
+            sm:h-[50%] sm:w-[50%] sm:flex sm:justify-end
+            md:h-[50%] md:w-[50%] md:flex md:justify-end
             lg:h-[50%] lg:w-[50%] lg:flex lg:justify-end
             xl:h-[50%] xl:w-[50%] xl:flex xl:justify-end
             2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-end' >
 
               <Label htmlFor='extraText' className='
+              text-xs font-bold hover:cursor-pointer
+              sm:text-base sm:font-semibold sm:hover:cursor-pointer
+              md:text-lg md:font-bold md:hover:cursor-pointer
               lg:text-lg lg:font-bold lg:hover:cursor-pointer
               xl:text-lg xl:font-bold xl:hover:cursor-pointer
               2xl:text-lg 2xl:font-bold 2xl:hover:cursor-pointer'>
@@ -754,12 +893,18 @@ function page() {
             </div>
 
             <div className='
+            h-[50%] w-[50%] flex justify-start
+            sm:h-[50%] sm:w-[60%] sm:flex sm:justify-start
+            md:h-[50%] md:w-[60%] md:flex md:justify-start
             lg:h-[50%] lg:w-[50%] lg:flex lg:justify-start
             xl:h-[50%] xl:w-[50%] xl:flex xl:justify-start
             2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-start' >
 
               <Input type="text" id='extraText' placeholder="..." 
               className='
+              bg-white focus:bg-blue-100 border-blue-700 h-8 w-40 transition-all delay-75 focus:scale-105
+              sm:bg-white sm:focus:bg-blue-100 sm:border-blue-700 sm:h-10 sm:w-60 sm:transition-all sm:delay-75 sm:focus:scale-105
+              md:bg-white md:focus:bg-blue-100 md:border-blue-700 md:w-72 md:transition-all md:delay-75 md:focus:scale-105
               lg:bg-white lg:focus:bg-blue-100 lg:border-blue-700 lg:w-96 lg:transition-all lg:delay-75 lg:focus:scale-105
               xl:bg-white xl:focus:bg-blue-100 xl:border-blue-700 xl:w-96 xl:transition-all xl:delay-75 xl:focus:scale-105
               2xl:bg-white 2xl:focus:bg-blue-100 2xl:border-blue-700 2xl:w-96 2xl:transition-all 2xl:delay-75 2xl:focus:scale-105'
@@ -773,16 +918,25 @@ function page() {
 
           {/* PROFILE PHOTO INPUT DIV */}
           <div className='
+          w-[25rem] flex flex-row justify-between items-center gap-x-3
+          sm:w-[38rem] sm:flex sm:flex-row sm:justify-between sm:items-center sm:gap-x-10
+          md:w-[43rem] md:flex md:flex-row md:justify-between md:items-center md:gap-x-10
           lg:w-[43rem] lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-x-20
           xl:w-[43rem] xl:flex xl:flex-row xl:justify-between xl:items-center xl:gap-x-20 
           2xl:w-[43rem] 2xl:flex 2xl:flex-row 2xl:justify-between 2xl:items-center 2xl:gap-x-20 '>
 
             <div className='
+            h-[50%] w-[50%] flex justify-end
+            sm:h-[50%] sm:w-[50%] sm:flex sm:justify-end
+            md:h-[50%] md:w-[50%] md:flex md:justify-end
             lg:h-[50%] lg:w-[50%] lg:flex lg:justify-end
             xl:h-[50%] xl:w-[50%] xl:flex xl:justify-end
             2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-end' >
 
               <Label htmlFor='profilePic' className='
+              text-xs font-bold hover:cursor-pointer
+              sm:text-base sm:font-semibold sm:hover:cursor-pointer
+              md:text-lg md:font-bold md:hover:cursor-pointer
               lg:text-lg lg:font-bold lg:hover:cursor-pointer
               xl:text-lg xl:font-bold xl:hover:cursor-pointer
               2xl:text-lg 2xl:font-bold 2xl:hover:cursor-pointer'>
@@ -792,12 +946,18 @@ function page() {
             </div>
 
             <div className='
+            h-[50%] w-[50%] flex justify-start
+            sm:h-[50%] sm:w-[60%] sm:flex sm:justify-start
+            md:h-[50%] md:w-[60%] md:flex md:justify-start
             lg:h-[50%] lg:w-[50%] lg:flex lg:justify-start
             xl:h-[50%] xl:w-[50%] xl:flex xl:justify-start
             2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-start' >
 
               <Input type="file" id='profilePhoto' 
               className='
+              bg-white focus:bg-blue-100 border-blue-700 h-8 w-40 transition-all delay-75 focus:scale-105
+              sm:bg-white sm:focus:bg-blue-100 sm:border-blue-700 sm:h-10 sm:w-60 sm:transition-all sm:delay-75 sm:focus:scale-105
+              md:bg-white md:focus:bg-blue-100 md:border-blue-700 md:w-72 md:transition-all md:delay-75 md:focus:scale-105
               lg:bg-white lg:focus:bg-blue-100 lg:border-blue-700 lg:w-96 lg:transition-all lg:delay-75 lg:focus:scale-105
               xl:bg-white xl:focus:bg-blue-100 xl:border-blue-700 xl:w-96 xl:transition-all xl:delay-75 xl:focus:scale-105
               2xl:bg-white 2xl:focus:bg-blue-100 2xl:border-blue-700 2xl:w-96 2xl:transition-all 2xl:delay-75 2xl:focus:scale-105 hover:cursor-pointer'
@@ -810,6 +970,9 @@ function page() {
           </div>
     
             <Button variant="secondary" className='
+            w-48 my-8 font-semibold
+            sm:w-52 sm:my-8 sm:font-bold
+            md:w-52 md:my-8 md:font-bold
             lg:w-52 lg:my-8 lg:font-bold
             xl:w-52 xl:my-8 xl:font-bold
             2xl:w-52 2xl:my-8 2xl:font-bold'>
