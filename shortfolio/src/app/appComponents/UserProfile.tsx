@@ -340,11 +340,11 @@ function page({params}: any) {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  @{userDetails.githubURL}
+                  Github
                 </Link>
               </div>
 
-              <div className="text-sm font-base text-gray-400">Github.com</div>
+              <div className="text-sm font-base text-gray-400">@{userDetails.githubURL}</div>
             </div>
           </div>
         </div>

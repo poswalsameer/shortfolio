@@ -390,26 +390,71 @@ function page() {
 
     <>
 
-    <div className=' h-full w-full flex flex-col justify-center items-center bg-[#FFF6F2] text-black'>
+    <div className='
+    md:h-full md:w-full md:flex md:flex-col md:justify-center md:items-center md:bg-[#FFF6F2] md:text-black
+    lg:h-full lg:w-full lg:flex lg:flex-col lg:justify-center lg:items-center lg:bg-[#FFF6F2] lg:text-black 
+    xl:h-full xl:w-full xl:flex xl:flex-col xl:justify-center xl:items-center xl:bg-[#FFF6F2] xl:text-black 
+    2xl:h-full 2xl:w-full 2xl:flex 2xl:flex-col 2xl:justify-center 2xl:items-center 2xl:bg-[#FFF6F2] 2xl:text-black'>
 
-      <div className=' my-20 h-full w-[70%] flex flex-col gap-y-16 justify-center items-center'>
+      <div className='
+      md:my-20 md:h-full md:w-[80%] md:flex md:flex-col md:gap-y-16 md:justify-center md:items-center
+      lg:my-20 lg:h-full lg:w-[80%] lg:flex lg:flex-col lg:gap-y-16 lg:justify-center lg:items-center
+      xl:my-20 xl:h-full xl:w-[70%] xl:flex xl:flex-col xl:gap-y-16 xl:justify-center xl:items-center 
+      2xl:my-20 2xl:h-full 2xl:w-[70%] 2xl:flex 2xl:flex-col 2xl:gap-y-16 2xl:justify-center 2xl:items-center'>
 
-        <div className='flex flex-col justify-center items-center gap-y-1'>
-          <h1 className=' text-6xl font-bold'>Let the world know who you are!</h1>
+        <div className='
+        md:flex md:flex-col md:justify-center md:items-center md:gap-y-1
+        lg:flex lg:flex-col lg:justify-center lg:items-center lg:gap-y-1
+        xl:flex xl:flex-col xl:justify-center xl:items-center xl:gap-y-1
+        2xl:flex 2xl:flex-col 2xl:justify-center 2xl:items-center 2xl:gap-y-1'>
+
+          {/* TODO: Yaha se continue karna hai */}
+          <h1 className='
+          md:text-4xl md:font-bold
+          lg:text-5xl lg:font-bold
+          xl:text-5xl xl:font-bold
+          2xl:text-6xl 2xl:font-bold'>
+            Let the world know who you are!
+          </h1>
+
         </div>
 
         <form onSubmit={handleSubmit(detailUpdateButton)}>
-          <div className='flex flex-col justify-center items-center gap-y-6'>
+          <div className='
+          lg:flex lg:flex-col lg:justify-center lg:items-center lg:gap-y-6
+          xl:flex xl:flex-col xl:justify-center xl:items-center xl:gap-y-6
+          2xl:flex 2xl:flex-col 2xl:justify-center 2xl:items-center 2xl:gap-y-6'>
           
           {/* FULL NAME INPUT DIV */}
-          <div className='w-[43rem] flex flex-row justify-between items-center gap-x-20 '>
-            <div className='h-[50%] w-[50%] flex justify-end' >
-              <Label htmlFor='fullname' className='text-lg font-bold hover:cursor-pointer'>Your Full Name: </Label>
+          <div className='
+          lg:w-[43rem] lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-x-20
+          xl:w-[43rem] xl:flex xl:flex-row xl:justify-between xl:items-center xl:gap-x-20
+          2xl:w-[43rem] 2xl:flex 2xl:flex-row 2xl:justify-between 2xl:items-center 2xl:gap-x-20 '>
+
+            <div className='
+            lg:h-[50%] lg:w-[50%] lg:flex lg:justify-end
+            xl:h-[50%] xl:w-[50%] xl:flex xl:justify-end
+            2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-end' >
+
+              <Label htmlFor='fullname' className='
+              lg:text-lg lg:font-bold lg:hover:cursor-pointer
+              xl:text-lg xl:font-bold xl:hover:cursor-pointer
+              2xl:text-lg 2xl:font-bold 2xl:hover:cursor-pointer'>
+                Your Full Name: 
+              </Label>
+
             </div>
 
-            <div className='h-[50%] w-[50%] flex justify-start' >
+            <div className='
+            lg:h-[50%] lg:w-[50%] lg:flex lg:justify-start
+            xl:h-[50%] xl:w-[50%] xl:flex xl:justify-start
+            2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-start' >
+
               <Input type="text" id='fullname' placeholder="..."
-              className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
+              className='
+              lg:bg-white lg:focus:bg-blue-100 lg:border-blue-700 lg:w-96 lg:transition-all lg:delay-75 lg:focus:scale-105
+              xl:bg-white xl:focus:bg-blue-100 xl:border-blue-700 xl:w-96 xl:transition-all xl:delay-75 xl:focus:scale-105
+              2xl:bg-white 2xl:focus:bg-blue-100 2xl:border-blue-700 2xl:w-96 2xl:transition-all 2xl:delay-75 2xl:focus:scale-105'
               
               {...register( "fullName", {
                 required: "Full Name is required",
@@ -421,14 +466,35 @@ function page() {
           </div>
 
           {/* USERNAME INPUT DIV */}
-          <div className=' w-[43rem] flex flex-row justify-between items-center gap-x-20  '>
-            <div className='h-[50%] w-[50%] flex justify-end' >
-              <Label htmlFor='username' className='text-lg font-bold hover:cursor-pointer'>Your username: </Label>
+          <div className='
+          lg:w-[43rem] lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-x-20
+          xl:w-[43rem] xl:flex xl:flex-row xl:justify-between xl:items-center xl:gap-x-20 
+          2xl:w-[43rem] 2xl:flex 2xl:flex-row 2xl:justify-between 2xl:items-center 2xl:gap-x-20  '>
+
+            <div className='
+            lg:h-[50%] lg:w-[50%] lg:flex lg:justify-end
+            xl:h-[50%] xl:w-[50%] xl:flex xl:justify-end
+            2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-end' >
+
+              <Label htmlFor='username' className='
+              lg:text-lg lg:font-bold lg:hover:cursor-pointer
+              xl:text-lg xl:font-bold xl:hover:cursor-pointer
+              2xl:text-lg 2xl:font-bold 2xl:hover:cursor-pointer'>
+                Your username: 
+              </Label>
+
             </div>
             
-            <div className='h-[50%] w-[50%] flex justify-start' >
+            <div className='
+            lg:h-[50%] lg:w-[50%] lg:flex lg:justify-start
+            xl:h-[50%] xl:w-[50%] xl:flex xl:justify-start
+            2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-start' >
+
               <Input type="text" id='username' placeholder="..."
-              className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
+              className='
+              lg:bg-white lg:focus:bg-blue-100 lg:border-blue-700 lg:w-96 lg:transition-all lg:delay-75 lg:focus:scale-105
+              xl:bg-white xl:focus:bg-blue-100 xl:border-blue-700 xl:w-96 xl:transition-all xl:delay-75 xl:focus:scale-105
+              2xl:bg-white 2xl:focus:bg-blue-100 2xl:border-blue-700 2xl:w-96 2xl:transition-all 2xl:delay-75 2xl:focus:scale-105'
               
               {...register( "username", {
                 required: "Username is required",
@@ -439,15 +505,35 @@ function page() {
           </div>
          
           {/* BIO INPUT DIV */}
-          <div className='w-[43rem] flex flex-row justify-between items-center gap-x-20 '>
+          <div className='
+          lg:w-[43rem] lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-x-20
+          xl:w-[43rem] xl:flex xl:flex-row xl:justify-between xl:items-center xl:gap-x-20 
+          2xl:w-[43rem] 2xl:flex 2xl:flex-row 2xl:justify-between 2xl:items-center 2xl:gap-x-20 '>
 
-            <div className='h-[50%] w-[50%] flex justify-end' >
-              <Label htmlFor='bio' className='text-lg font-bold hover:cursor-pointer'>Your Bio: </Label>
+            <div className='
+            lg:h-[50%] lg:w-[50%] lg:flex lg:justify-end
+            xl:h-[50%] xl:w-[50%] xl:flex xl:justify-end
+            2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-end' >
+
+              <Label htmlFor='bio' className='
+              lg:text-lg lg:font-bold lg:hover:cursor-pointer
+              xl:text-lg xl:font-bold xl:hover:cursor-pointer
+              2xl:text-lg 2xl:font-bold 2xl:hover:cursor-pointer'>
+                Your Bio: 
+              </Label>
+
             </div>
 
-            <div className='h-[50%] w-[50%] flex justify-start' >
+            <div className='
+            lg:h-[50%] lg:w-[50%] lg:flex lg:justify-start
+            xl:h-[50%] xl:w-[50%] xl:flex xl:justify-start
+            2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-start' >
+
               <Textarea placeholder='...' 
-              id='bio' className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
+              id='bio' className='
+              lg:bg-white lg:focus:bg-blue-100 lg:border-blue-700 lg:w-96 lg:transition-all lg:delay-75 lg:focus:scale-105
+              xl:bg-white xl:focus:bg-blue-100 xl:border-blue-700 xl:w-96 xl:transition-all xl:delay-75 xl:focus:scale-105
+              2xl:bg-white 2xl:focus:bg-blue-100 2xl:border-blue-700 2xl:w-96 2xl:transition-all 2xl:delay-75 2xl:focus:scale-105'
               
               {...register( "bio", {
                 required: "Bio is required",
@@ -458,15 +544,35 @@ function page() {
           </div>
 
           {/* TWITTER USERNAME INPUT DIV */}
-          <div className='w-[43rem] flex flex-row justify-between items-center gap-x-20 '>
+          <div className='
+          lg:w-[43rem] lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-x-20
+          xl:w-[43rem] xl:flex xl:flex-row xl:justify-between xl:items-center xl:gap-x-20 
+          2xl:w-[43rem] 2xl:flex 2xl:flex-row 2xl:justify-between 2xl:items-center 2xl:gap-x-20 '>
 
-            <div className='h-[50%] w-[50%] flex justify-end' >
-              <Label htmlFor='twitter' className='text-lg font-bold hover:cursor-pointer'>Your Twitter username: </Label>
+            <div className='
+            lg:h-[50%] lg:w-[50%] lg:flex lg:justify-end
+            xl:h-[50%] xl:w-[50%] xl:flex xl:justify-end
+            2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-end' >
+
+              <Label htmlFor='twitter' className='
+              lg:text-lg lg:font-bold lg:hover:cursor-pointer
+              xl:text-lg xl:font-bold xl:hover:cursor-pointer
+              2xl:text-lg 2xl:font-bold 2xl:hover:cursor-pointer'>
+                Your Twitter username: 
+              </Label>
+
             </div>
 
-            <div className='h-[50%] w-[50%] flex justify-start' >
+            <div className='
+            lg:h-[50%] lg:w-[50%] lg:flex lg:justify-start
+            xl:h-[50%] xl:w-[50%] xl:flex xl:justify-start
+            2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-start' >
+
               <Input type="text" id='twitter' placeholder="..." 
-              className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
+              className='
+              lg:bg-white lg:focus:bg-blue-100 lg:border-blue-700 lg:w-96 lg:transition-all lg:delay-75 lg:focus:scale-105
+              xl:bg-white xl:focus:bg-blue-100 xl:border-blue-700 xl:w-96 xl:transition-all xl:delay-75 xl:focus:scale-105
+              2xl:bg-white 2xl:focus:bg-blue-100 2xl:border-blue-700 2xl:w-96 2xl:transition-all 2xl:delay-75 2xl:focus:scale-105'
               
               {...register( "twitterUsername", {
                 required: false
@@ -476,15 +582,35 @@ function page() {
           </div>
 
           {/* GITHUB USERNAME INPUT DIV */}
-          <div className='w-[43rem] flex flex-row justify-between items-center gap-x-20 '>
+          <div className='
+          lg:w-[43rem] lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-x-20
+          xl:w-[43rem] xl:flex xl:flex-row xl:justify-between xl:items-center xl:gap-x-20 
+          2xl:w-[43rem] 2xl:flex 2xl:flex-row 2xl:justify-between 2xl:items-center 2xl:gap-x-20 '>
 
-            <div className='h-[50%] w-[50%] flex justify-end' >
-              <Label htmlFor='github' className='text-lg font-bold hover:cursor-pointer'>Your Github username: </Label>
+            <div className='
+            lg:h-[50%] lg:w-[50%] lg:flex lg:justify-end
+            xl:h-[50%] xl:w-[50%] xl:flex xl:justify-end
+            2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-end' >
+
+              <Label htmlFor='github' className='
+              lg:text-lg lg:font-bold lg:hover:cursor-pointer
+              xl:text-lg xl:font-bold xl:hover:cursor-pointer
+              2xl:text-lg 2xl:font-bold 2xl:hover:cursor-pointer'>
+                Your Github username: 
+              </Label>
+
             </div>
 
-            <div className='h-[50%] w-[50%] flex justify-start' >
+            <div className='
+            lg:h-[50%] lg:w-[50%] lg:flex lg:justify-start
+            xl:h-[50%] xl:w-[50%] xl:flex xl:justify-start
+            2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-start' >
+
               <Input type="text" id='github' placeholder="..." 
-              className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
+              className='
+              lg:bg-white lg:focus:bg-blue-100 lg:border-blue-700 lg:w-96 lg:transition-all lg:delay-75 lg:focus:scale-105
+              xl:bg-white xl:focus:bg-blue-100 xl:border-blue-700 xl:w-96 xl:transition-all xl:delay-75 xl:focus:scale-105
+              2xl:bg-white 2xl:focus:bg-blue-100 2xl:border-blue-700 2xl:w-96 2xl:transition-all 2xl:delay-75 2xl:focus:scale-105'
               
               {...register( "githubUsername", {
                 required: false
@@ -494,15 +620,35 @@ function page() {
           </div>
 
           {/* INSTAGRAM USERNAME INPUT DIV */}
-          <div className='w-[43rem] flex flex-row justify-between items-center gap-x-20 '>
+          <div className='
+          lg:w-[43rem] lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-x-20
+          xl:w-[43rem] xl:flex xl:flex-row xl:justify-between xl:items-center xl:gap-x-20 
+          2xl:w-[43rem] 2xl:flex 2xl:flex-row 2xl:justify-between 2xl:items-center 2xl:gap-x-20 '>
 
-            <div className='h-[50%] w-[50%] flex justify-end' >
-              <Label htmlFor='insta' className='text-lg font-bold hover:cursor-pointer'>Your Instagram username: </Label>
+            <div className='
+            lg:h-[50%] lg:w-[50%] lg:flex lg:justify-end
+            xl:h-[50%] xl:w-[50%] xl:flex xl:justify-end
+            2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-end' >
+
+              <Label htmlFor='insta' className='
+              lg:text-lg lg:font-bold lg:hover:cursor-pointer
+              xl:text-lg xl:font-bold xl:hover:cursor-pointer
+              2xl:text-lg 2xl:font-bold 2xl:hover:cursor-pointer'>
+                Your Instagram username: 
+              </Label>
+
             </div>
 
-            <div className='h-[50%] w-[50%] flex justify-start' >
+            <div className='
+            lg:h-[50%] lg:w-[50%] lg:flex lg:justify-start
+            xl:h-[50%] xl:w-[50%] xl:flex xl:justify-start
+            2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-start' >
+
               <Input type="text" id='insta' placeholder="..." 
-              className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
+              className='
+              lg:bg-white lg:focus:bg-blue-100 lg:border-blue-700 lg:w-96 lg:transition-all lg:delay-75 lg:focus:scale-105
+              xl:bg-white xl:focus:bg-blue-100 xl:border-blue-700 xl:w-96 xl:transition-all xl:delay-75 xl:focus:scale-105
+              2xl:bg-white 2xl:focus:bg-blue-100 2xl:border-blue-700 2xl:w-96 2xl:transition-all 2xl:delay-75 2xl:focus:scale-105'
               
               {...register( "instagramUsername", {
                 required: false
@@ -512,15 +658,35 @@ function page() {
           </div>
 
           {/* BEHANCE USERNAME INPUT DIV */}
-          <div className='w-[43rem] flex flex-row justify-between items-center gap-x-20 '>
+          <div className='
+          lg:w-[43rem] lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-x-20
+          xl:w-[43rem] xl:flex xl:flex-row xl:justify-between xl:items-center xl:gap-x-20 
+          2xl:w-[43rem] 2xl:flex 2xl:flex-row 2xl:justify-between 2xl:items-center 2xl:gap-x-20 '>
 
-            <div className='h-[50%] w-[50%] flex justify-end' >
-              <Label htmlFor='behance' className='text-lg font-bold hover:cursor-pointer'>Your Behance username: </Label>
+            <div className='
+            lg:h-[50%] lg:w-[50%] lg:flex lg:justify-end
+            xl:h-[50%] xl:w-[50%] xl:flex xl:justify-end
+            2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-end' >
+
+              <Label htmlFor='behance' className='
+              lg:text-lg lg:font-bold lg:hover:cursor-pointer
+              xl:text-lg xl:font-bold xl:hover:cursor-pointer
+              2xl:text-lg 2xl:font-bold 2xl:hover:cursor-pointer'>
+                Your Behance username: 
+              </Label>
+
             </div>
 
-            <div className='h-[50%] w-[50%] flex justify-start' >
+            <div className='
+            lg:h-[50%] lg:w-[50%] lg:flex lg:justify-start
+            xl:h-[50%] xl:w-[50%] xl:flex xl:justify-start
+            2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-start' >
+
               <Input type="text" id='behance' placeholder="..." 
-              className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
+              className='
+              lg:bg-white lg:focus:bg-blue-100 lg:border-blue-700 lg:w-96 lg:transition-all lg:delay-75 lg:focus:scale-105
+              xl:bg-white xl:focus:bg-blue-100 xl:border-blue-700 xl:w-96 xl:transition-all xl:delay-75 xl:focus:scale-105
+              2xl:bg-white 2xl:focus:bg-blue-100 2xl:border-blue-700 2xl:w-96 2xl:transition-all 2xl:delay-75 2xl:focus:scale-105'
               
               {...register( "behanceUsername", {
                 required: false
@@ -530,15 +696,35 @@ function page() {
           </div>
 
           {/* LINKEDIN USERNAME INPUT DIV */}
-          <div className='w-[43rem] flex flex-row justify-between items-center gap-x-20 '>
+          <div className='
+          lg:w-[43rem] lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-x-20
+          xl:w-[43rem] xl:flex xl:flex-row xl:justify-between xl:items-center xl:gap-x-20 
+          2xl:w-[43rem] 2xl:flex 2xl:flex-row 2xl:justify-between 2xl:items-center 2xl:gap-x-20 '>
 
-            <div className='h-[50%] w-[50%] flex justify-end' >
-              <Label htmlFor='linkedin' className='text-lg font-bold hover:cursor-pointer'>Your Linkedin username: </Label>
+            <div className='
+            lg:h-[50%] lg:w-[50%] lg:flex lg:justify-end
+            xl:h-[50%] xl:w-[50%] xl:flex xl:justify-end
+            2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-end' >
+
+              <Label htmlFor='linkedin' className='
+              lg:text-lg lg:font-bold lg:hover:cursor-pointer
+              xl:text-lg xl:font-bold xl:hover:cursor-pointer
+              2xl:text-lg 2xl:font-bold 2xl:hover:cursor-pointer'>
+                Your Linkedin username: 
+              </Label>
+
             </div>  
 
-            <div className='h-[50%] w-[50%] flex justify-start' >
+            <div className='
+            lg:h-[50%] lg:w-[50%] lg:flex lg:justify-start
+            xl:h-[50%] xl:w-[50%] xl:flex xl:justify-start
+            2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-start' >
+
               <Input type="text" id='linkedin' placeholder="..." 
-              className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
+              className='
+              lg:bg-white lg:focus:bg-blue-100 lg:border-blue-700 lg:w-96 lg:transition-all lg:delay-75 lg:focus:scale-105
+              xl:bg-white xl:focus:bg-blue-100 xl:border-blue-700 xl:w-96 xl:transition-all xl:delay-75 xl:focus:scale-105
+              2xl:bg-white 2xl:focus:bg-blue-100 2xl:border-blue-700 2xl:w-96 2xl:transition-all 2xl:delay-75 2xl:focus:scale-105'
               
               {...register( "linkedinUsername", {
                 required: false
@@ -548,15 +734,35 @@ function page() {
           </div>
 
           {/* EXTRA TEXT INPUT DIV */}
-          <div className='w-[43rem] flex flex-row justify-between items-center gap-x-20 '>
+          <div className='
+          lg:w-[43rem] lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-x-20
+          xl:w-[43rem] xl:flex xl:flex-row xl:justify-between xl:items-center xl:gap-x-20 
+          2xl:w-[43rem] 2xl:flex 2xl:flex-row 2xl:justify-between 2xl:items-center 2xl:gap-x-20 '>
 
-            <div className='h-[50%] w-[50%] flex justify-end' >
-              <Label htmlFor='extraText' className='text-lg font-bold hover:cursor-pointer'>Any quote you wanna share: </Label>
+            <div className='
+            lg:h-[50%] lg:w-[50%] lg:flex lg:justify-end
+            xl:h-[50%] xl:w-[50%] xl:flex xl:justify-end
+            2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-end' >
+
+              <Label htmlFor='extraText' className='
+              lg:text-lg lg:font-bold lg:hover:cursor-pointer
+              xl:text-lg xl:font-bold xl:hover:cursor-pointer
+              2xl:text-lg 2xl:font-bold 2xl:hover:cursor-pointer'>
+                Any quote you wanna share: 
+              </Label>
+
             </div>
 
-            <div className='h-[50%] w-[50%] flex justify-start' >
+            <div className='
+            lg:h-[50%] lg:w-[50%] lg:flex lg:justify-start
+            xl:h-[50%] xl:w-[50%] xl:flex xl:justify-start
+            2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-start' >
+
               <Input type="text" id='extraText' placeholder="..." 
-              className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105'
+              className='
+              lg:bg-white lg:focus:bg-blue-100 lg:border-blue-700 lg:w-96 lg:transition-all lg:delay-75 lg:focus:scale-105
+              xl:bg-white xl:focus:bg-blue-100 xl:border-blue-700 xl:w-96 xl:transition-all xl:delay-75 xl:focus:scale-105
+              2xl:bg-white 2xl:focus:bg-blue-100 2xl:border-blue-700 2xl:w-96 2xl:transition-all 2xl:delay-75 2xl:focus:scale-105'
               
               {...register( "extraText", {
                 required: false
@@ -566,14 +772,35 @@ function page() {
           </div>
 
           {/* PROFILE PHOTO INPUT DIV */}
-          <div className='w-[43rem] flex flex-row justify-between items-center gap-x-20 '>
+          <div className='
+          lg:w-[43rem] lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-x-20
+          xl:w-[43rem] xl:flex xl:flex-row xl:justify-between xl:items-center xl:gap-x-20 
+          2xl:w-[43rem] 2xl:flex 2xl:flex-row 2xl:justify-between 2xl:items-center 2xl:gap-x-20 '>
 
-            <div className='h-[50%] w-[50%] flex justify-end' >
-              <Label htmlFor='profilePic' className='text-lg font-bold hover:cursor-pointer'>Your Profile Photo: </Label>
+            <div className='
+            lg:h-[50%] lg:w-[50%] lg:flex lg:justify-end
+            xl:h-[50%] xl:w-[50%] xl:flex xl:justify-end
+            2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-end' >
+
+              <Label htmlFor='profilePic' className='
+              lg:text-lg lg:font-bold lg:hover:cursor-pointer
+              xl:text-lg xl:font-bold xl:hover:cursor-pointer
+              2xl:text-lg 2xl:font-bold 2xl:hover:cursor-pointer'>
+                Your Profile Photo: 
+              </Label>
+
             </div>
 
-            <div className='h-[50%] w-[50%] flex justify-start' >
-              <Input type="file" id='profilePhoto' className='bg-white focus:bg-blue-100 border-blue-700 w-96 transition-all delay-75 focus:scale-105 hover:cursor-pointer'
+            <div className='
+            lg:h-[50%] lg:w-[50%] lg:flex lg:justify-start
+            xl:h-[50%] xl:w-[50%] xl:flex xl:justify-start
+            2xl:h-[50%] 2xl:w-[50%] 2xl:flex 2xl:justify-start' >
+
+              <Input type="file" id='profilePhoto' 
+              className='
+              lg:bg-white lg:focus:bg-blue-100 lg:border-blue-700 lg:w-96 lg:transition-all lg:delay-75 lg:focus:scale-105
+              xl:bg-white xl:focus:bg-blue-100 xl:border-blue-700 xl:w-96 xl:transition-all xl:delay-75 xl:focus:scale-105
+              2xl:bg-white 2xl:focus:bg-blue-100 2xl:border-blue-700 2xl:w-96 2xl:transition-all 2xl:delay-75 2xl:focus:scale-105 hover:cursor-pointer'
               
               {...register( "profilePhoto", {
                 required: false
@@ -582,7 +809,12 @@ function page() {
             </div>
           </div>
     
-            <Button variant="secondary" className='w-52 my-8 font-bold'>Roll into your profile</Button>
+            <Button variant="secondary" className='
+            lg:w-52 lg:my-8 lg:font-bold
+            xl:w-52 xl:my-8 xl:font-bold
+            2xl:w-52 2xl:my-8 2xl:font-bold'>
+              Roll into your profile
+            </Button>
           </div>
         </form>
 
