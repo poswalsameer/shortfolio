@@ -25,6 +25,7 @@ import { cn } from "@/lib/utils";
 import EditBox from "./EditBox";
 import ImageContextProvider from "../contexts/ImageContextProvider";
 import ImageContext from "../contexts/ImageContext";
+import Loading from "./Loading";
 
 function page({params}: any) {
   const [error, setError] = useState("");
@@ -32,6 +33,7 @@ function page({params}: any) {
   const [userDetails, setUserDetails] = useState<any>({});
   const [userImage, setUserImage] = useState<string>("");
   const [userEmail, setUserEmail] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const behanceGrid = false;
 
@@ -40,6 +42,8 @@ function page({params}: any) {
   const { toast } = useToast();
 
   const logoutButtonClicked = async () => {
+
+    setLoading(true);
     setError("");
 
     try {
@@ -53,8 +57,10 @@ function page({params}: any) {
       console.log("value of cookie after deleting is: ", cookieAfterDeletion);
       // AFTER LOGGING OUT, THE COOKIE BECOMES UNDEFINED
 
+      setLoading(false);
       router.push("/login");
     } catch (error: any) {
+      setLoading(false);
       setError(error.message);
     }
   };
@@ -209,245 +215,239 @@ function page({params}: any) {
 
   return (
 
+    <>
     
-    <div
-      className=" h-screen w-screen flex flex-row justify-center items-center gap-x-10 text-black"
-      id="bodyDiv"
-    >
-      {/* LEFT SIDE WALA DIV */}
-      <div
-        className="h-[92%] w-[40%] flex flex-col rounded-r-3xl "
-        id="leftDiv"
-      >
-        {/* profile photo + name + bio wala div */}
-        <div className="h-[70%] w-full flex flex-col justify-center items-center gap-y-16 rounded-tr-3xl">
-          {/* IMAGE */}
+      {
+        loading ? (
 
-          {!editMode ? (
-            <div className="h-60 w-60 rounded-full">
-              <button className=" relative" onClick={openEditBox}>
-                <PenLine />
-              </button>
-              <img
-                src={profileImage ? profileImage : userImage }
-                alt=""
-                className="h-full w-full rounded-full"
-              />
-            </div>
-          ) : (
-            <EditBox closeButtonFunction={closeEditBox} userProfileImage={userImage} />
-          )}
+          <> 
+            <Loading text="Logging you out"/>
+          </>
 
+        ) : (
 
-          {/* NAME */}
-          <div className=" w-[80%] flex flex-col justify-center items-center ">
+          <> 
             <div
-              className=" w-full text-4xl font-bold flex justify-center items-center"
-              id="fullName"
-            >
-              {userDetails.fullName}
-            </div>
-
-            {/* BIO */}
-            <div className="w-full text-xl text-center text-gray-700 font-base flex justify-center items-center ">
-              {userDetails.bio}
-            </div>
-          </div>
-        </div>
-
-        {/* extra link wala div */}
-        <div className="h-[15%] w-full font-semibold flex flex-col text-black justify-center items-center gap-y-3"></div>
-
-        {/* button wala div */}
-
-        <div className=" h-[20%] w-full  flex flex-col justify-center items-center">
-          <div className="h-[25%] w-full font-semibold text-black flex justify-center items-center">
-            {userEmail}
-          </div>
-
-          <div className="h-[75%] w-full flex flex-row justify-center items-center gap-x-10 rounded-br-3xl">
-            {/* COPY BUTTON */}
-            <Button
-              variant="secondary"
-              className=" h-9 w-24 text-xs font-semibold flex flex-row justify-center items-center gap-x-2 transition-all delay-75 ease-in bg-black hover:bg-gray-700"
-              onClick={copyURL}
-            >
-              Copy
-              <Link2 className="h-4 w-4" />
-            </Button>
-
-            {/* EDIT BUTTON */}
-            <Link href="/enterDetails">
-              <Button
-                variant="destructive"
-                className="h-9 w-24 text-xs font-semibold flex flex-row justify-center items-center gap-x-2 transition-all delay-75 ease-in bg-gray-700 hover:bg-gray-800"
-              >
-                Edit
-                <PenLine className="h-4 w-4" />
-              </Button>
-            </Link>
-
-            <Button
-              variant="secondary"
-              className="h-9 w-24 text-xs  font-semibold flex flex-row justify-center items-center gap-x-2 transition-all delay-75 ease-in bg-blue-900 hover:bg-blue-950"
-              onClick={logoutButtonClicked}
-            >
-              Logout
-              <LogOut className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-      </div>
-
-      {/* RIGHT SIDE WALA DIV */}
-      <div
-        className="h-[92%] w-[65%] mr-5 rounded-l-3xl flex flex-col justify-center items-center gap-y-4 text-white"
-        id="rightDiv"
-      >
-        {/* twitter github wala div */}
-        <div className="h-[21.5%] w-[95%] flex justify-center items-center gap-x-5 ">
-          {/* twitter wala div */}
-          <div className="h-full w-[50%] flex justify-center items-center rounded-xl bg-black shadow-md shadow-gray-600">
-            <div className="h-full w-[40%] flex justify-center items-center">
-              <FaSquareXTwitter className="h-16 w-16" />
-            </div>
-
-            <div className="h-full w-[60%] text-2xl font-semibold flex flex-col justify-center items-start ">
-              <div>
-                <Link
-                  href={`https://x.com/${userDetails.twitterURL}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  className=" h-screen w-screen flex flex-row justify-center items-center gap-x-10 text-black"
+                  id="bodyDiv"
                 >
-                  @{userDetails.twitterURL}
-                </Link>
-              </div>
+                  {/* LEFT SIDE WALA DIV */}
+                  <div
+                    className="h-[92%] w-[40%] flex flex-col rounded-r-3xl "
+                    id="leftDiv"
+                  >
+                    {/* profile photo + name + bio wala div */}
+                    <div className="h-[70%] w-full flex flex-col justify-center items-center gap-y-16 rounded-tr-3xl">
+                      {/* IMAGE */}
 
-              <div className="text-sm font-base text-gray-400">X.com</div>
+                      {!editMode ? (
+                        <div className="h-60 w-60 rounded-full">
+                          <button className=" relative" onClick={openEditBox}>
+                            <PenLine />
+                          </button>
+                          <img
+                            src={profileImage ? profileImage : userImage }
+                            alt=""
+                            className="h-full w-full rounded-full"
+                          />
+                        </div>
+                      ) : (
+                        <EditBox closeButtonFunction={closeEditBox} userProfileImage={userImage} />
+                      )}
+
+
+                      {/* NAME */}
+                      <div className=" w-[80%] flex flex-col justify-center items-center ">
+                        <div
+                          className=" w-full text-4xl font-bold flex justify-center items-center"
+                          id="fullName"
+                        >
+                          {userDetails.fullName}
+                        </div>
+
+                        {/* BIO */}
+                        <div className="w-full text-xl text-center text-gray-700 font-base flex justify-center items-center ">
+                          {userDetails.bio}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* extra link wala div */}
+                    <div className="h-[15%] w-full font-semibold flex flex-col text-black justify-center items-center gap-y-3"></div>
+
+                    {/* button wala div */}
+
+                    <div className=" h-[20%] w-full  flex flex-col justify-center items-center">
+                      <div className="h-[25%] w-full font-semibold text-black flex justify-center items-center">
+                        {userEmail}
+                      </div>
+
+                      <div className="h-[75%] w-full flex flex-row justify-center items-center gap-x-10 rounded-br-3xl">
+                        {/* COPY BUTTON */}
+                        <Button
+                          variant="secondary"
+                          className=" h-9 w-24 text-xs font-semibold flex flex-row justify-center items-center gap-x-2 transition-all delay-75 ease-in bg-black hover:bg-gray-700"
+                          onClick={copyURL}
+                        >
+                          Copy
+                          <Link2 className="h-4 w-4" />
+                        </Button>
+
+                        {/* EDIT BUTTON */}
+                        <Link href="/enterDetails">
+                          <Button
+                            variant="destructive"
+                            className="h-9 w-24 text-xs font-semibold flex flex-row justify-center items-center gap-x-2 transition-all delay-75 ease-in bg-gray-700 hover:bg-gray-800"
+                          >
+                            Edit
+                            <PenLine className="h-4 w-4" />
+                          </Button>
+                        </Link>
+
+                        <Button
+                          variant="secondary"
+                          className="h-9 w-24 text-xs  font-semibold flex flex-row justify-center items-center gap-x-2 transition-all delay-75 ease-in bg-blue-900 hover:bg-blue-950"
+                          onClick={logoutButtonClicked}
+                        >
+                          Logout
+                          <LogOut className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* RIGHT SIDE WALA DIV */}
+                  <div
+                    className="h-[92%] w-[65%] mr-5 rounded-l-3xl flex flex-col justify-center items-center gap-y-4 text-white"
+                    id="rightDiv"
+                  >
+                    {/* twitter github wala div */}
+                    <div className="h-[21.5%] w-[95%] flex justify-center items-center gap-x-5 ">
+                      {/* twitter wala div */}
+                      <div className="h-full w-[50%] flex justify-center items-center rounded-xl bg-black shadow-md shadow-gray-600">
+                        <div className="h-full w-[40%] flex justify-center items-center">
+                          <FaSquareXTwitter className="h-16 w-16" />
+                        </div>
+
+                        <div className="h-full w-[60%] text-2xl font-semibold flex flex-col justify-center items-start ">
+                          <div>
+                            <Link
+                              href={`https://x.com/${userDetails.twitterURL}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              @{userDetails.twitterURL}
+                            </Link>
+                          </div>
+
+                          <div className="text-sm font-base text-gray-400">X.com</div>
+                        </div>
+                      </div>
+
+                      {/* github wala div */}
+                      <div className="h-full w-[50%] flex justify-center items-center rounded-xl bg-[#25292F] shadow-md shadow-gray-800">
+                        <div className="h-full w-[40%] flex justify-center items-center">
+                          <FaGithub className="h-16 w-16" />
+                        </div>
+
+                        <div className="h-full w-[60%] text-2xl font-semibold flex flex-col justify-center items-start">
+                          <div>
+                            <Link
+                              href={`https://github.com/${userDetails.githubURL}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              Github
+                            </Link>
+                          </div>
+
+                          <div className="text-sm font-base text-gray-400">@{userDetails.githubURL}</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* linkedin wala div */}
+                    <div className="h-[21.5%] w-[95%] flex justify-center items-center bg-[#086BC9] border border-blue-600 rounded-xl shadow-md shadow-blue-700">
+                      <div className="h-full w-[40%] flex justify-center items-center">
+                        <FaLinkedin className="h-16 w-16" />
+                      </div>
+
+                      <div className="h-full w-[60%] text-2xl font-semibold flex flex-col justify-center items-start">
+                        <div>
+                          <Link
+                            href={`https://linkedin.com/in/${userDetails.linkedinURL}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            @{userDetails.linkedinURL}
+                          </Link>
+                        </div>
+
+                        <div className="text-sm font-base text-blue-200">LinkedIn.com</div>
+                      </div>
+                    </div>
+
+                    {/* behance instagram wala div */}
+                    <div className="h-[21.5%] w-[95%] flex justify-center items-center gap-x-5 rounded-xl">
+                      {/* behance wala div */}
+                      <div className="h-full w-[40%] flex justify-center items-center rounded-xl bg-[#0057FF] shadow-md shadow-blue-800 border border-[#0057FF]">
+                        <div className="h-full w-[40%] flex justify-center items-center">
+                          <FaBehance className="h-16 w-16" />
+                        </div>
+
+                        <div className="h-full w-[60%] text-2xl font-semibold flex flex-col justify-center items-start">
+
+                          <div>
+                            <Link
+                              href={`https://behance.com/${userDetails.behanceURL}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              @{userDetails.behanceURL}
+                            </Link>
+                          </div>
+
+                          <div className="text-sm font-base text-blue-200">Behance.com</div>
+                        </div>
+                      </div>
+
+                      {/* instagram wala div */}
+                      <div className="h-full w-[67%] flex justify-center items-center rounded-xl bg-[#FF7D43] shadow-md shadow-[#d37c54] border border-[#FF7D43]">
+                        <div className="h-full w-[40%] flex justify-center items-center">
+                          <FaInstagram className="h-16 w-16" />
+                        </div>
+
+                        <div className="h-full w-[60%] text-2xl font-semibold flex flex-col justify-center items-start">
+                          <div>
+                            <Link
+                              href={`https://instagram.com/${userDetails.instagramURL}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              @{userDetails.instagramURL}
+                            </Link>
+                          </div>
+
+                          <div className="text-sm font-base text-yellow-100">
+                            Instagram.com
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* textarea wala div */}
+                    <div className="h-[21.5%] w-[95%] text-lg flex justify-center items-center bg-[#333533] rounded-xl shadow-md shadow-gray-600">
+                      {userDetails.TextArea ? userDetails.TextArea : " Either you run the day or the day runs you " }
+                    </div>
+                  </div>
             </div>
-          </div>
+          </>
 
-          {/* github wala div */}
-          <div className="h-full w-[50%] flex justify-center items-center rounded-xl bg-[#25292F] shadow-md shadow-gray-800">
-            <div className="h-full w-[40%] flex justify-center items-center">
-              <FaGithub className="h-16 w-16" />
-            </div>
-
-            <div className="h-full w-[60%] text-2xl font-semibold flex flex-col justify-center items-start">
-              <div>
-                <Link
-                  href={`https://github.com/${userDetails.githubURL}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Github
-                </Link>
-              </div>
-
-              <div className="text-sm font-base text-gray-400">@{userDetails.githubURL}</div>
-            </div>
-          </div>
-        </div>
-
-        {/* linkedin wala div */}
-        <div className="h-[21.5%] w-[95%] flex justify-center items-center bg-[#086BC9] border border-blue-600 rounded-xl shadow-md shadow-blue-700">
-          <div className="h-full w-[40%] flex justify-center items-center">
-            <FaLinkedin className="h-16 w-16" />
-          </div>
-
-          <div className="h-full w-[60%] text-2xl font-semibold flex flex-col justify-center items-start">
-            <div>
-              <Link
-                href={`https://linkedin.com/in/${userDetails.linkedinURL}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                @{userDetails.linkedinURL}
-              </Link>
-            </div>
-
-            <div className="text-sm font-base text-blue-200">LinkedIn.com</div>
-          </div>
-        </div>
-
-        {/* behance instagram wala div */}
-        <div className="h-[21.5%] w-[95%] flex justify-center items-center gap-x-5 rounded-xl">
-          {/* behance wala div */}
-
-          {/* {
-            behanceGrid && <div className="h-full w-[40%] flex justify-center items-center rounded-xl bg-[#0057FF] shadow-md shadow-blue-800 border border-[#0057FF]">
-            <div className="h-full w-[40%] flex justify-center items-center">
-              <FaBehance className="h-16 w-16" />
-            </div>
-
-            <div className="h-full w-[60%] text-2xl font-semibold flex flex-col justify-center items-start">
-
-              <div>
-                <Link
-                  href={`https://behance.com/${userDetails.behanceURL}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  @{userDetails.behanceURL}
-                </Link>
-              </div>
-
-              <div className="text-sm font-base text-blue-200">Behance.com</div>
-            </div>
-          </div>
-          } */}
-          <div className="h-full w-[40%] flex justify-center items-center rounded-xl bg-[#0057FF] shadow-md shadow-blue-800 border border-[#0057FF]">
-            <div className="h-full w-[40%] flex justify-center items-center">
-              <FaBehance className="h-16 w-16" />
-            </div>
-
-            <div className="h-full w-[60%] text-2xl font-semibold flex flex-col justify-center items-start">
-
-              <div>
-                <Link
-                  href={`https://behance.com/${userDetails.behanceURL}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  @{userDetails.behanceURL}
-                </Link>
-              </div>
-
-              <div className="text-sm font-base text-blue-200">Behance.com</div>
-            </div>
-          </div>
-
-          {/* instagram wala div */}
-          <div className="h-full w-[67%] flex justify-center items-center rounded-xl bg-[#FF7D43] shadow-md shadow-[#d37c54] border border-[#FF7D43]">
-            <div className="h-full w-[40%] flex justify-center items-center">
-              <FaInstagram className="h-16 w-16" />
-            </div>
-
-            <div className="h-full w-[60%] text-2xl font-semibold flex flex-col justify-center items-start">
-              <div>
-                <Link
-                  href={`https://instagram.com/${userDetails.instagramURL}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  @{userDetails.instagramURL}
-                </Link>
-              </div>
-
-              <div className="text-sm font-base text-yellow-100">
-                Instagram.com
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* textarea wala div */}
-        <div className="h-[21.5%] w-[95%] text-lg flex justify-center items-center bg-[#333533] rounded-xl shadow-md shadow-gray-600">
-          {userDetails.TextArea ? userDetails.TextArea : " Either you run the day or the day runs you " }
-        </div>
-      </div>
-    </div>
+        )
+      }
     
+    </>
+
 
   );
 }

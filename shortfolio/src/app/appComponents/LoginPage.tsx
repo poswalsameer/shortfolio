@@ -10,6 +10,7 @@ import authServiceObject from '../appwrite';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 import { useToast } from "@/components/ui/use-toast";
+import Loading from './Loading';
 
 
 function page() {
@@ -18,6 +19,7 @@ function page() {
 
   const [error, setError] = useState('');
   const [user, setUser] = useState('');
+  const [loading, setLoading] = useState<boolean>(false);
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -25,6 +27,7 @@ function page() {
 
   const loginUserFunction = async(data:any) => {
 
+    setLoading(true);
     console.log(" This is the data coming from the input field: ",data);
 
     localStorage.clear();
@@ -69,6 +72,7 @@ function page() {
         }
       
         // NAVIGATING TO THE USER ROUTE AFTER SUCCESSFULL LOGIN
+        setLoading(false);
         router.push(`/user/${username}`);
         console.log("Redirected to the profile route");
         
@@ -76,6 +80,7 @@ function page() {
       }
       
     } catch (error:any) {
+      setLoading(false);
       setError(error.message);
     }
 
@@ -92,50 +97,69 @@ function page() {
 
   return (
     
-    <div className=' h-screen w-screen flex flex-col justify-center items-center bg-[#FFF6F2] text-black'>
 
-        <div className='h-[80%] w-[70%] flex flex-col gap-y-20 justify-center items-center'>
-
-        <div className='flex flex-col justify-center items-center gap-y-1'>
-          <h1 className=' text-9xl font-bold'>Shortfolio.</h1>
-        </div>
-
-        <form onSubmit={handleSubmit(loginUserFunction)}>
-            <div className='flex flex-col justify-center items-center gap-y-8'>
-
-                {/* EMAIL INPUT FIELD */}
-                <Input type="email" placeholder="Email" 
-                {...register("email", {
-                    required: true,
-                    validate: {
-                        matchPattern: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || "Email address must be a valid address",
-                    }
-                })} 
-                />
-
-                {/* PASSWORD INPUT FIELD */}
-                <Input type="password" placeholder="Password" 
-                {...register("password", {
-                    required: true,
-                    minLength: {
-                      value: 8,
-                      message: "Password should be minimum of 8 characters",
-                    },
-                })}
-                />
-                <Button type='submit' variant="secondary" className='h-9'>Login</Button>
-            </div>
-        </form>
-        
-
-        </div>
-
-        <div className='h-[20%] w-full' id='loginImage'>
-        {/* yaha homepage wali image hai */}
-      </div>
-      
-    </div>
+    <>
     
+      {
+        loading ? (
+
+          <>
+            <Loading text="Logging into your profile"/>
+          </>
+
+        ) : (
+
+          <>
+            <div className=' h-screen w-screen flex flex-col justify-center items-center bg-[#FFF6F2] text-black'>
+
+              <div className='h-[80%] w-[70%] flex flex-col gap-y-20 justify-center items-center'>
+
+              <div className='flex flex-col justify-center items-center gap-y-1'>
+                <h1 className=' text-9xl font-bold'>Shortfolio.</h1>
+              </div>
+
+              <form onSubmit={handleSubmit(loginUserFunction)}>
+                  <div className='flex flex-col justify-center items-center gap-y-8'>
+
+                      {/* EMAIL INPUT FIELD */}
+                      <Input type="email" placeholder="Email" 
+                      {...register("email", {
+                          required: true,
+                          validate: {
+                              matchPattern: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || "Email address must be a valid address",
+                          }
+                      })} 
+                      />
+
+                      {/* PASSWORD INPUT FIELD */}
+                      <Input type="password" placeholder="Password" 
+                      {...register("password", {
+                          required: true,
+                          minLength: {
+                            value: 8,
+                            message: "Password should be minimum of 8 characters",
+                          },
+                      })}
+                      />
+                      <Button type='submit' variant="secondary" className='h-9'>Login</Button>
+                  </div>
+              </form>
+
+
+              </div>
+
+              <div className='h-[20%] w-full' id='loginImage'>
+              {/* yaha homepage wali image hai */}
+              </div>
+
+            </div>
+          </>
+
+        )
+      }
+    
+    </>
+
   )
 }
 
