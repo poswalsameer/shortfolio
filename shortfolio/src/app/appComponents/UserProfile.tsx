@@ -57,8 +57,8 @@ function page({params}: any) {
       console.log("value of cookie after deleting is: ", cookieAfterDeletion);
       // AFTER LOGGING OUT, THE COOKIE BECOMES UNDEFINED
 
+      router.push("/");
       setLoading(false);
-      router.push("/login");
     } catch (error: any) {
       setLoading(false);
       setError(error.message);
