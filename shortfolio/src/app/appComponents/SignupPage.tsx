@@ -63,10 +63,11 @@ function page() {
           console.log("the user data is: ", userData);
         }
 
-        setLoading(false);
+        // setLoading(false);
 
-        //NAVIGATING THE PAGE TO LOGIN PAGE AFTER SUCCESSFULL SIGNUP
+        //NAVIGATING THE PAGE TO DETAILS PAGE AFTER SUCCESSFULL SIGNUP
         router.push("/enterDetails");
+        setLoading(false);
         // router.push(`/user/${username}`);
       }
 

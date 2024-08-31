@@ -22,6 +22,7 @@ function page() {
   const [currentUserDocument, setCurrentUserDocument] = useState<any>({});
   const [imageInDB, setImageInDB] = useState<any>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const [imageOfUser, setImageOfUser] = useState<string>('');
 
   const { register, handleSubmit, reset,formState: { errors } } = useForm();
 
@@ -69,6 +70,7 @@ function page() {
 
           if( currentUserDoc ){
             setCurrentUserDocument(currentUserDoc);
+            setImageOfUser(currentUserDoc.profilePhoto);
           }
           else{
             console.log("User doc not found");
@@ -88,16 +90,16 @@ function page() {
   // FUNCTION TO UPLOAD IMAGE ON APPWRITE
   const uploadImageFunction = async (data: any) => {
 
-      const uploadedImage = await databaseServiceObject.fileUpload(data.profilePhoto[0]);
+        const uploadedImage = await databaseServiceObject.fileUpload(data.profilePhoto[0]);
 
-      if( uploadedImage ){
-        console.log("Image uploaded successfully : INSIDE THE UPLOAD IMAGE FUNCTION");
-        return uploadedImage;
-      }
-      else{
-        console.log("Image cannot be uploaded : INSIDE THE UPLOAD IMAGE FUNCTION");
-        
-      }
+        if( uploadedImage ){
+          console.log("Image uploaded successfully : INSIDE THE UPLOAD IMAGE FUNCTION");
+          return uploadedImage;
+        }
+        else{
+          console.log("Image cannot be uploaded : INSIDE THE UPLOAD IMAGE FUNCTION");
+          
+        }
 
   }
 
@@ -175,36 +177,32 @@ function page() {
   const updateDocument = async ( userEmail: any, data: any ) => {
 
     let uploadedImage;
-    if( data.profilePhoto ){
-      uploadedImage = await uploadImageFunction(data);
-      console.log("Image uploaded successfully: ", uploadedImage);
+
+    console.log("The type of the profilePhoto in the data coming from input is: ", typeof data.profilePhoto);
+
+    if( typeof data.profilePhoto === "string" ){
+      // setImageOfUser(data.profilePhoto);
+      uploadedImage = data.profilePhoto;
+      console.log("Image set in the state because the profile photo in the data is of type string");
     }
-    // THIS ELSE IS FOR JAB USER NE IMAGE INPUT ME KUCH NAHI DIYA
     else{
-
-      // AGAR KUCH NAHI DIYA, MATLAB YA TO PICTURE ALREADY UPLOADED HAI
-      // if( currentUserDocument.profilePhoto ){
-
-      //   // getFile function ko fileID dete hai wo url de deta hai
-      //   const userImage = await getFileID(currentUserDocument.profilePhoto);
-      //   if( userImage ){
-      //     console.log( "Image we got from the storage is: ", userImage );
-      //   } 
-      //   else{
-      //     console.log("cannot get image from the storage");
-          
-      //   }
-
-        
-
-      // }
-      // YA FIR PICTURE HAI HI NAHI
-      // else{
-        // console.log("Image not uploaded by the user");
-      // }
-      // console.log("Image cannot be uploaded because the image was not found");
-      // uploadedImage = currentUserDocument.profilePhoto;
+      uploadedImage = await uploadImageFunction(data);
+      console.log("This is the uploadedImage returned from the upload image function:", uploadedImage);
+      
+      uploadedImage = uploadedImage.$id;
+      console.log("Image uploaded successfully, and the value of uploadedImage after uploading it is: ", imageOfUser);
     }
+
+    console.log("Image stored in the state imageOfUser is: ", imageOfUser);
+    
+
+    // if( data.profilePhoto ){
+    //   uploadedImage = await uploadImageFunction(data);
+    //   console.log("This is the uploadedImage returned from the upload image function:", uploadedImage);
+      
+    //   setImageOfUser(uploadedImage.$id);
+    //   console.log("Image uploaded successfully, and the value of uploadedImage after uploading it is: ", imageOfUser);
+    // }
 
     // finding the username entered in the input field in document database
     const findUser = await databaseServiceObject.getAllDocuments(data.username);
@@ -235,7 +233,8 @@ function page() {
           behanceFrontend: data.behanceUsername,
           linkedinFrontend: data.linkedinUsername,
           textFrontend: data.extraText,
-          profilePhotoFrontend: uploadedImage ? uploadedImage.$id : '',
+          // profilePhotoFrontend: typeof uploadedImage === "string" ? ( uploadedImage || '' ) : ( uploadedImage.$id || '' ) ,
+          profilePhotoFrontend: uploadedImage ? uploadedImage : '',
           fullNameFrontend: data.fullName,
           emailFrontend: userEmail
         })
@@ -304,7 +303,6 @@ function page() {
     }
   }, [errors.fullName, errors.username, errors.bio]);
 
-
   // FUNCTION THAT TRIGGERS WHEN BUTTON IS CLICKED
   const detailUpdateButton = async (data: any) => {
 
@@ -347,8 +345,8 @@ function page() {
         console.log("The username formed is: ", username);
 
         if( username ){
-          setLoading(false);
           router.push(`/user/${username}`);
+          setLoading(false);
           localStorage.clear();
         }
         else{
@@ -375,6 +373,9 @@ function page() {
     console.log("details in the second use effect: ", currentUserDetails);
     console.log("The current user details in the stored document is: ", currentUserDocument);
     console.log("The image found from db is: ", currentUserDocument.profilePhoto);
+    // setImageOfUser(currentUserDocument.profilePhoto);
+    console.log("The type of the image saved in the currentUserDocument is: ", typeof currentUserDocument.profilePhoto);
+    // console.log("Default value inside the imageOfUser state is: ", imageOfUser);
     
 
     reset({
@@ -392,6 +393,10 @@ function page() {
 
     })
   }, [currentUserDetails])
+
+  // useEffect(() => {
+  //   console.log("Updated imageOfUser state:", imageOfUser);
+  // }, [imageOfUser]);
 
   return (
 

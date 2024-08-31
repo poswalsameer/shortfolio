@@ -126,6 +126,8 @@ function page({params}: any) {
 
         //find document with string mail id
         const userEmail = await databaseServiceObject.getUser(convertedEmail);
+        console.log("The userEmail data is: ", userEmail);
+        
 
         if( userEmail.profilePhoto ){
           const photoFile = await getFileID(userEmail.profilePhoto);
