@@ -35,6 +35,9 @@ function page({params}: any) {
   const [userEmail, setUserEmail] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
+  // TODO: Middleware shayad hatana padega, kyuki uski wjh se, home route par nahi jayega if logged in hai
+  const [loginStatus, setLoginStatus] = useState<boolean>(false);
+
   const behanceGrid = false;
 
   const dispatch = useDispatch();
@@ -115,6 +118,8 @@ function page({params}: any) {
       const currentUser = await authServiceObject.getLoggedInUser();
 
       if (currentUser) {
+
+        setLoginStatus(true);
         console.log("Details of the current user: ", currentUser);
 
         // Converting the email to normal string
@@ -152,6 +157,7 @@ function page({params}: any) {
           console.log("Document not found with this id");
         }
       } else {
+        setLoginStatus(false);
         console.log("User details not found");
       }
     } catch (error) {
@@ -296,7 +302,34 @@ function page({params}: any) {
                         </Button>
 
                         {/* EDIT BUTTON */}
-                        <Link href="/enterDetails">
+
+                        {
+                          loginStatus ? 
+                          
+                          <Link href="/enterDetails">
+                            <Button
+                              variant="destructive"
+                              className="h-9 w-24 text-xs font-semibold flex flex-row justify-center items-center gap-x-2 transition-all delay-75 ease-in bg-gray-700 hover:bg-gray-800"
+                            >
+                              Edit
+                              <PenLine className="h-4 w-4" />
+                            </Button>
+                          </Link>
+
+                          : 
+
+                          <Link href="/">
+                            <Button
+                              variant="destructive"
+                              className="h-9 w-24 text-xs font-semibold flex flex-row justify-center items-center gap-x-2 transition-all delay-75 ease-in bg-gray-700 hover:bg-gray-800"
+                            >
+                              Create
+                            </Button>
+                          </Link>
+
+                        }
+
+                        {/* <Link href="/enterDetails">
                           <Button
                             variant="destructive"
                             className="h-9 w-24 text-xs font-semibold flex flex-row justify-center items-center gap-x-2 transition-all delay-75 ease-in bg-gray-700 hover:bg-gray-800"
@@ -304,7 +337,7 @@ function page({params}: any) {
                             Edit
                             <PenLine className="h-4 w-4" />
                           </Button>
-                        </Link>
+                        </Link> */}
 
                         <Button
                           variant="secondary"
@@ -326,7 +359,7 @@ function page({params}: any) {
                     {/* twitter github wala div */}
                     <div className="h-[21.5%] w-[95%] flex justify-center items-center gap-x-5 ">
                       {/* twitter wala div */}
-                      <div className="h-full w-[50%] flex justify-center items-center rounded-xl bg-black shadow-md shadow-gray-600">
+                      <div className="h-full w-[50%] flex justify-center items-center rounded-xl shadow-md shadow-gray-600" id="twitterDiv">
                         <div className="h-full w-[40%] flex justify-center items-center">
                           <FaSquareXTwitter className="h-16 w-16" />
                         </div>
@@ -347,7 +380,7 @@ function page({params}: any) {
                       </div>
 
                       {/* github wala div */}
-                      <div className="h-full w-[50%] flex justify-center items-center rounded-xl bg-[#25292F] shadow-md shadow-gray-800">
+                      <div className="h-full w-[50%] flex justify-center items-center rounded-xl shadow-md shadow-gray-800" id="githubDiv">
                         <div className="h-full w-[40%] flex justify-center items-center">
                           <FaGithub className="h-16 w-16" />
                         </div>
@@ -359,17 +392,17 @@ function page({params}: any) {
                               target="_blank"
                               rel="noopener noreferrer"
                             >
-                              Github
+                              @{userDetails.githubURL}
                             </Link>
                           </div>
 
-                          <div className="text-sm font-base text-gray-400">@{userDetails.githubURL}</div>
+                          <div className="text-sm font-base text-gray-400">Github.com</div>
                         </div>
                       </div>
                     </div>
 
                     {/* linkedin wala div */}
-                    <div className="h-[21.5%] w-[95%] flex justify-center items-center bg-[#086BC9] border border-blue-600 rounded-xl shadow-md shadow-blue-700">
+                    <div className="h-[21.5%] w-[95%] flex justify-center items-center rounded-xl shadow-md shadow-[#182B3A]" id="linkedinDiv">
                       <div className="h-full w-[40%] flex justify-center items-center">
                         <FaLinkedin className="h-16 w-16" />
                       </div>
@@ -392,12 +425,12 @@ function page({params}: any) {
                     {/* behance instagram wala div */}
                     <div className="h-[21.5%] w-[95%] flex justify-center items-center gap-x-5 rounded-xl">
                       {/* behance wala div */}
-                      <div className="h-full w-[40%] flex justify-center items-center rounded-xl bg-[#0057FF] shadow-md shadow-blue-800 border border-[#0057FF]">
-                        <div className="h-full w-[40%] flex justify-center items-center">
+                      <div className="h-full w-[44%] flex justify-center items-center rounded-xl shadow-md shadow-[#2c67f2] " id="behanceDiv">
+                        <div className="h-full w-[36%] flex justify-center items-center">
                           <FaBehance className="h-16 w-16" />
                         </div>
 
-                        <div className="h-full w-[60%] text-2xl font-semibold flex flex-col justify-center items-start">
+                        <div className="h-full w-[64%] text-2xl font-semibold flex flex-col justify-center items-start">
 
                           <div>
                             <Link
@@ -414,7 +447,7 @@ function page({params}: any) {
                       </div>
 
                       {/* instagram wala div */}
-                      <div className="h-full w-[67%] flex justify-center items-center rounded-xl bg-[#FF7D43] shadow-md shadow-[#d37c54] border border-[#FF7D43]">
+                      <div className="h-full w-[67%] flex justify-center items-center rounded-xl shadow-md shadow-[#EC4364] border border-[#EC4364]" id="instagramDiv">
                         <div className="h-full w-[40%] flex justify-center items-center">
                           <FaInstagram className="h-16 w-16" />
                         </div>

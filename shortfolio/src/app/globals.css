@@ -48,7 +48,8 @@
 
 #bodyDiv{
     /* background: linear-gradient(#1A1B1F,#2D2E32, #4D4B50); */
-    background: linear-gradient( to right,#8e9eab,#e9e4f0);
+    /* background: linear-gradient( to right,#8e9eab,#e9e4f0); */
+    background-color: #e8d8d0;
 }
 /* #leftDiv{ */
     /* background: linear-gradient( #dddddd, #858C8D); */
@@ -71,4 +72,24 @@
 
 #mainDiv{
     background-color: #FFF6F2;
+}
+
+#twitterDiv{
+    background: linear-gradient( to bottom, #000000, #434343, #000000);
+}
+
+#githubDiv{
+    background: linear-gradient(to right, #02001A, #081043);
+}
+
+#linkedinDiv{
+    background: linear-gradient( to bottom right ,#20A4F3, #182B3A );
+}
+
+#behanceDiv{
+    background: linear-gradient(to bottom, #2c67f2, #2c67f2, #3da4c7);
+}
+
+#instagramDiv{
+    background: linear-gradient( to top left, #EC4364, #F1625B );
 }
