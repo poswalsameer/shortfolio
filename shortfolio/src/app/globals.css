@@ -49,7 +49,8 @@
 #bodyDiv{
     /* background: linear-gradient(#1A1B1F,#2D2E32, #4D4B50); */
     /* background: linear-gradient( to right,#8e9eab,#e9e4f0); */
-    background-color: #e8d8d0;
+    /* background-color: #e8d8d0; */
+    background: linear-gradient(to right,#7c86a4, #D7DDE8);
 }
 /* #leftDiv{ */
     /* background: linear-gradient( #dddddd, #858C8D); */
