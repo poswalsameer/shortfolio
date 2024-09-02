@@ -79,9 +79,10 @@ function EditBox(props: any) {
     <>
 
 
-      <div className=" absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-[90%] w-[40%] flex flex-col justify-center items-center bg-black text-white rounded-2xl">
+      <div className=" 
+      absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-[90%] w-[35%] flex flex-col justify-center items-center text-black rounded-2xl border-2 border-blue-950" id="editBoxDiv">
 
-        <div className="flex justify-center items-center font-semibold text-xl">EDIT IMAGE</div>
+        <div className="flex justify-center items-center font-semibold text-2xl">EDIT IMAGE</div>
         
         {/* THE CROP FEATURE */}
         <ReactCrop 
@@ -96,7 +97,7 @@ function EditBox(props: any) {
         >
             <img src={props.userProfileImage} alt="" onLoad={onImageLoadFunction} 
             ref={imageRef}
-            className="h-72 w-64"
+            className="h-72 w-64 border-2 border-blue-950 "
             crossOrigin="anonymous"
             />
         </ReactCrop>
@@ -105,14 +106,15 @@ function EditBox(props: any) {
         {/* BUTTONS WALA DIV */}
         <div className="flex justify-center items-center w-full gap-x-3">
 
-          <button className="h-10 w-32 bg-green-500 rounded-md text-black"
+          <button className="h-9 w-24 bg-black rounded-md text-sm font-semibold text-white transition-all ease-in delay-75 hover:bg-gray-800"
           onClick={ setNewImageToCanvas }
           >
             Save
           </button>
 
           <button
-            className="h-10 w-32 bg-red-500 rounded-md text-black"
+            className="h-9 w-24 bg-red-600 rounded-md text-sm font-semibold text-white transition-all ease-in delay-75 hover:bg-red-700"
+
             onClick={props.closeButtonFunction}
           >
             Close

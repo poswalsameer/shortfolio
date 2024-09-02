@@ -236,69 +236,109 @@ function page({params}: any) {
 
           <> 
             <div
-                  className=" h-screen w-screen flex flex-row justify-center items-center gap-x-10 text-black"
+                  className=" 
+                  xl:h-screen xl:w-screen xl:flex xl:flex-row xl:justify-center xl:items-center xl:gap-x-10 xl:text-black
+                  2xl:h-screen 2xl:w-screen 2xl:flex 2xl:flex-row 2xl:justify-center 2xl:items-center 2xl:gap-x-10 2xl:text-black"
                   id="bodyDiv"
                 >
                   {/* LEFT SIDE WALA DIV */}
                   <div
-                    className="h-[92%] w-[40%] flex flex-col rounded-r-3xl "
+                    className="
+                    xl:h-[92%] xl:w-[40%] xl:flex xl:flex-col xl:rounded-r-3xl
+                    2xl:h-[92%] 2xl:w-[40%] 2xl:flex 2xl:flex-col 2xl:rounded-r-3xl "
                     id="leftDiv"
                   >
                     {/* profile photo + name + bio wala div */}
-                    <div className="h-[70%] w-full flex flex-col justify-center items-center gap-y-16 rounded-tr-3xl">
+                    <div className="
+                    xl:h-[70%] xl:w-full xl:flex xl:flex-col xl:justify-center xl:items-center xl:gap-y-16 xl:rounded-tr-3xl
+                    2xl:h-[70%] 2xl:w-full 2xl:flex 2xl:flex-col 2xl:justify-center 2xl:items-center 2xl:gap-y-16 2xl:rounded-tr-3xl">
                       {/* IMAGE */}
 
                       {!editMode ? (
-                        <div className="h-60 w-60 rounded-full">
-                          <button className=" relative" onClick={openEditBox}>
-                            <PenLine />
-                          </button>
-                          <img
-                            src={profileImage ? profileImage : userImage }
-                            alt=""
-                            className="h-full w-full rounded-full"
-                          />
-                        </div>
+                        <>
+                          <div className=" 
+                          xl:relative xl:h-60 xl:w-60
+                          2xl:relative 2xl:h-60 2xl:w-60 ">
+                            
+                            <img
+                              src={profileImage ? profileImage : userImage }
+                              alt=""
+                              className="
+                              xl:h-full xl:w-full xl:rounded-full
+                              2xl:h-full 2xl:w-full 2xl:rounded-full"
+                            />
+                            
+                            <button className="
+                            xl:absolute xl:bottom-2 xl:right-2 xl:p-2 xl:rounded-full xl:shadow-lg xl:transition-all xl:delay-75 xl:ease-in xl:hover:bg-[#8791af]
+                            2xl:absolute 2xl:bottom-2 2xl:right-2 2xl:p-2 2xl:rounded-full 2xl:shadow-lg 2xl:transition-all 2xl:delay-75 2xl:ease-in 2xl:hover:bg-[#8791af]"
+                              onClick={openEditBox}
+                            >
+                              <PenLine />
+                            </button>
+
+                            {/* </div> */}
+                          </div>
+                        </>
                       ) : (
                         <EditBox closeButtonFunction={closeEditBox} userProfileImage={userImage} />
                       )}
 
 
                       {/* NAME */}
-                      <div className=" w-[80%] flex flex-col justify-center items-center ">
+                      <div className=" 
+                      xl:w-[80%] xl:flex xl:flex-col xl:justify-center xl:items-center 
+                      2xl:w-[80%] 2xl:flex 2xl:flex-col 2xl:justify-center 2xl:items-center ">
+                        
                         <div
-                          className=" w-full text-4xl font-bold flex justify-center items-center"
+                          className=" 
+                          xl:w-full xl:text-4xl xl:font-bold xl:flex xl:justify-center xl:items-center
+                          2xl:w-full 2xl:text-4xl 2xl:font-bold 2xl:flex 2xl:justify-center 2xl:items-center"
                           id="fullName"
                         >
                           {userDetails.fullName}
                         </div>
 
                         {/* BIO */}
-                        <div className="w-full text-xl text-center text-gray-700 font-base flex justify-center items-center ">
+                        <div className="
+                        xl:w-full xl:text-xl xl:text-center xl:text-gray-700 xl:font-base xl:flex xl:justify-center xl:items-center
+                        2xl:w-full 2xl:text-xl 2xl:text-center 2xl:text-gray-700 2xl:font-base 2xl:flex 2xl:justify-center 2xl:items-center ">
                           {userDetails.bio}
                         </div>
                       </div>
                     </div>
 
                     {/* extra link wala div */}
-                    <div className="h-[15%] w-full font-semibold flex flex-col text-black justify-center items-center gap-y-3"></div>
+                    <div className="
+                    xl:h-[15%] xl:w-full xl:font-semibold xl:flex xl:flex-col xl:text-black xl:justify-center xl:items-center xl:gap-y-3
+                    2xl:h-[15%] 2xl:w-full 2xl:font-semibold 2xl:flex 2xl:flex-col 2xl:text-black 2xl:justify-center 2xl:items-center 2xl:gap-y-3"></div>
 
                     {/* button wala div */}
 
-                    <div className=" h-[20%] w-full  flex flex-col justify-center items-center">
-                      <div className="h-[25%] w-full font-semibold text-black flex justify-center items-center">
+                    <div className=" 
+                    xl:h-[20%] xl:w-full xl:flex xl:flex-col xl:justify-center xl:items-center
+                    2xl:h-[20%] 2xl:w-full 2xl:flex 2xl:flex-col 2xl:justify-center 2xl:items-center">
+
+                      <div className="
+                      xl:h-[25%] xl:w-full xl:font-semibold xl:text-black xl:flex xl:justify-center xl:items-center
+                      2xl:h-[25%] 2xl:w-full 2xl:font-semibold 2xl:text-black 2xl:flex 2xl:justify-center 2xl:items-center">
                         {userEmail}
                       </div>
 
-                      <div className="h-[75%] w-full flex flex-row justify-center items-center gap-x-10 rounded-br-3xl">
+                      <div className="
+                      xl:h-[75%] xl:w-full xl:flex xl:flex-row xl:justify-center xl:items-center xl:gap-x-10 xl:rounded-br-3xl
+                      2xl:h-[75%] 2xl:w-full 2xl:flex 2xl:flex-row 2xl:justify-center 2xl:items-center 2xl:gap-x-10 2xl:rounded-br-3xl">
                         {/* COPY BUTTON */}
                         <Button
                           variant="secondary"
-                          className=" h-9 w-24 text-xs font-semibold flex flex-row justify-center items-center gap-x-2 transition-all delay-75 ease-in bg-black hover:bg-gray-700"
+                          className=" 
+                          xl:h-9 xl:w-24 xl:text-xs xl:font-semibold xl:flex xl:flex-row xl:justify-center xl:items-center xl:gap-x-2 xl:transition-all xl:delay-75 xl:ease-in xl:bg-black xl:hover:bg-gray-700
+                          2xl:h-9 2xl:w-24 2xl:text-xs 2xl:font-semibold 2xl:flex 2xl:flex-row 2xl:justify-center 2xl:items-center 2xl:gap-x-2 2xl:transition-all 2xl:delay-75 2xl:ease-in 2xl:bg-black 2xl:hover:bg-gray-700"
                           onClick={copyURL}
                         >
                           Copy
-                          <Link2 className="h-4 w-4" />
+                          <Link2 className="
+                          xl:h-4 xl:w-4
+                          2xl:h-4 2xl:w-4" />
                         </Button>
 
                         {/* EDIT BUTTON */}
@@ -309,10 +349,14 @@ function page({params}: any) {
                           <Link href="/enterDetails">
                             <Button
                               variant="destructive"
-                              className="h-9 w-24 text-xs font-semibold flex flex-row justify-center items-center gap-x-2 transition-all delay-75 ease-in bg-gray-700 hover:bg-gray-800"
+                              className="
+                              xl:h-9 xl:w-24 xl:text-xs xl:font-semibold xl:flex xl:flex-row xl:justify-center xl:items-center xl:gap-x-2 xl:transition-all xl:delay-75 xl:ease-in xl:bg-gray-700 xl:hover:bg-gray-800
+                              2xl:h-9 2xl:w-24 2xl:text-xs 2xl:font-semibold 2xl:flex 2xl:flex-row 2xl:justify-center 2xl:items-center 2xl:gap-x-2 2xl:transition-all 2xl:delay-75 2xl:ease-in 2xl:bg-gray-700 2xl:hover:bg-gray-800"
                             >
                               Edit
-                              <PenLine className="h-4 w-4" />
+                              <PenLine className="
+                              xl:h-4 xl:w-4
+                              2xl:h-4 2xl:w-4" />
                             </Button>
                           </Link>
 
@@ -321,7 +365,9 @@ function page({params}: any) {
                           <Link href="/">
                             <Button
                               variant="destructive"
-                              className="h-9 w-24 text-xs font-semibold flex flex-row justify-center items-center gap-x-2 transition-all delay-75 ease-in bg-gray-700 hover:bg-gray-800"
+                              className="
+                              xl:h-9 xl:w-24 xl:text-xs xl:font-semibold xl:flex xl:flex-row xl:justify-center xl:items-center xl:gap-x-2 xl:transition-all xl:delay-75 xl:ease-in xl:bg-gray-700 xl:hover:bg-gray-800
+                              2xl:h-9 2xl:w-24 2xl:text-xs 2xl:font-semibold 2xl:flex 2xl:flex-row 2xl:justify-center 2xl:items-center 2xl:gap-x-2 2xl:transition-all 2xl:delay-75 2xl:ease-in 2xl:bg-gray-700 2xl:hover:bg-gray-800"
                             >
                               Create
                             </Button>
@@ -341,11 +387,15 @@ function page({params}: any) {
 
                         <Button
                           variant="secondary"
-                          className="h-9 w-24 text-xs  font-semibold flex flex-row justify-center items-center gap-x-2 transition-all delay-75 ease-in bg-blue-900 hover:bg-blue-950"
+                          className="
+                          xl:h-9 xl:w-24 xl:text-xs xl:font-semibold xl:flex xl:flex-row xl:justify-center xl:items-center xl:gap-x-2 xl:transition-all xl:delay-75 xl:ease-in xl:bg-blue-900
+                          2xl:h-9 2xl:w-24 2xl:text-xs  2xl:font-semibold 2xl:flex 2xl:flex-row 2xl:justify-center 2xl:items-center 2xl:gap-x-2 2xl:transition-all 2xl:delay-75 2xl:ease-in 2xl:bg-blue-900 2xl:hover:bg-blue-950"
                           onClick={logoutButtonClicked}
                         >
                           Logout
-                          <LogOut className="h-4 w-4" />
+                          <LogOut className="
+                          xl:h-4 xl:w-4
+                          2xl:h-4 2xl:w-4" />
                         </Button>
                       </div>
                     </div>
@@ -353,18 +403,25 @@ function page({params}: any) {
 
                   {/* RIGHT SIDE WALA DIV */}
                   <div
-                    className="h-[92%] w-[65%] mr-5 rounded-l-3xl flex flex-col justify-center items-center gap-y-4 text-white"
+                    className="
+                    xl:h-[92%] xl:w-[65%] xl:mr-5 xl:rounded-l-3xl xl:flex xl:flex-col xl:justify-center xl:items-center xl:gap-y-4 xl:text-white
+                    2xl:h-[92%] 2xl:w-[65%] 2xl:mr-5 2xl:rounded-l-3xl 2xl:flex 2xl:flex-col 2xl:justify-center 2xl:items-center 2xl:gap-y-4 2xl:text-white"
                     id="rightDiv"
                   >
                     {/* twitter github wala div */}
-                    <div className="h-[21.5%] w-[95%] flex justify-center items-center gap-x-5 ">
+                    <div className="
+                    2xl:h-[21.5%] 2xl:w-[95%] 2xl:flex 2xl:justify-center 2xl:items-center 2xl:gap-x-5 ">
                       {/* twitter wala div */}
-                      <div className="h-full w-[50%] flex justify-center items-center rounded-xl shadow-md shadow-gray-600" id="twitterDiv">
-                        <div className="h-full w-[40%] flex justify-center items-center">
-                          <FaSquareXTwitter className="h-16 w-16" />
+                      <div className="
+                      2xl:h-full 2xl:w-[50%] 2xl:flex 2xl:justify-center 2xl:items-center 2xl:rounded-xl 2xl:shadow-md 2xl:shadow-gray-600" id="twitterDiv">
+
+                        <div className="
+                        2xl:h-full 2xl:w-[40%] 2xl:flex 2xl:justify-center 2xl:items-center">
+                          <FaSquareXTwitter className="
+                          2xl:h-16 2xl:w-16" />
                         </div>
 
-                        <div className="h-full w-[60%] text-2xl font-semibold flex flex-col justify-center items-start ">
+                        <div className="2xl:h-full 2xl:w-[60%] 2xl:text-2xl 2xl:font-semibold 2xl:flex 2xl:flex-col 2xl:justify-center 2xl:items-start ">
                           <div>
                             <Link
                               href={`https://x.com/${userDetails.twitterURL}`}
@@ -375,17 +432,25 @@ function page({params}: any) {
                             </Link>
                           </div>
 
-                          <div className="text-sm font-base text-gray-400">X.com</div>
+                          <div className="
+                          2xl:text-sm 2xl:font-base 2xl:text-gray-400">
+                            X.com
+                          </div>
+
                         </div>
                       </div>
 
                       {/* github wala div */}
-                      <div className="h-full w-[50%] flex justify-center items-center rounded-xl shadow-md shadow-gray-800" id="githubDiv">
-                        <div className="h-full w-[40%] flex justify-center items-center">
+                      <div className="2xl:h-full 2xl:w-[50%] 2xl:flex 2xl:justify-center 2xl:items-center 2xl:rounded-xl 2xl:shadow-md 2xl:shadow-gray-800" id="githubDiv">
+
+                        <div className="
+                        2xl:h-full 2xl:w-[40%] 2xl:flex 2xl:justify-center 2xl:items-center">
                           <FaGithub className="h-16 w-16" />
                         </div>
 
-                        <div className="h-full w-[60%] text-2xl font-semibold flex flex-col justify-center items-start">
+                        <div className="
+                        2xl:h-full 2xl:w-[60%] 2xl:text-2xl 2xl:font-semibold 2xl:flex 2xl:flex-col 2xl:justify-center 2xl:items-start">
+
                           <div>
                             <Link
                               href={`https://github.com/${userDetails.githubURL}`}
@@ -396,18 +461,30 @@ function page({params}: any) {
                             </Link>
                           </div>
 
-                          <div className="text-sm font-base text-gray-400">Github.com</div>
+                          <div className="
+                          2xl:text-sm 2xl:font-base 2xl:text-gray-400">
+                            Github.com
+                          </div>
                         </div>
                       </div>
+
                     </div>
 
                     {/* linkedin wala div */}
-                    <div className="h-[21.5%] w-[95%] flex justify-center items-center rounded-xl shadow-md shadow-[#182B3A]" id="linkedinDiv">
-                      <div className="h-full w-[40%] flex justify-center items-center">
-                        <FaLinkedin className="h-16 w-16" />
+                    <div className="
+                    2xl:h-[21.5%] 2xl:w-[95%] 2xl:flex 2xl:justify-center 2xl:items-center 2xl:rounded-xl 2xl:shadow-md 2xl:shadow-[#182B3A]" id="linkedinDiv">
+
+                      <div className="
+                      2xl:h-full 2xl:w-[40%] 2xl:flex 2xl:justify-center 2xl:items-center">
+
+                        <FaLinkedin className="
+                        2xl:h-16 2xl:w-16" />
+
                       </div>
 
-                      <div className="h-full w-[60%] text-2xl font-semibold flex flex-col justify-center items-start">
+                      <div className="
+                      2xl:h-full 2xl:w-[60%] 2xl:text-2xl 2xl:font-semibold 2xl:flex 2xl:flex-col 2xl:justify-center 2xl:items-start">
+
                         <div>
                           <Link
                             href={`https://linkedin.com/in/${userDetails.linkedinURL}`}
@@ -418,19 +495,29 @@ function page({params}: any) {
                           </Link>
                         </div>
 
-                        <div className="text-sm font-base text-blue-200">LinkedIn.com</div>
+                        <div className="
+                        2xl:text-sm 2xl:font-base 2xl:text-blue-200">
+                          LinkedIn.com
+                        </div>
+
                       </div>
                     </div>
 
                     {/* behance instagram wala div */}
-                    <div className="h-[21.5%] w-[95%] flex justify-center items-center gap-x-5 rounded-xl">
+                    <div className="
+                    2xl:h-[21.5%] 2xl:w-[95%] 2xl:flex 2xl:justify-center 2xl:items-center 2xl:gap-x-5 2xl:rounded-xl">
                       {/* behance wala div */}
-                      <div className="h-full w-[44%] flex justify-center items-center rounded-xl shadow-md shadow-[#2c67f2] " id="behanceDiv">
-                        <div className="h-full w-[36%] flex justify-center items-center">
-                          <FaBehance className="h-16 w-16" />
+                      <div className="
+                      2xl:h-full 2xl:w-[44%] 2xl:flex 2xl:justify-center 2xl:items-center 2xl:rounded-xl 2xl:shadow-md 2xl:shadow-[#2c67f2] " id="behanceDiv">
+
+                        <div className="
+                        2xl:h-full 2xl:w-[36%] 2xl:flex 2xl:justify-center 2xl:items-center">
+                          <FaBehance className="
+                          2xl:h-16 2xl:w-16" />
                         </div>
 
-                        <div className="h-full w-[64%] text-2xl font-semibold flex flex-col justify-center items-start">
+                        <div className="
+                        2xl:h-full 2xl:w-[64%] 2xl:text-2xl 2xl:font-semibold 2xl:flex 2xl:flex-col 2xl:justify-center 2xl:items-start">
 
                           <div>
                             <Link
@@ -442,17 +529,26 @@ function page({params}: any) {
                             </Link>
                           </div>
 
-                          <div className="text-sm font-base text-blue-200">Behance.com</div>
+                          <div className="
+                          2xl:text-sm 2xl:font-base 2xl:text-blue-200">
+                            Behance.com
+                          </div>
+
                         </div>
                       </div>
 
                       {/* instagram wala div */}
-                      <div className="h-full w-[67%] flex justify-center items-center rounded-xl shadow-md shadow-[#EC4364] border border-[#EC4364]" id="instagramDiv">
-                        <div className="h-full w-[40%] flex justify-center items-center">
-                          <FaInstagram className="h-16 w-16" />
+                      <div className="
+                      2xl:h-full 2xl:w-[67%] 2xl:flex 2xl:justify-center 2xl:items-center 2xl:rounded-xl 2xl:shadow-md 2xl:shadow-[#EC4364] 2xl:border 2xl:border-[#EC4364]" id="instagramDiv">
+
+                        <div className="
+                        2xl:h-full 2xl:w-[40%] 2xl:flex 2xl:justify-center 2xl:items-center">
+                          <FaInstagram className="
+                          2xl:h-16 2xl:w-16" />
                         </div>
 
-                        <div className="h-full w-[60%] text-2xl font-semibold flex flex-col justify-center items-start">
+                        <div className="
+                        2xl:h-full 2xl:w-[60%] 2xl:text-2xl 2xl:font-semibold 2xl:flex 2xl:flex-col 2xl:justify-center 2xl:items-start">
                           <div>
                             <Link
                               href={`https://instagram.com/${userDetails.instagramURL}`}
@@ -463,7 +559,8 @@ function page({params}: any) {
                             </Link>
                           </div>
 
-                          <div className="text-sm font-base text-yellow-100">
+                          <div className="
+                          2xl:text-sm 2xl:font-base 2xl:text-yellow-100">
                             Instagram.com
                           </div>
                         </div>
@@ -471,9 +568,13 @@ function page({params}: any) {
                     </div>
 
                     {/* textarea wala div */}
-                    <div className="h-[21.5%] w-[95%] text-lg flex justify-center items-center bg-[#333533] rounded-xl shadow-md shadow-gray-600">
+                    <div className="
+                    2xl:h-[21.5%] 2xl:w-[95%] 2xl:text-lg 2xl:flex 2xl:justify-center 2xl:items-center 2xl:bg-[#333533] 2xl:rounded-xl 2xl:shadow-md 2xl:shadow-gray-600">
+
                       {userDetails.TextArea ? userDetails.TextArea : " Either you run the day or the day runs you " }
+
                     </div>
+
                   </div>
             </div>
           </>

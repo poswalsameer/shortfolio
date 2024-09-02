@@ -84,13 +84,18 @@
 }
 
 #linkedinDiv{
-    background: linear-gradient( to bottom right ,#20A4F3, #182B3A );
+    background: linear-gradient( to bottom ,#198acb, #294b65 );
 }
 
 #behanceDiv{
-    background: linear-gradient(to bottom, #2c67f2, #2c67f2, #3da4c7);
+    background: linear-gradient(to bottom, #4278f4, #2c67f2, #173e98);
 }
 
 #instagramDiv{
     background: linear-gradient( to top left, #EC4364, #F1625B );
+}
+
+#editBoxDiv{
+    /* background: linear-gradient(to bottom, #4d8f77, #373B44); */
+    background: linear-gradient(to top,#6f7997, #adb6c6);
 }
