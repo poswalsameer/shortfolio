@@ -258,7 +258,7 @@ function page({params}: any) {
                   >
                     {/* profile photo + name + bio wala div */}
                     <div className="
-                    h-[70%] w-full flex flex-row justify-center items-center gap-y-6 rounded-tr-3xl
+                    h-[70%] w-full flex flex-row justify-center items-center gap-y-0 rounded-tr-3xl
                     sm:h-[70%] sm:w-full sm:flex sm:flex-row sm:justify-center sm:items-center sm:gap-y-6 sm:rounded-tr-3xl
                     md:h-[70%] md:w-full md:flex md:flex-col md:justify-center md:items-center md:gap-y-16 md:rounded-tr-3xl 
                     lg:h-[70%] lg:w-full lg:flex lg:flex-col lg:justify-center lg:items-center lg:gap-y-16 lg:rounded-tr-3xl
@@ -297,7 +297,11 @@ function page({params}: any) {
                             2xl:absolute 2xl:bottom-2 2xl:right-2 2xl:p-2 2xl:rounded-full 2xl:shadow-lg 2xl:transition-all 2xl:delay-75 2xl:ease-in 2xl:hover:bg-[#8791af]"
                               onClick={openEditBox}
                             >
-                              <PenLine className="h-3 w-3"/>
+                              <PenLine className="
+                              h-3 w-3
+                              sm:h-3 sm:w-3
+                              md:h-5 md:w-5
+                              "/>
                             </button>
 
                             {/* </div> */}
@@ -332,7 +336,7 @@ function page({params}: any) {
 
                         {/* BIO */}
                         <div className="
-                        w-full text-xs text-center text-gray-700 font-base flex justify-center items-center
+                        w-[95%] text-xs text-center text-gray-700 font-base flex justify-center items-center
                         sm:w-full sm:text-sm sm:text-center sm:text-gray-700 sm:font-base sm:flex sm:justify-center sm:items-center
                         md:w-full md:text-sm md:text-center md:text-gray-700 md:font-base md:flex md:justify-center md:items-center
                         lg:w-full lg:text-base lg:text-center lg:text-gray-700 lg:font-base lg:flex lg:justify-center lg:items-center
@@ -355,12 +359,12 @@ function page({params}: any) {
                     {/* button wala div */}
 
                     <div className=" 
-                    h-[20%] w-full flex flex-col justify-center items-center
-                    sm:h-[20%] sm:w-full sm:flex sm:flex-col sm:justify-center sm:items-center
-                    md:h-[20%] md:w-full md:flex md:flex-col md:justify-center md:items-center
-                    lg:h-[20%] lg:w-full lg:flex lg:flex-col lg:justify-center lg:items-center
-                    xl:h-[20%] xl:w-full xl:flex xl:flex-col xl:justify-center xl:items-center
-                    2xl:h-[20%] 2xl:w-full 2xl:flex 2xl:flex-col 2xl:justify-center 2xl:items-center">
+                    h-[20%] w-full flex flex-col justify-center items-center gap-y-4
+                    sm:h-[20%] sm:w-full sm:flex sm:flex-col sm:justify-center sm:items-center sm:gap-y-4
+                    md:h-[20%] md:w-full md:flex md:flex-col md:justify-center md:items-center md:gap-y-4
+                    lg:h-[20%] lg:w-full lg:flex lg:flex-col lg:justify-center lg:items-center lg:gap-y-4
+                    xl:h-[20%] xl:w-full xl:flex xl:flex-col xl:justify-center xl:items-center xl:gap-y-4
+                    2xl:h-[20%] 2xl:w-full 2xl:flex 2xl:flex-col 2xl:justify-center 2xl:items-center 2xl:gap-y-4">
 
                       <div className="
                       h-[25%] w-full text-sm font-semibold text-black flex justify-center items-center
@@ -484,7 +488,7 @@ function page({params}: any) {
                   {/* RIGHT SIDE WALA DIV */}
                   <div
                     className="
-                    h-[40rem] w-[92%] mr-0 rounded-l-3xl flex flex-col justify-center items-center gap-y-4 text-white
+                    h-[25rem] w-[92%] mr-0 rounded-l-3xl flex flex-col justify-center items-center gap-y-4 text-white
                     sm:h-[40rem] sm:w-[92%] sm:mr-0 sm:rounded-l-3xl sm:flex sm:flex-col sm:justify-center sm:items-center sm:gap-y-4 sm:text-white
                     md:h-[92%] md:w-[70%] md:mr-5 md:rounded-l-3xl md:flex md:flex-col md:justify-center md:items-center md:gap-y-4 md:text-white
                     lg:h-[92%] lg:w-[65%] lg:mr-5 lg:rounded-l-3xl lg:flex lg:flex-col lg:justify-center lg:items-center lg:gap-y-4 lg:text-white
@@ -615,7 +619,7 @@ function page({params}: any) {
 
                     {/* linkedin wala div */}
                     <div className="
-                    h-[12%] w-[95%] flex justify-center items-center rounded-lg shadow-md shadow-[#182B3A]
+                    h-[15%] w-[95%] flex justify-center items-center rounded-lg shadow-md shadow-[#182B3A]
                     sm:h-[21.5%] sm:w-[95%] sm:flex sm:justify-center sm:items-center sm:rounded-xl sm:shadow-md sm:shadow-[#182B3A]
                     md:h-[21.5%] md:w-[95%] md:flex md:justify-center md:items-center md:rounded-xl md:shadow-md md:shadow-[#182B3A]
                     lg:h-[21.5%] lg:w-[95%] lg:flex lg:justify-center lg:items-center lg:rounded-xl lg:shadow-md lg:shadow-[#182B3A]
@@ -673,6 +677,7 @@ function page({params}: any) {
 
                     {/* behance instagram wala div */}
                     <div className="
+                    h-[15%] w-[95%] flex justify-center items-center gap-x-5 rounded-xl
                     sm:h-[21.5%] sm:w-[95%] sm:flex sm:justify-center sm:items-center sm:gap-x-5 sm:rounded-xl
                     md:h-[21.5%] md:w-[95%] md:flex md:justify-center md:items-center md:gap-x-5 md:rounded-xl
                     lg:h-[21.5%] lg:w-[95%] lg:flex lg:justify-center lg:items-center lg:gap-x-5 lg:rounded-xl
@@ -680,6 +685,7 @@ function page({params}: any) {
                     2xl:h-[21.5%] 2xl:w-[95%] 2xl:flex 2xl:justify-center 2xl:items-center 2xl:gap-x-5 2xl:rounded-xl">
                       {/* behance wala div */}
                       <div className="
+                      h-full w-[40%] flex justify-center items-center rounded-lg shadow-md shadow-[#2c67f2]
                       sm:h-full sm:w-[40%] sm:flex sm:justify-center sm:items-center sm:rounded-xl sm:shadow-md sm:shadow-[#2c67f2]
                       md:h-full md:w-[44%] md:flex md:justify-center md:items-center md:rounded-xl md:shadow-md md:shadow-[#2c67f2]
                       lg:h-full lg:w-[44%] lg:flex lg:justify-center lg:items-center lg:rounded-xl lg:shadow-md lg:shadow-[#2c67f2]
@@ -687,12 +693,14 @@ function page({params}: any) {
                       2xl:h-full 2xl:w-[44%] 2xl:flex 2xl:justify-center 2xl:items-center 2xl:rounded-xl 2xl:shadow-md 2xl:shadow-[#2c67f2] " id="behanceDiv">
 
                         <div className="
+                        h-full w-[33%] flex justify-center items-center
                         sm:h-full sm:w-[30%] sm:flex sm:justify-center sm:items-center
                         md:h-full md:w-[30%] md:flex md:justify-center md:items-center
                         lg:h-full lg:w-[36%] lg:flex lg:justify-center lg:items-center
                         xl:h-full xl:w-[36%] xl:flex xl:justify-center xl:items-center
                         2xl:h-full 2xl:w-[36%] 2xl:flex 2xl:justify-center 2xl:items-center">
                           <FaBehance className="
+                          h-8 w-8
                           sm:h-10 sm:w-10
                           md:h-8 md:w-8
                           lg:h-14 lg:w-14
@@ -701,6 +709,7 @@ function page({params}: any) {
                         </div>
 
                         <div className="
+                        h-full w-[67%] text-xs font-semibold flex flex-col justify-center items-start overflow-hidden
                         sm:h-full sm:w-[70%] sm:text-lg sm:font-semibold sm:flex sm:flex-col sm:justify-center sm:items-start sm:overflow-hidden
                         md:h-full md:w-[70%] md:text-base md:font-semibold md:flex md:flex-col md:justify-center md:items-start md:overflow-hidden
                         lg:h-full lg:w-[64%] lg:text-xl lg:font-semibold lg:flex lg:flex-col lg:justify-center lg:items-start lg:overflow-hidden
@@ -718,6 +727,7 @@ function page({params}: any) {
                           </div>
 
                           <div className="
+                          text-[0.5rem] font-base text-blue-200
                           sm:text-xs sm:font-base sm:text-blue-200
                           md:text-xs md:font-base md:text-blue-200
                           lg:text-sm lg:font-base lg:text-blue-200
@@ -731,6 +741,7 @@ function page({params}: any) {
 
                       {/* instagram wala div */}
                       <div className="
+                      h-full w-[60%] flex justify-center items-center rounded-lg shadow-md shadow-[#EC4364] border border-[#EC4364]
                       sm:h-full sm:w-[60%] sm:flex sm:justify-center sm:items-center sm:rounded-xl sm:shadow-md sm:shadow-[#EC4364] sm:border sm:border-[#EC4364]
                       md:h-full md:w-[56%] md:flex md:justify-center md:items-center md:rounded-xl md:shadow-md md:shadow-[#EC4364] md:border md:border-[#EC4364]
                       lg:h-full lg:w-[67%] lg:flex lg:justify-center lg:items-center lg:rounded-xl lg:shadow-md lg:shadow-[#EC4364] lg:border lg:border-[#EC4364]
@@ -738,6 +749,7 @@ function page({params}: any) {
                       2xl:h-full 2xl:w-[67%] 2xl:flex 2xl:justify-center 2xl:items-center 2xl:rounded-xl 2xl:shadow-md 2xl:shadow-[#EC4364] 2xl:border 2xl:border-[#EC4364]" id="instagramDiv">
 
                         <div className="
+                        h-full w-[30%] flex justify-center items-center
                         sm:h-full sm:w-[30%] sm:flex sm:justify-center sm:items-center
                         md:h-full md:w-[35%] md:flex md:justify-center md:items-center
                         lg:h-full lg:w-[40%] lg:flex lg:justify-center lg:items-center
@@ -745,6 +757,7 @@ function page({params}: any) {
                         2xl:h-full 2xl:w-[40%] 2xl:flex 2xl:justify-center 2xl:items-center">
 
                           <FaInstagram className="
+                          h-8 w-8
                           sm:h-10 sm:w-10
                           md:h-8 md:w-8
                           lg:h-14 lg:w-14
@@ -754,6 +767,7 @@ function page({params}: any) {
                         </div>
 
                         <div className="
+                        h-full w-[70%] text-xs font-semibold flex flex-col justify-center items-start
                         sm:h-full sm:w-[70%] sm:text-lg sm:font-semibold sm:flex sm:flex-col sm:justify-center sm:items-start
                         md:h-full md:w-[65%] md:text-base md:font-semibold md:flex md:flex-col md:justify-center md:items-start
                         lg:h-full lg:w-[60%] lg:text-xl lg:font-semibold lg:flex lg:flex-col lg:justify-center lg:items-start
@@ -770,6 +784,7 @@ function page({params}: any) {
                           </div>
 
                           <div className="
+                          text-[0.5rem] font-base text-yellow-100
                           sm:text-xs sm:font-base sm:text-yellow-100
                           md:text-xs md:font-base md:text-yellow-100
                           lg:text-sm lg:font-base lg:text-yellow-100
@@ -783,6 +798,7 @@ function page({params}: any) {
 
                     {/* textarea wala div */}
                     <div className="
+                    h-[15%] w-[95%] text-xs flex justify-center items-center bg-[#333533] rounded-lg shadow-md shadow-gray-600
                     sm:h-[21.5%] sm:w-[95%] sm:text-base sm:flex sm:justify-center sm:items-center sm:bg-[#333533] sm:rounded-xl sm:shadow-md sm:shadow-gray-600
                     md:h-[21.5%] md:w-[95%] md:text-base md:flex md:justify-center md:items-center md:bg-[#333533] md:rounded-xl md:shadow-md md:shadow-gray-600
                     lg:h-[21.5%] lg:w-[95%] lg:text-lg lg:flex lg:justify-center lg:items-center lg:bg-[#333533] lg:rounded-xl lg:shadow-md lg:shadow-gray-600
