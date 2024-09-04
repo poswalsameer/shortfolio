@@ -56,19 +56,14 @@ function Page() {
           console.log("User cookie not found");
         }
 
-        // const username = userData.name.split(" ").join('');
-
         if (userData) {
           dispatch(checkLogin(userData));
           console.log("the user data is: ", userData);
         }
 
-        // setLoading(false);
-
         //NAVIGATING THE PAGE TO DETAILS PAGE AFTER SUCCESSFULL SIGNUP
         router.push("/enterDetails");
         setLoading(false);
-        // router.push(`/user/${username}`);
       }
 
       router.push("/enterDetails");

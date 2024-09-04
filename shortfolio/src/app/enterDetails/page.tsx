@@ -26,10 +26,6 @@ function Page() {
 
   const { register, handleSubmit, reset,formState: { errors } } = useForm();
 
-  // if( errors.fullName?.message ){
-  //   alert(errors.fullName?.message);
-  // }
-
   const router = useRouter();
   const {toast} = useToast();
 
@@ -114,10 +110,8 @@ function Page() {
       }
       else{
         console.log("Cannot upload the image because image was not uploaded");
-        
       }      
       
-
       const findUser = await databaseServiceObject.getUser(data.username);
 
       if( findUser ){
@@ -173,7 +167,6 @@ function Page() {
   };
 
   // FUNCTION THAT UPDATES A DOCUMENT
-  // TODO: issue ye hai ki, agar profile photo daalte hai to upload hori hai wo bucket par but agar profile photo nahi daalre to storage me upload nahi hori, iss wajah se wo available nahi hai
   const updateDocument = async ( userEmail: any, data: any ) => {
 
     let uploadedImage;
@@ -181,7 +174,6 @@ function Page() {
     console.log("The type of the profilePhoto in the data coming from input is: ", typeof data.profilePhoto);
 
     if( typeof data.profilePhoto === "string" ){
-      // setImageOfUser(data.profilePhoto);
       uploadedImage = data.profilePhoto;
       console.log("Image set in the state because the profile photo in the data is of type string");
     }
@@ -194,15 +186,6 @@ function Page() {
     }
 
     console.log("Image stored in the state imageOfUser is: ", imageOfUser);
-    
-
-    // if( data.profilePhoto ){
-    //   uploadedImage = await uploadImageFunction(data);
-    //   console.log("This is the uploadedImage returned from the upload image function:", uploadedImage);
-      
-    //   setImageOfUser(uploadedImage.$id);
-    //   console.log("Image uploaded successfully, and the value of uploadedImage after uploading it is: ", imageOfUser);
-    // }
 
     // finding the username entered in the input field in document database
     const findUser = await databaseServiceObject.getAllDocuments(data.username);
@@ -214,14 +197,10 @@ function Page() {
     if( findUser ){
       console.log("Details of the existing user: ", findUser);
 
-      // IF THE USER ENTERED A NEW USERNAME, AND THE NEW USERNAME ALREADY EXISTS, THEN WE DO THE BELOW THING
-
       //getting the ID of the returned document
       const returnedDocID = findUser.$id;
       console.log( "ID of the returned document: ", returnedDocID);
-      
 
-      // if the ID of the returned document is same as of userEmail, this means user didn't changed his username while updating the details, so we can simply update the document with new details
       if( returnedDocID === userEmail ){
 
         const updatedUserDetails = await databaseServiceObject.updateUserDetails({
@@ -233,7 +212,6 @@ function Page() {
           behanceFrontend: data.behanceUsername,
           linkedinFrontend: data.linkedinUsername,
           textFrontend: data.extraText,
-          // profilePhotoFrontend: typeof uploadedImage === "string" ? ( uploadedImage || '' ) : ( uploadedImage.$id || '' ) ,
           profilePhotoFrontend: uploadedImage ? uploadedImage : '',
           fullNameFrontend: data.fullName,
           emailFrontend: userEmail
@@ -332,7 +310,6 @@ function Page() {
         else{
           console.log("Document with this id does not exists");
 
-          // data.profilePhoto
           const createdUser = await createDocument(userEmail, data);
 
           if( createdUser ){
@@ -365,8 +342,6 @@ function Page() {
 
   useEffect( () => {
     getCurrentUserDetails();
-    
-    // getImageFromDatabase();
   }, [])
 
   useEffect(() => {
@@ -375,7 +350,6 @@ function Page() {
     console.log("The image found from db is: ", currentUserDocument.profilePhoto);
     // setImageOfUser(currentUserDocument.profilePhoto);
     console.log("The type of the image saved in the currentUserDocument is: ", typeof currentUserDocument.profilePhoto);
-    // console.log("Default value inside the imageOfUser state is: ", imageOfUser);
     
 
     reset({
@@ -394,9 +368,6 @@ function Page() {
     })
   }, [currentUserDetails])
 
-  // useEffect(() => {
-  //   console.log("Updated imageOfUser state:", imageOfUser);
-  // }, [imageOfUser]);
 
   return (
 

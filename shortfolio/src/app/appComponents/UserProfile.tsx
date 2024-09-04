@@ -165,8 +165,7 @@ function Page({params}: any) {
     }
   };
 
-  // implementing image edit part here
-
+  // IMPLEMENTING EDIT IMAGE PART HERE
   const [editMode, setEditMode] = useState(false);
 
   const closeEditBox = () => {
