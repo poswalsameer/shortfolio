@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import Link from "next/Link";
+// import Link from "next/link";
 import { useForm } from "react-hook-form";
 import authServiceObject from "../appwrite";
 import databaseServiceObject from "../database.appwrite";
@@ -15,7 +15,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import Loading from "./Loading";
 
-function page() {
+function Page() {
   const {
     register,
     handleSubmit,
@@ -217,4 +217,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import { store } from '../reduxStore/store';
 import authServiceObject from '../appwrite';
 
-function page() {
+function Page() {
 
   const [user, setUser] = useState('');
 
@@ -42,4 +42,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

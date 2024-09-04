@@ -1,11 +1,11 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from '@/components/ui/Label';
-import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import { Input } from "../../components/ui/input";
+import { Button } from "../../components/ui/button"
+import { Textarea } from "../../components/ui/textarea"
+import { Label } from '../../components/ui/label';
+// import Link from 'next/link';
 import authServiceObject from '../appwrite';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import databaseServiceObject from '../database.appwrite'
@@ -16,7 +16,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import Loading from '../appComponents/Loading'
 
 
-function page() {
+function Page() {
 
   const [currentUserDetails, setCurrentUserDetails] = useState<any>({});
   const [currentUserDocument, setCurrentUserDocument] = useState<any>({});
@@ -1021,4 +1021,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

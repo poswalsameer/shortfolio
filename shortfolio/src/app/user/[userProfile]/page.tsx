@@ -8,7 +8,7 @@ import authServiceObject from '../../appwrite';
 import ImageContextProvider from '@/app/contexts/ImageContextProvider';
 
 
-function page() {
+function Page() {
 
     const [ userName, setUserName ] = useState('');
 
@@ -48,4 +48,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

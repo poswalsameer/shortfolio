@@ -27,7 +27,7 @@ import ImageContextProvider from "../contexts/ImageContextProvider";
 import ImageContext from "../contexts/ImageContext";
 import Loading from "./Loading";
 
-function page({params}: any) {
+function Page({params}: any) {
   const [error, setError] = useState("");
 
   const [userDetails, setUserDetails] = useState<any>({});
@@ -822,4 +822,4 @@ function page({params}: any) {
   );
 }
 
-export default page;
+export default Page;

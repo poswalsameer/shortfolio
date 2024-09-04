@@ -13,7 +13,7 @@ import { useToast } from "@/components/ui/use-toast";
 import Loading from './Loading';
 
 
-function page() {
+function Page() {
 
   const { register, handleSubmit,formState: { errors } } = useForm();
 
@@ -163,4 +163,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

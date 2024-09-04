@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import authServiceObject from '../appwrite';
 
 
-function page() {
+function Page() {
 
   const [user, setUser] = useState('');
 
@@ -45,4 +45,4 @@ function page() {
   )
 }
 
-export default page
+export default Page
