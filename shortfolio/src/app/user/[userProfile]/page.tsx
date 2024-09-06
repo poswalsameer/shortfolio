@@ -7,16 +7,17 @@ import { store } from '../../reduxStore/store';
 import authServiceObject from '../../appwrite';
 import ImageContextProvider from '@/app/contexts/ImageContextProvider';
 import databaseServiceObject from '@/app/database.appwrite';
+import { GetServerSideProps } from 'next';
 
+interface serverProps{
+  userDetailsServer: any,
+  userImageServer: string,
+  userEmailServer: string,
+  loadingServer: boolean,
+  loginStatusServer: boolean
+}
 
-
-function Page({
-  userDetailsServer,
-  userImageServer,
-  userEmailServer,
-  loadingServer,
-  loginStatusServer
-}: {userDetailsServer: any, userImageServer: string, userEmailServer: string, loadingServer: boolean, loginStatusServer: boolean}) {
+function Page( {userDetailsServer, userImageServer, userEmailServer, loadingServer, loginStatusServer} : serverProps) {
 
     const [ userName, setUserName ] = useState('');
 
@@ -38,7 +39,7 @@ function Page({
   )
 }
 
-export const getServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
 
   let userDetails = {};
   let userImage = "";

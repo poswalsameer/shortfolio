@@ -27,7 +27,15 @@ import ImageContextProvider from "../contexts/ImageContextProvider";
 import ImageContext from "../contexts/ImageContext";
 import Loading from "./Loading";
 
-function Page({userDetailsServer, userImageServer, userEmailServer, loadingServer, loginStatusServer} : {userDetailsServer:any, userImageServer: string, userEmailServer: string, loadingServer: boolean, loginStatusServer: boolean }) {
+interface UserProfileProps {
+  userDetailsServer: any;
+  userImageServer: string;
+  userEmailServer: string;
+  loadingServer: boolean;
+  loginStatusServer: boolean;
+}
+
+function Page( {userDetailsServer, userImageServer, userEmailServer, loadingServer, loginStatusServer} : UserProfileProps) {
 
   const [error, setError] = useState("");
   const [userDetails, setUserDetails] = useState<any>(userDetailsServer || {} );
