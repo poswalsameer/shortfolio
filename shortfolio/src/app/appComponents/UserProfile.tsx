@@ -27,16 +27,17 @@ import ImageContextProvider from "../contexts/ImageContextProvider";
 import ImageContext from "../contexts/ImageContext";
 import Loading from "./Loading";
 
-function Page({params}: any) {
-  const [error, setError] = useState("");
+function Page({userDetailsServer, userImageServer, userEmailServer, loadingServer, loginStatusServer} : {userDetailsServer:any, userImageServer: string, userEmailServer: string, loadingServer: boolean, loginStatusServer: boolean }) {
 
-  const [userDetails, setUserDetails] = useState<any>({});
-  const [userImage, setUserImage] = useState<string>("");
-  const [userEmail, setUserEmail] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState("");
+  const [userDetails, setUserDetails] = useState<any>(userDetailsServer || {} );
+  const [userImage, setUserImage] = useState<string>(userImageServer || "");
+  const [userEmail, setUserEmail] = useState<string>(userEmailServer || "");
+  const [loading, setLoading] = useState<boolean>(loadingServer);
+  
 
   // TODO: Middleware shayad hatana padega, kyuki uski wjh se, home route par nahi jayega if logged in hai
-  const [loginStatus, setLoginStatus] = useState<boolean>(false);
+  const [loginStatus, setLoginStatus] = useState<boolean>(loginStatusServer);
 
   const behanceGrid = false;
 
@@ -113,57 +114,57 @@ function Page({params}: any) {
     }
   };
 
-  const getCurrentUserDetails = async () => {
-    try {
-      const currentUser = await authServiceObject.getLoggedInUser();
+  // const getCurrentUserDetails = async () => {
+  //   try {
+  //     const currentUser = await authServiceObject.getLoggedInUser();
 
-      if (currentUser) {
+  //     if (currentUser) {
 
-        setLoginStatus(true);
-        console.log("Details of the current user: ", currentUser);
+  //       setLoginStatus(true);
+  //       console.log("Details of the current user: ", currentUser);
 
-        // Converting the email to normal string
-        const convertedEmail = convertEmailToString(currentUser.email);
-        console.log("Converted mail: ", convertedEmail);
+  //       // Converting the email to normal string
+  //       const convertedEmail = convertEmailToString(currentUser.email);
+  //       console.log("Converted mail: ", convertedEmail);
 
-        //setting the email in the state
-        setUserEmail(currentUser.email);
+  //       //setting the email in the state
+  //       setUserEmail(currentUser.email);
 
-        //find document with string mail id
-        const userEmail = await databaseServiceObject.getUser(convertedEmail);
-        console.log("The userEmail data is: ", userEmail);
+  //       //find document with string mail id
+  //       const userEmail = await databaseServiceObject.getUser(convertedEmail);
+  //       console.log("The userEmail data is: ", userEmail);
         
 
-        if( userEmail.profilePhoto ){
-          const photoFile = await getFileID(userEmail.profilePhoto);
+  //       if( userEmail.profilePhoto ){
+  //         const photoFile = await getFileID(userEmail.profilePhoto);
 
-          if (photoFile) {
-            setUserImage(photoFile);
-            console.log("This is the photo we got after getting the user: ", photoFile);
-          }
-          else{
-            console.log("The file cannot be found because it was not uploaded");
-          }
-        }
-        else{
-          setUserImage('/userProfile.png');
-        }
+  //         if (photoFile) {
+  //           setUserImage(photoFile);
+  //           console.log("This is the photo we got after getting the user: ", photoFile);
+  //         }
+  //         else{
+  //           console.log("The file cannot be found because it was not uploaded");
+  //         }
+  //       }
+  //       else{
+  //         setUserImage('/userProfile.png');
+  //       }
 
-        if (userEmail) {
-          console.log("Details of the document with this id: ", userEmail);
-          setUserDetails(userEmail);
-        } else {
-          setUserDetails({});
-          console.log("Document not found with this id");
-        }
-      } else {
-        setLoginStatus(false);
-        console.log("User details not found");
-      }
-    } catch (error) {
-      console.log("Error finding the details of the user: ", error);
-    }
-  };
+  //       if (userEmail) {
+  //         console.log("Details of the document with this id: ", userEmail);
+  //         setUserDetails(userEmail);
+  //       } else {
+  //         setUserDetails({});
+  //         console.log("Document not found with this id");
+  //       }
+  //     } else {
+  //       setLoginStatus(false);
+  //       console.log("User details not found");
+  //     }
+  //   } catch (error) {
+  //     console.log("Error finding the details of the user: ", error);
+  //   }
+  // };
 
   // IMPLEMENTING EDIT IMAGE PART HERE
   const [editMode, setEditMode] = useState(false);
@@ -186,7 +187,7 @@ function Page({params}: any) {
   
   // GETTING THE STATE AND THE FUNCTION FROM THE CONTEXT
   const { profileImage, setProfileImage } = context;
-  console.log("The profileImage coming is: ", profileImage);
+  // console.log("The profileImage coming is: ", profileImage);
 
 
   // THIS USE-EFFECT SAVES THE CROPPED IMAGE TO THE LOCAL STORAGE AFTER CONVERTING IT TO BASE64
@@ -216,7 +217,10 @@ function Page({params}: any) {
     } catch (error) {
       console.error("Error retrieving the profile image: ", error);
     }
-    getCurrentUserDetails();
+
+    console.log(userDetails);
+    
+    // getCurrentUserDetails();
   }, []);
   
 
@@ -820,5 +824,115 @@ function Page({params}: any) {
 
   );
 }
+
+// export const getServerSideProps = async () => {
+
+//   // const [userDetails, setUserDetails] = useState<any>({});
+//   // const [userImage, setUserImage] = useState<string>("");
+//   // const [userEmail, setUserEmail] = useState<string>("");
+//   // const [loading, setLoading] = useState<boolean>(false);
+//   // const [loginStatus, setLoginStatus] = useState<boolean>(false);
+
+//   let userDetails = {};
+//   let userImage = "";
+//   let userEmailVar = "";
+//   let loading = false;
+//   let loginStatus = false;
+
+//   // FUNCTION TO CONVERT EMAIL TO STRING
+//   const convertEmailToString = (data: any) => {
+//     let n = data.length;
+//     let convertedString = "";
+
+//     for (let i = 0; i < n; i++) {
+//       if (data[i] === "@" || data[i] === ".") {
+//         convertedString = convertedString + "0";
+//       } else {
+//         convertedString = convertedString + data[i];
+//       }
+//     }
+
+//     return convertedString;
+//   };
+
+//   // FUNCTION TO GET FILE ID
+//   const getFileID = async (fileId: string) => {
+//     try {
+//       const file = await databaseServiceObject.getFilePreview(fileId);
+
+//       if (file) {
+//         console.log("Got the file from the backend");
+//         return file;
+//       } else {
+//         console.log("Didn't got the file from the backend");
+//         return undefined;
+//       }
+//     } catch (error) {
+//       console.log(
+//         "Error from the frontend side while getting the file: ",
+//         error
+//       );
+//     }
+//   };
+
+//   try {
+//     const currentUser = await authServiceObject.getLoggedInUser();
+
+//     if (currentUser) {
+
+//       console.log("inside the if statement of currentuser");
+      
+//       loginStatus = true; // setLoginStatus(true);
+//       console.log(currentUser);
+      
+//       // Converting the email to normal string
+//       const convertedEmail = convertEmailToString(currentUser.email);
+
+//       //setting the email in the state
+//       userEmailVar = currentUser.email // setUserEmail(currentUser.email);
+
+//       //find document with string mail id
+//       const userEmail = await databaseServiceObject.getUser(convertedEmail);
+
+//       if( userEmail.profilePhoto ){
+//         const photoFile = await getFileID(userEmail.profilePhoto);
+
+//         if (photoFile) {
+//           userImage = photoFile // setUserImage(photoFile);
+//         }
+//         else{
+//         }
+//       }
+//       else{
+//         userImage = "/userProfile.png"; // setUserImage('/userProfile.png');
+//       }
+
+//       if (userEmail) {
+//         userDetails = userEmail; // setUserDetails(userEmail);
+//       } else {
+//         userDetails = {}; // setUserDetails({});
+//       }
+//     } else {
+//       loginStatus = false; // setLoginStatus(false);
+//     }
+//   } 
+//   catch (error) {
+//     console.log("Error finding the details of the user: ", error);
+//   }
+
+//   console.log(userDetails);
+  
+
+//   return {
+//     props: {
+//       userDetails, 
+//       userImage, 
+//       userEmailVar,
+//       loading,
+//       loginStatus
+//     }
+//   }
+
+// }
 
 export default Page;
