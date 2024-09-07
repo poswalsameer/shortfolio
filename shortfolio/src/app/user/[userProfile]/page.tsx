@@ -9,6 +9,7 @@ import ImageContextProvider from '@/app/contexts/ImageContextProvider';
 import databaseServiceObject from '@/app/database.appwrite';
 import { GetServerSideProps } from 'next';
 
+//interface for serverProps
 interface serverProps{
   userDetailsServer: any,
   userImageServer: string,
