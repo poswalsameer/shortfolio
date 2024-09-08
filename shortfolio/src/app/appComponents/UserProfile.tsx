@@ -277,7 +277,7 @@ function Page( params: any ) {
                           md:relative md:h-48 md:w-48
                           lg:relative lg:h-52 lg:w-52
                           xl:relative xl:h-60 xl:w-60
-                          2xl:relative 2xl:h-60 2xl:w-60 ">
+                          2xl:relative 2xl:h-60 2xl:w-60  ">
                             
                             <img
                               src={profileImage ? profileImage : userImage }
@@ -288,16 +288,19 @@ function Page( params: any ) {
                               md:h-full md:w-full md:rounded-full
                               lg:h-full lg:w-full lg:rounded-full
                               xl:h-full xl:w-full xl:rounded-full
-                              2xl:h-full 2xl:w-full 2xl:rounded-full"
+                              2xl:h-full 2xl:w-full 2xl:rounded-full 
+                              
+                              border-[5px] border-[#bfc378]"
+                              id="profilePhotoDiv"
                             />
                             
                             <button className="
-                            absolute bottom-2 right-2 p-2 rounded-full shadow-lg transition-all delay-75 ease-in hover:bg-[#8791af]
-                            sm:absolute sm:bottom-2 sm:right-2 sm:p-2 sm:rounded-full sm:shadow-lg sm:transition-all sm:delay-75 sm:ease-in sm:hover:bg-[#8791af]
-                            md:absolute md:bottom-2 md:right-2 md:p-2 md:rounded-full md:shadow-lg md:transition-all md:delay-75 md:ease-in md:hover:bg-[#8791af]
-                            lg:absolute lg:bottom-2 lg:right-2 lg:p-2 lg:rounded-full lg:shadow-lg lg:transition-all lg:delay-75 lg:ease-in lg:hover:bg-[#8791af]
-                            xl:absolute xl:bottom-2 xl:right-2 xl:p-2 xl:rounded-full xl:shadow-lg xl:transition-all xl:delay-75 xl:ease-in xl:hover:bg-[#8791af]
-                            2xl:absolute 2xl:bottom-2 2xl:right-2 2xl:p-2 2xl:rounded-full 2xl:shadow-lg 2xl:transition-all 2xl:delay-75 2xl:ease-in 2xl:hover:bg-[#8791af]"
+                            absolute bottom-2 right-2 p-2 rounded-full shadow-lg transition-all delay-75 ease-in hover:bg-[#bfc378]
+                            sm:absolute sm:bottom-2 sm:right-2 sm:p-2 sm:rounded-full sm:shadow-lg sm:transition-all sm:delay-75 sm:ease-in sm:hover:bg-[#bfc378]
+                            md:absolute md:bottom-2 md:right-2 md:p-2 md:rounded-full md:shadow-lg md:transition-all md:delay-75 md:ease-in md:hover:bg-[#bfc378]
+                            lg:absolute lg:bottom-2 lg:right-2 lg:p-2 lg:rounded-full lg:shadow-lg lg:transition-all lg:delay-75 lg:ease-in lg:hover:bg-[#bfc378]
+                            xl:absolute xl:bottom-2 xl:right-2 xl:p-2 xl:rounded-full xl:shadow-lg xl:transition-all xl:delay-75 xl:ease-in xl:hover:bg-[#bfc378]
+                            2xl:absolute 2xl:bottom-2 2xl:right-2 2xl:p-2 2xl:rounded-full 2xl:shadow-lg 2xl:transition-all 2xl:delay-75 2xl:ease-in 2xl:hover:bg-[#bfc378]"
                               onClick={openEditBox}
                             >
                               <PenLine className="

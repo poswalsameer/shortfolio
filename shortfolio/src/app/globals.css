@@ -51,8 +51,13 @@
     /* background: linear-gradient( to right,#8e9eab,#e9e4f0); */
     /* background-color: #e8d8d0; */
     /* background: linear-gradient(to right,#7c86a4, #D7DDE8); */
-    background: linear-gradient(to right , #DDEFBB, #FFEEEE);
+    /* background: linear-gradient(to right , #DDEFBB, #FFEEEE); */
+    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
 }
+
+/* #profilePhotoDiv{
+    box-shadow: 0 0 0 5px #c1c390;
+} */
 
 #fullName{
     letter-spacing: -1.2px;
