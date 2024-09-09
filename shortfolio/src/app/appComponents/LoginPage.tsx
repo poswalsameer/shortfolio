@@ -42,6 +42,7 @@ function Page() {
         toast({
           title: "Incorrect credentials",
         });
+        setLoading(false);
       }
 
       if( loginSession ){
