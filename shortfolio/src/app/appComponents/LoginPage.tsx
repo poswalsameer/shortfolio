@@ -25,6 +25,7 @@ function Page() {
   const router = useRouter();
   const {toast} = useToast();
 
+  // FUNCTION INVOKED WHEN THE LOGIN BUTTON IS CLICKED
   const loginUserFunction = async(data:any) => {
 
     setLoading(true);
